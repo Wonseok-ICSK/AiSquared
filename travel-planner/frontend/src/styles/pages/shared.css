@@ -1,5 +1,21 @@
 /* Small helpers shared by several pages. */
 
+/* the muted one-line description under a page's serif title */
+.page-lede {
+  max-width: 68ch;
+  font-size: var(--fs-md);
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+@media (max-width: 560px) {
+  .form-head h1,
+  .settings-head h1,
+  .inbox-head h1,
+  .itin-head h1 {
+    font-size: 26px;
+  }
+}
+
 .stack-xs {
   display: flex;
   flex-direction: column;
@@ -52,4 +68,35 @@
 .route__arrow {
   color: var(--olive);
   flex: none;
+}
+
+/* ---------------------------------------------------------------- not found */
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-8) var(--sp-4) var(--sp-7);
+  text-align: center;
+  word-break: keep-all;
+}
+.not-found__mark {
+  margin-bottom: var(--sp-2);
+  color: var(--accent);
+}
+.not-found__title {
+  font-size: var(--fs-2xl);
+}
+.not-found .page-lede {
+  margin-bottom: var(--sp-3);
+  text-wrap: balance;
+}
+@media (max-width: 560px) {
+  .not-found {
+    padding-top: var(--sp-7);
+  }
+  .not-found__title {
+    font-size: 26px;
+  }
 }

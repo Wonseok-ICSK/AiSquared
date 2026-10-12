@@ -1,3 +1,4 @@
+import { locale, translate } from './i18n.js';
 import { koreanError } from '../shared/ko.js';
 
 export async function api(path, options = {}) {
@@ -9,8 +10,8 @@ export async function api(path, options = {}) {
   if (!response.ok) throw new Error(koreanError(data));
   return data;
 }
-export const money = n => n == null ? '—' : `${Math.round(n).toLocaleString('ko-KR')}원`;
-export function shortDate(date, opts = {}) { return date ? new Date(`${date.slice(0, 10)}T12:00:00`).toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', ...opts }) : '—'; }
+export const money = n => n == null ? '—' : `${Math.round(n).toLocaleString(locale())}원`;
+export function shortDate(date, opts = {}) { return date ? new Date(`${date.slice(0, 10)}T12:00:00`).toLocaleDateString(locale(), { month: 'long', day: 'numeric', ...opts }) : '—'; }
 export const clockTime = iso => iso?.slice(11, 16) || '—';
-export const duration = n => n == null ? '비행시간 정보 없음' : `${Math.floor(n / 60)}시간 ${n % 60}분`;
-export function dateTime(iso, timezone = 'Asia/Seoul') { return iso ? new Date(iso).toLocaleString('ko-KR', { month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false, timeZone: timezone }) : '예약된 확인 없음'; }
+export const duration = n => n == null ? translate('비행시간 정보 없음') : locale() === 'en-US' ? `${Math.floor(n / 60)}h ${n % 60}m` : `${Math.floor(n / 60)}시간 ${n % 60}분`;
+export function dateTime(iso, timezone = 'Asia/Seoul') { return iso ? new Date(iso).toLocaleString(locale(), { month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false, timeZone: timezone }) : translate('예약된 확인 없음'); }

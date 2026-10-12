@@ -3,7 +3,7 @@
 * Google Maps URLs need no API key (``/maps/search/?api=1`` and ``/maps/dir/?api=1``). Transit
   directions are generated **per leg** (multi-stop transit routes are not supported by Maps).
 * Tabelog (Japan) has no API and forbids scraping: links only, never fetched server-side.
-  Verified pattern (docs/research/places-routing.md): ``https://tabelog.com/kr/tokyo/{A13xx}/
+  Verified pattern (unpublished research notes): ``https://tabelog.com/kr/tokyo/{A13xx}/
   rstLst/{genre}/?SrtT=rt`` (rating-sorted list for a Tokyo area and genre) — always preferred.
   Keyword parameters are ignored on ``/kr/``, so the fallback (and the extra ``tabelog_search``
   link of a named restaurant) is the Japanese site's keyword search

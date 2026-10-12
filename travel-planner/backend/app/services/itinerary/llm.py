@@ -85,7 +85,7 @@ __all__ = [
 # --------------------------------------------------------------------------- constants
 
 DEFAULT_MODEL = "claude-opus-5-5"
-DEFAULT_EFFORT = "high"
+DEFAULT_EFFORT = "xhigh"
 MAX_TOKENS = 64000
 FALLBACK_BETA = "server-side-fallback-2026-07-01"
 WEB_SEARCH_TOOL_TYPE = "web_search_20260209"

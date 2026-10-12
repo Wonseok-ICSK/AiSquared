@@ -1,4 +1,4 @@
-/** Tiny scale helpers for the hand-rolled SVG charts. */
+/** Tiny scale helpers for the hand-rolled SVG charts. Pure: no DOM, no i18n (tests/scale.test.ts). */
 
 export interface NiceDomain {
   lo: number;
@@ -27,35 +27,129 @@ export function niceDomain(min: number, max: number, count = 4): NiceDomain {
   return { lo, hi, ticks };
 }
 
+// ----------------------------------------------------------------------------- relative time axis
+// The x axis ends at "now" and spans a fixed window, so the frame (ticks, size) is the same
+// every time the page opens; only the points move left as they age.
+
 const HOUR = 3_600_000;
 const DAY = 24 * HOUR;
-const SEOUL_OFFSET = 9 * HOUR; // Asia/Seoul has no DST
 
-export interface TimeTick {
-  t: number;
-  kind: "day" | "hour";
+export type TimeWindow = "24h" | "7d" | "30d";
+
+export const TIME_WINDOWS: readonly TimeWindow[] = ["24h", "7d", "30d"];
+
+export const WINDOW_MS: Readonly<Record<TimeWindow, number>> = {
+  "24h": DAY,
+  "7d": 7 * DAY,
+  "30d": 30 * DAY,
+};
+
+/** A fixed tick of a window: "7 days ago" is { ago: 7 days, amount: 7, unit: "day" }. */
+export interface RelativeTick {
+  /** Milliseconds before now (0 for "now"). */
+  ago: number;
+  /** The number in the label (0 for "now"). */
+  amount: number;
+  unit: "hour" | "day" | "now";
+}
+
+const WINDOW_TICKS: Readonly<Record<TimeWindow, readonly (readonly [number, "hour" | "day"])[]>> = {
+  "24h": [
+    [24, "hour"],
+    [18, "hour"],
+    [12, "hour"],
+    [6, "hour"],
+  ],
+  "7d": [
+    [7, "day"],
+    [5, "day"],
+    [3, "day"],
+    [1, "day"],
+  ],
+  "30d": [
+    [30, "day"],
+    [21, "day"],
+    [14, "day"],
+    [7, "day"],
+  ],
+};
+
+/** The window's ticks, oldest first, ending with "now". */
+export function relativeTicks(window: TimeWindow): RelativeTick[] {
+  return [
+    ...WINDOW_TICKS[window].map(([amount, unit]) => ({ ago: amount * (unit === "day" ? DAY : HOUR), amount, unit })),
+    { ago: 0, amount: 0, unit: "now" as const },
+  ];
+}
+
+/** The next longer window (24h -> 7d -> 30d), or null for the longest. */
+export function longerWindow(window: TimeWindow): TimeWindow | null {
+  const i = TIME_WINDOWS.indexOf(window);
+  return i >= 0 && i < TIME_WINDOWS.length - 1 ? TIME_WINDOWS[i + 1] : null;
+}
+
+/** Points slightly after `now` (clock skew between server and browser) still count as now. */
+export const FUTURE_SKEW_MS = 10 * 60_000;
+
+/** Whether the instant `t` falls inside the window that ends at `now`. */
+export function inWindow(t: number, now: number, windowMs: number): boolean {
+  return Number.isFinite(t) && t >= now - windowMs && t <= now + FUTURE_SKEW_MS;
 }
 
 /**
- * Tick instants for a time axis: Seoul midnights (every N days) for multi-day spans,
- * otherwise round Seoul hours (every 1/3/6/12 h). At most `maxTicks`.
+ * x position of the instant `t` on a window ending at `now`: `now - windowMs` maps to `r0`,
+ * `now` to `r1`; instants outside the window are clamped to the edges.
  */
-export function timeTicks(t0: number, t1: number, maxTicks: number): TimeTick[] {
-  const span = t1 - t0;
-  if (span <= 0) return [{ t: t0, kind: "hour" }];
-  if (span >= 1.5 * DAY) {
-    const first = Math.ceil((t0 + SEOUL_OFFSET) / DAY) * DAY - SEOUL_OFFSET;
-    const days = Math.floor((t1 - first) / DAY) + 1;
-    const step = Math.max(1, Math.ceil(days / Math.max(1, maxTicks)));
-    const ticks: TimeTick[] = [];
-    for (let t = first; t <= t1; t += step * DAY) ticks.push({ t, kind: "day" });
-    return ticks;
+export function relativeX(t: number, now: number, windowMs: number, r0: number, r1: number): number {
+  const f = windowMs > 0 ? (t - (now - windowMs)) / windowMs : 1;
+  return r0 + Math.min(1, Math.max(0, f)) * (r1 - r0);
+}
+
+// ----------------------------------------------------------------------------- tick labels
+
+/**
+ * Rough rendered width of a short label in px (no DOM): Hangul/CJK about one em, digits and
+ * Latin about 0.6 em, spaces 0.3 em. Good enough to keep axis labels from colliding.
+ */
+export function estimateTextWidth(text: string, fontPx: number): number {
+  let em = 0;
+  for (const ch of text) {
+    const code = ch.codePointAt(0) ?? 0;
+    if (code >= 0x1100) em += 0.95;
+    else if (ch === " ") em += 0.3;
+    else if (/[0-9]/.test(ch)) em += 0.6;
+    else em += 0.56;
   }
-  const stepH = [1, 3, 6, 12].find((h) => span / (h * HOUR) <= maxTicks) ?? 24;
-  const step = stepH * HOUR;
-  const ticks: TimeTick[] = [];
-  for (let t = Math.ceil((t0 + SEOUL_OFFSET) / step) * step - SEOUL_OFFSET; t <= t1; t += step) ticks.push({ t, kind: "hour" });
-  return ticks;
+  return em * fontPx;
+}
+
+/** [left, right] extent of a label of `width` px drawn at `x` with an SVG text-anchor. */
+export function labelBox(x: number, width: number, anchor: "start" | "middle" | "end"): [number, number] {
+  if (anchor === "start") return [x, x + width];
+  if (anchor === "end") return [x - width, x];
+  return [x - width / 2, x + width / 2];
+}
+
+/**
+ * Which axis labels to draw so none overlap: the first and last always, a middle one only
+ * when it keeps `gap` px clear of the last kept label and of the final one.
+ */
+export function fitLabels(boxes: readonly (readonly [number, number])[], gap = 8): boolean[] {
+  const n = boxes.length;
+  const keep = boxes.map(() => false);
+  if (n === 0) return keep;
+  keep[0] = true;
+  keep[n - 1] = true;
+  let prevRight = boxes[0][1];
+  const lastLeft = n > 1 ? boxes[n - 1][0] : Infinity;
+  for (let i = 1; i < n - 1; i++) {
+    const [left, right] = boxes[i];
+    if (left >= prevRight + gap && right <= lastLeft - gap) {
+      keep[i] = true;
+      prevRight = right;
+    }
+  }
+  return keep;
 }
 
 /** Linear map from a domain to a range. */

@@ -27,7 +27,7 @@ from app.security.secrets import SecretBoxError, get_secretbox
 logger = logging.getLogger(__name__)
 
 RUNTIME_KEY = "runtime"
-DEFAULT_LLM_EFFORT: LlmEffort = "high"
+DEFAULT_LLM_EFFORT: LlmEffort = "xhigh"
 
 
 class SecretSpec(NamedTuple):

@@ -2,7 +2,7 @@
 
 Input is the **final** SSE event of ``POST flight-api.naver.com/flight/international/searchFlights``
 (``status.isCompleted == true``), as captured in-page by ``naver_capture.js``. Shape (verified
-2026-10-06, see ``docs/research/naver-flights.md``)::
+2026-10-06, see ``unpublished research notes``)::
 
     {uniqueId, status: {searchKey, isCompleted, airlinesCodeMap, airportsCodeMap,
                         fareTypesCodeMap, lowestFare: {direct, a01, oneStop?}, expireAt, ...},

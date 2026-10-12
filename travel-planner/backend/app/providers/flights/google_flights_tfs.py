@@ -1,7 +1,7 @@
 """Google Flights ``tfs`` URL parameter: a hand-rolled protobuf writer (no protobuf dependency).
 
 ``tfs`` is a URL-safe base64 protobuf message (DESIGN §13.1,
-docs/research/google-flights-browser.md).
+unpublished research notes).
 Field map, verified by decoding URLs Google's own UI produced (byte-identical output):
 
 * top level: ``1=28``, ``2=2`` (UI constants), ``3`` = repeated leg, ``8`` = repeated passenger

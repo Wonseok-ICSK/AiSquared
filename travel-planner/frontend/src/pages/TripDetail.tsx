@@ -1,26 +1,24 @@
 /** Trip detail "/trips/:id" with tabs: Flights, Price history, Alerts, Trip plan, Itineraries. */
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft,
+  ArrowRight,
   Bell,
-  CalendarClock,
-  Clock3,
   LineChart,
   Map as MapIcon,
   Pencil,
   Plane,
   RefreshCw,
   SlidersHorizontal,
-  Target,
   Trash2,
-  TrendingDown,
-  Trophy,
 } from "lucide-react";
 import { api } from "../api/endpoints";
 import { errorMessage } from "../api/client";
-import type { SearchRunOut, TripOut } from "../api/types";
+import type { FlightOfferOut, SearchRunOut, TripOut } from "../api/types";
+import { AssistantNote } from "../components/BrandMark";
 import { Route } from "../components/Place";
 import { Tabs } from "../components/Tabs";
 import type { TabDef } from "../components/Tabs";
@@ -30,6 +28,7 @@ import { useAsync, useInterval, useNow, useTitle } from "../lib/hooks";
 import { tr } from "../lib/i18n";
 import { useRunWatcher } from "../lib/runs";
 import { tripFacts } from "../lib/trip";
+import { tripSummary } from "./trip/tripText";
 import { AlertsTab } from "./trip/AlertsTab";
 import { FlightsTab } from "./trip/FlightsTab";
 import { HistoryTab } from "./trip/HistoryTab";
@@ -87,7 +86,71 @@ function targetGap(t: TripOut, current: number | null): string | null {
   const gap = t.target_price - current;
   const amount = formatMoney(Math.abs(gap), t.currency);
   if (gap >= 0) return tr(`${amount} under target`, `목표가보다 ${amount} 저렴`);
-  return tr(`${amount} above target`, `목표가까지 ${amount}`);
+  return tr(`${amount} to go`, `목표가까지 ${amount}`);
+}
+
+/** The page summary in the app's voice, with "Plan booking" for the cheapest flight. */
+function TripNote({
+  trip,
+  best,
+  now,
+  checking,
+}: {
+  trip: TripOut;
+  best: FlightOfferOut | null;
+  now: number;
+  checking: boolean;
+}) {
+  const summary = tripSummary(trip, best, now, checking);
+  return (
+    <AssistantNote
+      className="trip-note"
+      tone={summary.tone}
+      title={summary.title}
+      action={
+        best && (
+          <Link
+            className="btn btn--primary"
+            to={`/trips/${trip.id}/book/${best.id}`}
+            title={tr(
+              "See both flights, the tickets to buy and where to book them",
+              "가는 편·오는 편과 예약할 항공권, 예약할 곳을 확인해요",
+            )}
+          >
+            {tr("Plan booking", "예약 준비")} <ArrowRight size={15} aria-hidden />
+          </Link>
+        )
+      }
+    >
+      {summary.text && <p>{summary.text}</p>}
+      {summary.timing && <p className="trip-note__timing">{summary.timing}</p>}
+    </AssistantNote>
+  );
+}
+
+/** One fact of the stats strip: label, a serif value and a muted line under it. */
+function Stat({
+  label,
+  value,
+  foot,
+  hero = false,
+  title,
+}: {
+  label: string;
+  value: string;
+  foot?: ReactNode;
+  hero?: boolean;
+  title?: string;
+}) {
+  return (
+    <div className={`tstat${hero ? " tstat--hero" : ""}`}>
+      <dt className="tstat__label">{label}</dt>
+      <dd className="tstat__value serif tnum" title={title}>
+        {value}
+      </dd>
+      {foot && <dd className="tstat__foot">{foot}</dd>}
+    </div>
+  );
 }
 
 /** Trip detail page. */
@@ -98,6 +161,11 @@ export function TripDetail() {
   const tab: TabKey = isTab(params.get("tab")) ? (params.get("tab") as TabKey) : "flights";
   const trip = useAsync(() => api.getTrip(tripId), [tripId]);
   const [refreshKey, setRefreshKey] = useState(0);
+  // Cheapest matching offer of the latest finished run, for the summary and "Plan booking".
+  const best = useAsync(
+    () => api.listOffers(tripId, { only_matching: true, sort: "price", limit: 1 }).then((list) => list[0] ?? null),
+    [tripId, refreshKey],
+  );
   const [actionError, setActionError] = useState<string | null>(null);
   const [starting, setStarting] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -173,18 +241,16 @@ export function TripDetail() {
 
   if (trip.error && !trip.data) {
     return (
-      <>
-        <Link className="breadcrumb" to="/">
+      <div className="trip-detail">
+        <Link className="breadcrumb trip-detail__back" to="/">
           <ArrowLeft size={14} aria-hidden /> {tr("Trips", "내 여행")}
         </Link>
-        <div style={{ marginTop: 12 }}>
-          <ErrorBanner
-            error={trip.error}
-            title={tr("Could not load this trip", "여행 정보를 불러오지 못했어요")}
-            onRetry={() => void trip.reload()}
-          />
-        </div>
-      </>
+        <ErrorBanner
+          error={trip.error}
+          title={tr("Could not load this trip", "여행 정보를 불러오지 못했어요")}
+          onRetry={() => void trip.reload()}
+        />
+      </div>
     );
   }
   if (!trip.data) {
@@ -203,16 +269,16 @@ export function TripDetail() {
   const belowTarget = current !== null && t.target_price !== null && current <= t.target_price;
   const sample = t.providers.length > 0 && t.providers.every((p) => p === "mock");
   const gap = targetGap(t, current);
+  const bestOffer = best.data && best.data.trip_id === t.id ? best.data : null;
 
   return (
     <div className="trip-detail">
-      <Link className="breadcrumb" to="/">
+      <Link className="breadcrumb trip-detail__back" to="/">
         <ArrowLeft size={14} aria-hidden /> {tr("Trips", "내 여행")}
       </Link>
 
       <header className="detail-head">
         <div className="detail-head__main">
-          <span className="detail-eyebrow">{tr("Price details", "가격 자세히 보기")}</span>
           <h1 className="detail-head__title">{t.name}</h1>
           <div className="detail-head__route">
             <Route origin={t.origin} destination={t.destination} tripType={t.trip_type} />
@@ -226,7 +292,7 @@ export function TripDetail() {
               {!t.active && <Badge tone="outline">{tr("Paused", "일시 중지")}</Badge>}
             </span>
           </div>
-          <span className="small subtle">{tripFacts(t)}</span>
+          <p className="detail-head__meta">{tripFacts(t)}</p>
         </div>
         <div className="detail-head__actions">
           <Link
@@ -241,7 +307,8 @@ export function TripDetail() {
             {checking ? tr("Checking", "확인 중") : tr("Check now", "지금 확인")}
           </Button>
           <Button
-            variant="danger"
+            variant="ghost"
+            className="detail-head__delete"
             iconOnly
             busy={deleting}
             icon={<Trash2 size={16} aria-hidden />}
@@ -252,81 +319,7 @@ export function TripDetail() {
         </div>
       </header>
 
-      <div className="trip-stats">
-        <div className={`tstat tstat--hero${belowTarget ? " is-good" : ""}`}>
-          <div className="tstat__label">
-            <span>
-              {tr("Lowest now", "현재 최저가")} · {BASIS_LABEL[t.price_basis]}
-            </span>
-            <TrendingDown size={16} aria-hidden />
-          </div>
-          <div className="tstat__value">{formatMoney(current, t.currency)}</div>
-          <div className="tstat__foot">
-            {current !== null && t.adults > 1 && t.latest_min_price !== null && (
-              <span>
-                {t.price_basis === "per_person"
-                  ? tr(
-                      `${formatMoney(t.latest_min_price, t.currency)} total for ${t.adults} adults`,
-                      `성인 ${t.adults}명 총액 ${formatMoney(t.latest_min_price, t.currency)}`,
-                    )
-                  : tr(
-                      `${formatMoney(t.latest_min_price / t.adults, t.currency)} per person`,
-                      `1인 ${formatMoney(t.latest_min_price / t.adults, t.currency)}`,
-                    )}
-              </span>
-            )}
-            {belowTarget && <Badge tone="good">{tr("Below target", "목표가 이하")}</Badge>}
-            {current === null && <span>{tr("No check yet", "아직 확인 전")}</span>}
-          </div>
-        </div>
-        <div className="tstat">
-          <div className="tstat__label">
-            <span>{tr("Target", "목표 가격")}</span>
-            <Target size={15} aria-hidden />
-          </div>
-          <div className="tstat__value tstat__value--sm">{formatMoney(t.target_price, t.currency)}</div>
-          <div className="tstat__foot">
-            <span className={belowTarget ? "good-text" : undefined}>{gap ?? tr("No target set", "목표 가격 없음")}</span>
-          </div>
-        </div>
-        <div className="tstat">
-          <div className="tstat__label">
-            <span>{tr("Lowest ever", "역대 최저가")}</span>
-            <Trophy size={15} aria-hidden />
-          </div>
-          <div className="tstat__value tstat__value--sm">{formatMoney(t.lowest_ever, t.currency)}</div>
-          <div className="tstat__foot">
-            <span>{tr("Across all checks", "모든 확인 기준")}</span>
-          </div>
-        </div>
-        <div className="tstat">
-          <div className="tstat__label">
-            <span>{tr("Next check", "다음 확인")}</span>
-            <CalendarClock size={15} aria-hidden />
-          </div>
-          <div className="tstat__value tstat__value--sm">
-            {!t.active ? tr("Paused", "일시 중지") : t.next_run_at ? formatUtc(t.next_run_at) : "—"}
-          </div>
-          <div className="tstat__foot">
-            <span>{t.active && t.next_run_at ? formatRelative(t.next_run_at, now) : tr("Not scheduled", "예약 없음")}</span>
-          </div>
-        </div>
-        <div className="tstat">
-          <div className="tstat__label">
-            <span>{tr("Last check", "마지막 확인")}</span>
-            <Clock3 size={15} aria-hidden />
-          </div>
-          <div
-            className="tstat__value tstat__value--sm"
-            title={t.last_checked_at ? formatUtc(t.last_checked_at) : undefined}
-          >
-            {t.last_checked_at ? formatRelative(t.last_checked_at, now) : tr("Never", "없음")}
-          </div>
-          <div className="tstat__foot">
-            <span>{t.last_checked_at ? formatUtc(t.last_checked_at) : tr("Not checked yet", "아직 확인 전")}</span>
-          </div>
-        </div>
-      </div>
+      <TripNote trip={t} best={bestOffer} now={now} checking={checking} />
 
       <div className="stack-sm detail-banners" aria-live="polite">
         {run?.status === "running" && <RunProgress run={run} />}
@@ -370,6 +363,57 @@ export function TripDetail() {
           </Banner>
         )}
       </div>
+
+      <dl className="trip-stats" aria-label={tr("Price facts", "가격 요약")}>
+        <Stat
+          hero
+          label={`${tr("Lowest now", "현재 최저가")} · ${BASIS_LABEL[t.price_basis]}`}
+          value={formatMoney(current, t.currency)}
+          foot={
+            current === null ? (
+              tr("No check yet", "아직 확인 전")
+            ) : (
+              <>
+                {t.adults > 1 && t.latest_min_price !== null && (
+                  <span>
+                    {t.price_basis === "per_person"
+                      ? tr(
+                          `${formatMoney(t.latest_min_price, t.currency)} total for ${t.adults} adults`,
+                          `성인 ${t.adults}명 총액 ${formatMoney(t.latest_min_price, t.currency)}`,
+                        )
+                      : tr(
+                          `${formatMoney(t.latest_min_price / t.adults, t.currency)} per person`,
+                          `1인 ${formatMoney(t.latest_min_price / t.adults, t.currency)}`,
+                        )}
+                  </span>
+                )}
+                {belowTarget && <Badge tone="good">{tr("Below target", "목표가 이하")}</Badge>}
+              </>
+            )
+          }
+        />
+        <Stat
+          label={tr("Target", "목표 가격")}
+          value={formatMoney(t.target_price, t.currency)}
+          foot={<span className={belowTarget ? "good-text" : undefined}>{gap ?? tr("No target set", "목표 가격 없음")}</span>}
+        />
+        <Stat
+          label={tr("Lowest ever", "역대 최저가")}
+          value={formatMoney(t.lowest_ever, t.currency)}
+          foot={tr("Across all checks", "모든 확인 기준")}
+        />
+        <Stat
+          label={tr("Next check", "다음 확인")}
+          value={!t.active ? tr("Paused", "일시 중지") : t.next_run_at ? formatUtc(t.next_run_at) : "—"}
+          foot={t.active && t.next_run_at ? formatRelative(t.next_run_at, now) : tr("Not scheduled", "예약 없음")}
+        />
+        <Stat
+          label={tr("Last check", "마지막 확인")}
+          value={t.last_checked_at ? formatRelative(t.last_checked_at, now) : tr("Never", "없음")}
+          title={t.last_checked_at ? formatUtc(t.last_checked_at) : undefined}
+          foot={t.last_checked_at ? formatUtc(t.last_checked_at) : tr("Not checked yet", "아직 확인 전")}
+        />
+      </dl>
 
       <div className="detail-tabs">
         <Tabs

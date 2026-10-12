@@ -1,32 +1,22 @@
-/** App shell: sidebar navigation (icon rail on narrow screens), top bar with breadcrumb,
- * language menu, notification bell and theme toggle, main outlet, footer. */
+/** App shell: a sidebar with the "new trip" button, main navigation and the watched trips
+ * (collapsible to an icon rail on desktop, a slide-in drawer on phones), the page outlet and
+ * a quiet footer. Language and theme controls live at the bottom of the sidebar. */
 
 import { Suspense, useEffect, useId, useRef, useState } from "react";
 import { NavLink, Outlet, Link, useLocation } from "react-router-dom";
-import {
-  ArrowUpRight,
-  Bell,
-  Check,
-  ChevronDown,
-  ChevronRight,
-  Compass,
-  Globe,
-  Languages,
-  Monitor,
-  Moon,
-  Plane,
-  PlusCircle,
-  Send,
-  Settings,
-  Sun,
-} from "lucide-react";
+import { Bell, Check, ChevronUp, Languages, Menu, Monitor, Moon, PanelLeft, Plane, Plus, Settings, Sun, X } from "lucide-react";
+import { api } from "../api/endpoints";
+import type { TripOut } from "../api/types";
 import { useApp } from "../lib/appContext";
+import { useAsync } from "../lib/hooks";
 import { LANGS, tr, useLang } from "../lib/i18n";
 import type { Lang } from "../lib/i18n";
 import { useTheme } from "../lib/theme";
+import { BrandMark } from "./BrandMark";
 import { SkeletonBlock } from "./ui";
 
 const LANG_NAME: Record<Lang, string> = { ko: "한국어", en: "English" };
+const NAV_KEY = "ast-nav";
 
 function themeLabel(choice: "system" | "light" | "dark"): string {
   if (choice === "light") return tr("Light theme", "라이트 테마");
@@ -51,7 +41,7 @@ function ThemeToggle() {
   );
 }
 
-/** Header menu switching the UI between Korean and English. */
+/** Sidebar menu switching the UI between Korean and English (opens upwards). */
 function LanguageMenu() {
   const [lang, setLang] = useLang();
   const [open, setOpen] = useState(false);
@@ -89,7 +79,7 @@ function LanguageMenu() {
         <Languages size={16} aria-hidden />
         <span className="lang-menu__label">{LANG_NAME[lang]}</span>
         <span className="sr-only">{tr("Change language", "언어 변경")}</span>
-        <ChevronDown size={14} aria-hidden />
+        <ChevronUp size={14} className="lang-menu__chev" aria-hidden />
       </button>
       {open && (
         <ul className="lang-menu__list" role="menu" id={listId} aria-label={tr("Language", "언어")}>
@@ -117,26 +107,12 @@ function LanguageMenu() {
   );
 }
 
-function NotificationBell() {
-  const { unread } = useApp();
-  const label = unread > 0 ? tr(`Notifications, ${unread} unread`, `알림, 읽지 않음 ${unread}개`) : tr("Notifications", "알림");
-  return (
-    <Link to="/notifications" className="btn btn--ghost btn--icon bell" aria-label={label} title={label}>
-      <Bell size={18} aria-hidden />
-      {unread > 0 && (
-        <span className="bell__count" aria-hidden>
-          {unread > 99 ? "99+" : unread}
-        </span>
-      )}
-    </Link>
-  );
-}
-
-/** Current page name for the top-bar breadcrumb. */
+/** Current page name (phone top bar). */
 function pageName(pathname: string): string {
   if (pathname === "/") return tr("Trips", "내 여행");
   if (pathname === "/trips/new") return tr("New trip", "새 여행");
   if (/^\/trips\/\d+\/edit$/.test(pathname)) return tr("Edit trip", "여행 수정");
+  if (/^\/trips\/\d+\/book\//.test(pathname)) return tr("Booking", "예약 준비");
   if (/^\/trips\/\d+/.test(pathname)) return tr("Trip details", "여행 상세");
   if (pathname.startsWith("/itineraries/")) return tr("Itinerary", "여행 일정");
   if (pathname.startsWith("/notifications")) return tr("Notifications", "알림");
@@ -144,64 +120,134 @@ function pageName(pathname: string): string {
   return tr("Page not found", "페이지 없음");
 }
 
-function Sidebar() {
+type TripTone = "good" | "bad" | "off" | "watch";
+
+function tripTone(trip: TripOut): TripTone {
+  if (!trip.active) return "off";
+  if (trip.last_status === "error") return "bad";
+  const value = trip.latest_min_price_basis_value;
+  if (value != null && trip.target_price != null && value <= trip.target_price) return "good";
+  return "watch";
+}
+
+function toneLabel(tone: TripTone): string {
+  if (tone === "good") return tr("At or below target", "목표가 도달");
+  if (tone === "bad") return tr("Last check failed", "마지막 확인 실패");
+  if (tone === "off") return tr("Paused", "일시 중지");
+  return tr("Watching", "지켜보는 중");
+}
+
+/** The watched trips, like a list of recent conversations. */
+function RecentTrips({ pathname }: { pathname: string }) {
+  const { data } = useAsync(() => api.listTrips(), [pathname]);
+  if (!data || data.length === 0) return null;
+  return (
+    <section className="recents" aria-labelledby="recents-title">
+      <h2 className="recents__title" id="recents-title">
+        {tr("Watched trips", "지켜보는 여행")}
+      </h2>
+      <ul className="recents__list">
+        {data.map((trip) => {
+          const tone = tripTone(trip);
+          const active = pathname === `/trips/${trip.id}` || pathname.startsWith(`/trips/${trip.id}/`);
+          return (
+            <li key={trip.id}>
+              <Link to={`/trips/${trip.id}`} className="recents__item" aria-current={active ? "page" : undefined} title={trip.name}>
+                <i className={`recents__dot recents__dot--${tone}`} aria-hidden />
+                <span className="recents__name">{trip.name}</span>
+                <span className="recents__route">
+                  {trip.origin}–{trip.destination}
+                </span>
+                <span className="sr-only">, {toneLabel(tone)}</span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+}
+
+function readCollapsed(): boolean {
+  try {
+    return localStorage.getItem(NAV_KEY) === "rail";
+  } catch {
+    return false;
+  }
+}
+
+function Sidebar({ collapsed, onToggle, onNavigate }: { collapsed: boolean; onToggle: () => void; onNavigate: () => void }) {
   const { meta, unread } = useApp();
   const { pathname } = useLocation();
   // "Trips" stays highlighted on a trip's pages and its itineraries (not on "New trip").
-  const tripsActive =
-    pathname === "/" || (/^\/trips\/\d+/.test(pathname)) || pathname.startsWith("/itineraries/");
+  const tripsActive = pathname === "/" || /^\/trips\/\d+/.test(pathname) || pathname.startsWith("/itineraries/");
   return (
-    <aside className="sidebar">
-      <Link to="/" className="brand" aria-label={tr("AiSquared Travel home", "AiSquared Travel 홈")}>
-        <span className="brand__mark" aria-hidden>
-          <Send size={24} strokeWidth={2.2} />
+    <aside className="sidebar" id="app-sidebar" aria-label={tr("Sidebar", "사이드바")}>
+      <div className="sidebar__top">
+        <Link to="/" className="brand" aria-label={tr("AiSquared Travel home", "AiSquared Travel 홈")} onClick={onNavigate}>
+          <BrandMark size={26} className="brand__mark" />
+          <span className="brand__text">
+            AiSquared <em>Travel</em>
+          </span>
+        </Link>
+        <button
+          type="button"
+          className="btn btn--ghost btn--icon sidebar__toggle"
+          onClick={onToggle}
+          aria-controls="app-sidebar"
+          aria-expanded={!collapsed}
+          title={collapsed ? tr("Expand sidebar", "사이드바 펼치기") : tr("Collapse sidebar", "사이드바 접기")}
+          aria-label={collapsed ? tr("Expand sidebar", "사이드바 펼치기") : tr("Collapse sidebar", "사이드바 접기")}
+        >
+          <PanelLeft size={18} aria-hidden />
+        </button>
+      </div>
+
+      <Link to="/trips/new" className="new-trip" title={tr("New trip", "새 여행")} onClick={onNavigate}>
+        <span className="new-trip__icon" aria-hidden>
+          <Plus size={16} strokeWidth={2.4} />
         </span>
-        <span className="brand__text">
-          aisquared<span className="brand__dot">.</span>
-        </span>
+        <span className="new-trip__label">{tr("New trip", "새 여행")}</span>
       </Link>
-      <div className="sidebar__label">{tr("My travel space", "나의 여행 공간")}</div>
-      <nav className="side-nav" aria-label={tr("Main", "주 메뉴")}>
+
+      <nav className="side-nav" aria-label={tr("Main", "주 메뉴")} onClick={onNavigate}>
         <Link to="/" title={tr("Trips", "내 여행")} aria-current={tripsActive ? "page" : undefined}>
-          <Plane size={19} aria-hidden />
+          <Plane size={18} aria-hidden />
           <span className="side-nav__label">{tr("Trips", "내 여행")}</span>
         </Link>
-        <NavLink to="/trips/new" title={tr("New trip", "새 여행")}>
-          <PlusCircle size={19} aria-hidden />
-          <span className="side-nav__label">{tr("New trip", "새 여행")}</span>
-        </NavLink>
         <NavLink to="/notifications" title={tr("Notifications", "알림")}>
-          <Bell size={19} aria-hidden />
+          <Bell size={18} aria-hidden />
           <span className="side-nav__label">{tr("Notifications", "알림")}</span>
-          {unread > 0 && <span className="side-nav__count">{unread > 99 ? "99+" : unread}</span>}
+          {unread > 0 && (
+            <span className="side-nav__count" aria-label={tr(`${unread} unread`, `읽지 않음 ${unread}개`)}>
+              {unread > 99 ? "99+" : unread}
+            </span>
+          )}
         </NavLink>
         <NavLink to="/settings" title={tr("Settings", "설정")}>
-          <Settings size={19} aria-hidden />
+          <Settings size={18} aria-hidden />
           <span className="side-nav__label">{tr("Settings", "설정")}</span>
         </NavLink>
       </nav>
-      <section className="side-promo" aria-label={tr("Tip", "도움말")}>
-        <Compass size={26} className="side-promo__icon" aria-hidden />
-        <h2>{tr("Travel lighter, plan smarter.", "설레는 여행, 가볍게 준비하세요.")}</h2>
-        <p>
-          {tr(
-            "We keep an eye on fares for you. Just pick where you want to go.",
-            "항공권 가격은 저희가 살필게요. 어떤 여행을 떠날지 골라보세요.",
-          )}
-        </p>
-        <Link to="/trips/new">
-          {tr("Plan a new trip", "새 여행 준비하기")} <ArrowUpRight size={14} aria-hidden />
-        </Link>
-      </section>
+
+      <div className="sidebar__scroll" onClick={onNavigate}>
+        <RecentTrips pathname={pathname} />
+      </div>
+
       <div className="sidebar__bottom">
-        <div className={`side-status${meta ? "" : " side-status--off"}`} title={meta ? undefined : tr("Backend not reachable", "서버에 연결할 수 없어요")}>
+        <div
+          className={`side-status${meta ? "" : " side-status--off"}`}
+          title={meta ? tr("Price checks run while this PC is on", "이 PC가 켜져 있는 동안 가격을 확인해요") : tr("Backend not reachable", "서버에 연결할 수 없어요")}
+        >
           <i aria-hidden />
-          <span>{meta ? tr("Price monitoring on this PC", "이 PC에서 가격 모니터링 중") : tr("Server offline", "서버 연결 안 됨")}</span>
+          <span>
+            {meta ? tr("Watching fares on this PC", "이 PC에서 가격을 지켜보는 중") : tr("Server offline", "서버 연결 안 됨")}
+            {meta && <small> · v{meta.version}</small>}
+          </span>
         </div>
-        <div className="side-foot">
-          AiSquared Travel{meta ? ` v${meta.version}` : ""}
-          <br />
-          {tr("Runs locally on this PC", "이 PC에서 로컬로 실행 중")}
+        <div className="side-controls">
+          <LanguageMenu />
+          <ThemeToggle />
         </div>
       </div>
     </aside>
@@ -211,29 +257,70 @@ function Sidebar() {
 /** Layout wrapper rendered around every route. */
 export function Layout() {
   const location = useLocation();
+  const { unread } = useApp();
+  const [collapsed, setCollapsed] = useState(readCollapsed);
+  const [drawer, setDrawer] = useState(false);
+
+  useEffect(() => setDrawer(false), [location.pathname]);
+  useEffect(() => {
+    if (!drawer) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setDrawer(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [drawer]);
+
+  const toggleCollapsed = () => {
+    if (drawer) {
+      setDrawer(false);
+      return;
+    }
+    setCollapsed((v) => {
+      try {
+        localStorage.setItem(NAV_KEY, v ? "full" : "rail");
+      } catch {
+        /* storage unavailable: lasts for this session */
+      }
+      return !v;
+    });
+  };
+
+  const bellLabel = unread > 0 ? tr(`Notifications, ${unread} unread`, `알림, 읽지 않음 ${unread}개`) : tr("Notifications", "알림");
   return (
-    <div className="app-shell">
+    <div className={`app-shell${collapsed ? " is-rail" : ""}${drawer ? " is-drawer" : ""}`}>
       <a className="skip-link" href="#main">
         {tr("Skip to content", "본문으로 건너뛰기")}
       </a>
-      <Sidebar />
+      <Sidebar collapsed={collapsed} onToggle={toggleCollapsed} onNavigate={() => setDrawer(false)} />
+      {drawer && <div className="drawer-scrim" onClick={() => setDrawer(false)} aria-hidden />}
       <div className="main-shell">
-        <header className="topbar">
-          <nav className="crumbs" aria-label={tr("Breadcrumb", "현재 위치")}>
-            <span className="crumbs__root">{tr("My travel space", "나의 여행 공간")}</span>
-            <ChevronRight size={14} className="crumbs__sep" aria-hidden />
-            <span className="crumbs__current" aria-current="page">
-              {pageName(location.pathname)}
-            </span>
-          </nav>
-          <div className="top-actions">
-            <span className="tz-chip" title="Asia/Seoul">
-              <Globe size={14} aria-hidden /> {tr("Seoul · KST", "서울 · 한국 시간")}
-            </span>
-            <LanguageMenu />
-            <NotificationBell />
-            <ThemeToggle />
-          </div>
+        <header className="mobilebar">
+          <button
+            type="button"
+            className="btn btn--ghost btn--icon"
+            onClick={() => setDrawer((v) => !v)}
+            aria-controls="app-sidebar"
+            aria-expanded={drawer}
+            aria-label={drawer ? tr("Close menu", "메뉴 닫기") : tr("Open menu", "메뉴 열기")}
+          >
+            {drawer ? <X size={20} aria-hidden /> : <Menu size={20} aria-hidden />}
+          </button>
+          <Link to="/" className="mobilebar__brand" aria-label={tr("AiSquared Travel home", "AiSquared Travel 홈")}>
+            <BrandMark size={22} />
+          </Link>
+          <span className="mobilebar__title">{pageName(location.pathname)}</span>
+          <Link to="/notifications" className="btn btn--ghost btn--icon bell" aria-label={bellLabel} title={bellLabel}>
+            <Bell size={18} aria-hidden />
+            {unread > 0 && (
+              <span className="bell__count" aria-hidden>
+                {unread > 99 ? "99+" : unread}
+              </span>
+            )}
+          </Link>
+          <Link to="/trips/new" className="btn btn--primary btn--icon btn--sm" aria-label={tr("New trip", "새 여행")} title={tr("New trip", "새 여행")}>
+            <Plus size={16} aria-hidden />
+          </Link>
         </header>
         <main id="main" className="app-main" tabIndex={-1}>
           <Suspense
@@ -251,7 +338,7 @@ export function Layout() {
         </main>
         <footer className="app-footer">
           <span>
-            <Send size={13} aria-hidden /> {tr("Plan lightly, travel happily.", "계획은 가볍게, 여행은 즐겁게.")}
+            <BrandMark size={14} /> {tr("Plan lightly, travel happily.", "계획은 가볍게, 여행은 즐겁게.")}
           </span>
           <span>
             {tr(

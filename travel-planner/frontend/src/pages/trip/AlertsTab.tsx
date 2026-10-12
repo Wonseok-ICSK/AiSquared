@@ -264,15 +264,16 @@ function RuleCard({
   };
 
   return (
-    <li className={`card rule${rule.enabled ? "" : " is-paused"}`}>
-      <div className="card__body stack-sm">
-        <div className="row-between">
+    <li className={`rule${rule.enabled ? "" : " is-paused"}`}>
+      <div className="rule__row">
+        <div className="rule__summary">
+          <span className="rule__icon" aria-hidden>
+            <BellRing size={16} />
+          </span>
           <div className="stack-xs grow">
-            <span className="row" style={{ gap: 8 }}>
-              <span className="rule__icon" aria-hidden>
-                <BellRing size={16} />
-              </span>
+            <span className="rule__title">
               <span className="strong">{ALERT_KIND_LABEL[rule.kind]}</span>
+              {!rule.enabled && <Badge tone="outline">{tr("Off", "꺼짐")}</Badge>}
               {rule.kind === "below_target" &&
                 (rule.armed ? (
                   <Badge
@@ -296,7 +297,7 @@ function RuleCard({
                   </Badge>
                 ))}
             </span>
-            <span className="small">{describeRule(rule, trip)}</span>
+            <span className="small muted">{describeRule(rule, trip)}</span>
             <span className="xsmall subtle">
               {rule.last_triggered_at
                 ? tr(
@@ -310,32 +311,55 @@ function RuleCard({
                 : tr("Never triggered", "아직 알림 없음")}
             </span>
           </div>
-          <div className="row" style={{ gap: 4 }}>
-            <Switch checked={rule.enabled} disabled={busy} onChange={(v) => void patch({ enabled: v })} label={tr("Enabled", "사용")} hideLabel />
-            {rule.kind === "below_target" && !rule.armed && (
-              <Button size="sm" variant="ghost" icon={<RotateCcw size={14} aria-hidden />} disabled={busy} onClick={() => void patch({ armed: true })}>
-                {tr("Re-arm", "재설정")}
-              </Button>
-            )}
-            <Button size="sm" variant="ghost" iconOnly aria-label={tr("Edit rule", "규칙 수정")} icon={<Pencil size={14} aria-hidden />} onClick={() => setEditing((v) => !v)} />
-            <Button size="sm" variant="danger" iconOnly aria-label={tr("Delete rule", "규칙 삭제")} icon={<Trash2 size={14} aria-hidden />} disabled={busy} onClick={() => void remove()} />
-          </div>
         </div>
-        {error && <span className="field__error" role="alert">{error}</span>}
-        {editing && (
-          <div className="rule__edit">
-            <RuleForm
-              trip={trip}
-              rule={rule}
-              onCancel={() => setEditing(false)}
-              onSaved={(r) => {
-                onChange(r);
-                setEditing(false);
-              }}
-            />
-          </div>
-        )}
+        <div className="rule__controls">
+          <Switch checked={rule.enabled} disabled={busy} onChange={(v) => void patch({ enabled: v })} label={tr("Enabled", "사용")} hideLabel />
+          {rule.kind === "below_target" && !rule.armed && (
+            <Button size="sm" variant="ghost" icon={<RotateCcw size={14} aria-hidden />} disabled={busy} onClick={() => void patch({ armed: true })}>
+              {tr("Re-arm", "재설정")}
+            </Button>
+          )}
+          <Button
+            size="sm"
+            variant="ghost"
+            iconOnly
+            aria-label={tr("Edit rule", "규칙 수정")}
+            title={tr("Edit rule", "규칙 수정")}
+            aria-expanded={editing}
+            icon={<Pencil size={14} aria-hidden />}
+            onClick={() => setEditing((v) => !v)}
+          />
+          <Button
+            size="sm"
+            variant="ghost"
+            className="detail-head__delete"
+            iconOnly
+            aria-label={tr("Delete rule", "규칙 삭제")}
+            title={tr("Delete rule", "규칙 삭제")}
+            icon={<Trash2 size={14} aria-hidden />}
+            disabled={busy}
+            onClick={() => void remove()}
+          />
+        </div>
       </div>
+      {error && (
+        <span className="field__error rule__error" role="alert">
+          {error}
+        </span>
+      )}
+      {editing && (
+        <div className="rule__edit">
+          <RuleForm
+            trip={trip}
+            rule={rule}
+            onCancel={() => setEditing(false)}
+            onSaved={(r) => {
+              onChange(r);
+              setEditing(false);
+            }}
+          />
+        </div>
+      )}
     </li>
   );
 }
@@ -345,6 +369,8 @@ export function AlertsTab({ trip }: { trip: TripOut }) {
   const rules = useAsync(() => api.listAlerts(trip.id), [trip.id]);
   const list = rules.data ?? [];
   const replace = (r: AlertRuleOut) => rules.setData((prev) => (prev ?? []).map((x) => (x.id === r.id ? r : x)));
+
+  const active = list.filter((r) => r.enabled).length;
 
   return (
     <div className="stack">
@@ -357,36 +383,52 @@ export function AlertsTab({ trip }: { trip: TripOut }) {
           )}
         </Banner>
       )}
-      {rules.loading && !rules.data && <SkeletonBlock lines={4} label={tr("Loading alert rules", "알림 규칙 불러오는 중")} />}
-      {rules.data && list.length === 0 && (
-        <div className="card">
-          <EmptyState compact icon={<BellPlus size={24} />} title={tr("No alert rules", "알림 규칙이 없어요")}>
-            {tr("Add a rule below to get notified about price changes.", "아래에서 규칙을 추가하면 가격이 바뀔 때 알려드려요.")}
-          </EmptyState>
+      <section className="tab-section" aria-labelledby="alert-rules-title">
+        <div className="tab-section__head">
+          <h2 id="alert-rules-title">{tr("Alert rules", "알림 규칙")}</h2>
+          {rules.data && list.length > 0 && (
+            <span className="tab-section__note">
+              {tr(`${active} of ${list.length} on`, `${list.length}개 중 ${active}개 사용 중`)}
+            </span>
+          )}
         </div>
-      )}
-      {list.length > 0 && (
-        <ul className="rule-list">
-          {list.map((rule) => (
-            <RuleCard
-              key={rule.id}
-              rule={rule}
-              trip={trip}
-              onChange={replace}
-              onDelete={(id) => rules.setData((prev) => (prev ?? []).filter((x) => x.id !== id))}
-            />
-          ))}
-        </ul>
-      )}
+        {rules.loading && !rules.data && (
+          <div className="card card__body">
+            <SkeletonBlock lines={4} label={tr("Loading alert rules", "알림 규칙 불러오는 중")} />
+          </div>
+        )}
+        {rules.data && list.length === 0 && (
+          <div className="card">
+            <EmptyState compact icon={<BellPlus size={24} />} title={tr("No alert rules", "알림 규칙이 없어요")}>
+              {tr("Add a rule below to get notified about price changes.", "아래에서 규칙을 추가하면 가격이 바뀔 때 알려드려요.")}
+            </EmptyState>
+          </div>
+        )}
+        {list.length > 0 && (
+          <div className="card">
+            <ul className="rule-list">
+              {list.map((rule) => (
+                <RuleCard
+                  key={rule.id}
+                  rule={rule}
+                  trip={trip}
+                  onChange={replace}
+                  onDelete={(id) => rules.setData((prev) => (prev ?? []).filter((x) => x.id !== id))}
+                />
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
       <section className="card rule-new">
         <div className="card__head">
-          <h2>{tr("Add an alert rule", "알림 규칙 추가")}</h2>
+          <h3>{tr("Add an alert rule", "알림 규칙 추가")}</h3>
         </div>
         <div className="card__body">
           <RuleForm trip={trip} rule={null} onSaved={(r) => rules.setData((prev) => [...(prev ?? []), r])} />
         </div>
       </section>
-      <p className="xsmall subtle">
+      <p className="rule-foot">
         {tr(
           "Alerts are delivered to every enabled notification channel (Settings → Notification channels).",
           "알림은 사용 중인 모든 알림 채널로 전송돼요 (설정 → 알림 채널).",

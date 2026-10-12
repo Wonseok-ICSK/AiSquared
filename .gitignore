@@ -22,3 +22,6 @@ storage_state*.json
 *.key
 *.p12
 *.pfx
+
+# Research notes are not part of the published source.
+**/docs/research/

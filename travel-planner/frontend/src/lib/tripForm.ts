@@ -13,7 +13,7 @@ import type {
   TripUpdate,
 } from "../api/types";
 import { MAX_SCHEDULE_TIMES } from "../api/types";
-import { tr } from "./i18n";
+import { josa, tr } from "./i18n";
 import type { Errors } from "./validation";
 import {
   checkLength,
@@ -75,6 +75,109 @@ const EMPTY_TIMES = Object.fromEntries(TIME_WINDOW_FIELDS.map((f) => [f, ""])) a
 
 function asFlex(value: number): FlexDays {
   return value === 1 || value === 3 || value === 7 ? value : 0;
+}
+
+/** Adults allowed per trip (schemas.TripCreate: 1 <= adults <= 2). */
+export const MIN_ADULTS = 1;
+export const MAX_ADULTS = 2;
+
+// ----------------------------------------------------------------------------- prefill
+
+/** Query parameters `/trips/new` understands (the dashboard composer sends these names). */
+export const PREFILL_PARAMS = ["origin", "destination", "depart", "return", "adults", "trip_type"] as const;
+export type PrefillParam = (typeof PREFILL_PARAMS)[number];
+
+/** Form values taken from `/trips/new?…`; only valid values are present. */
+export interface TripPrefill {
+  origin?: string;
+  destination?: string;
+  depart_date?: string;
+  return_date?: string;
+  adults?: number;
+  trip_type?: TripType;
+  /** Parameters that were given but ignored because their value was not valid. */
+  ignored: PrefillParam[];
+}
+
+/** "YYYY-MM-DD" naming a real calendar day (2026-02-30 is rejected). */
+export function isIsoDate(value: string): boolean {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!match) return false;
+  const [y, m, d] = [Number(match[1]), Number(match[2]), Number(match[3])];
+  const date = new Date(Date.UTC(y, m - 1, d));
+  return date.getUTCFullYear() === y && date.getUTCMonth() === m - 1 && date.getUTCDate() === d;
+}
+
+/**
+ * Read trip fields from the new-trip URL (`?origin=ICN&destination=NRT&depart=2026-11-20&
+ * return=2026-11-27&adults=2&trip_type=round_trip`, any subset). Soft validation: a value that
+ * is not valid is left out (and listed in `ignored`) instead of failing the whole link:
+ * - origin/destination: 3-letter airport or city code, case-insensitive (TYO, osa → OSA);
+ * - depart/return: real YYYY-MM-DD dates; a return before the departure is ignored;
+ * - adults: a whole number from MIN_ADULTS to MAX_ADULTS;
+ * - trip_type: "round_trip" or "one_way". When absent (or ignored) it follows the dates:
+ *   round trip when a return date was accepted, one way when only a departure date was.
+ */
+export function parseTripPrefill(params: URLSearchParams | string): TripPrefill {
+  const query = typeof params === "string" ? new URLSearchParams(params) : params;
+  const prefill: TripPrefill = { ignored: [] };
+  const read = (key: PrefillParam): string | null => {
+    const raw = query.get(key);
+    return raw === null || raw.trim() === "" ? null : raw.trim();
+  };
+  const reject = (key: PrefillParam) => prefill.ignored.push(key);
+
+  for (const key of ["origin", "destination"] as const) {
+    const raw = read(key);
+    if (raw === null) continue;
+    if (isIataCode(raw)) prefill[key] = raw.toUpperCase();
+    else reject(key);
+  }
+
+  const depart = read("depart");
+  if (depart !== null) {
+    if (isIsoDate(depart)) prefill.depart_date = depart;
+    else reject("depart");
+  }
+  const ret = read("return");
+  if (ret !== null) {
+    if (isIsoDate(ret) && !(prefill.depart_date && ret < prefill.depart_date)) prefill.return_date = ret;
+    else reject("return");
+  }
+
+  const adults = read("adults");
+  if (adults !== null) {
+    const n = /^\d+$/.test(adults) ? Number(adults) : Number.NaN;
+    if (n >= MIN_ADULTS && n <= MAX_ADULTS) prefill.adults = n;
+    else reject("adults");
+  }
+
+  const tripType = read("trip_type");
+  if (tripType === "round_trip" || tripType === "one_way") prefill.trip_type = tripType;
+  else {
+    if (tripType !== null) reject("trip_type");
+    if (prefill.return_date) prefill.trip_type = "round_trip";
+    else if (prefill.depart_date) prefill.trip_type = "one_way";
+  }
+  return prefill;
+}
+
+/** Whether the prefill carries any field (an empty or fully ignored query does not). */
+export function hasPrefill(prefill: TripPrefill): boolean {
+  return Object.keys(prefill).some((key) => key !== "ignored");
+}
+
+/** Form state with the prefilled fields applied on top (the rest stays as given). */
+export function applyTripPrefill(form: TripFormState, prefill: TripPrefill): TripFormState {
+  return {
+    ...form,
+    origin: prefill.origin ?? form.origin,
+    destination: prefill.destination ?? form.destination,
+    depart_date: prefill.depart_date ?? form.depart_date,
+    return_date: prefill.return_date ?? form.return_date,
+    adults: prefill.adults ?? form.adults,
+    trip_type: prefill.trip_type ?? form.trip_type,
+  };
 }
 
 /** Blank form pre-filled with /api/meta defaults. */
@@ -236,13 +339,13 @@ export function routeOverlapError(
   if (contains(originAirport, destination, destinationAirport)) {
     return tr(
       `${origin} already includes ${destination}; pick a different destination`,
-      `${origin}에 이미 ${destination}이(가) 포함돼 있어요. 다른 도착지를 선택하세요`,
+      `${origin}에 이미 ${josa(destination, "이/가")} 포함돼 있어요. 다른 도착지를 선택하세요`,
     );
   }
   if (contains(destinationAirport, origin, originAirport)) {
     return tr(
       `${destination} already includes ${origin}; pick a different destination`,
-      `${destination}에 이미 ${origin}이(가) 포함돼 있어요. 다른 도착지를 선택하세요`,
+      `${destination}에 이미 ${josa(origin, "이/가")} 포함돼 있어요. 다른 도착지를 선택하세요`,
     );
   }
   return null;
@@ -310,7 +413,12 @@ export function validateTripForm(
     ],
     ["depart_date", form.depart_date ? null : tr("Required", "필수 항목이에요")],
     ["return_date", returnError],
-    ["adults", form.adults === 1 || form.adults === 2 ? null : tr("1 or 2 adults", "성인 1명 또는 2명")],
+    [
+      "adults",
+      Number.isInteger(form.adults) && form.adults >= MIN_ADULTS && form.adults <= MAX_ADULTS
+        ? null
+        : tr("1 or 2 adults", "성인 1명 또는 2명"),
+    ],
     ["max_price", checkMoney(form.max_price)],
     ["target_price", checkMoney(form.target_price)],
     [

@@ -337,6 +337,51 @@ export interface OfferHistoryOut {
   points: OfferHistoryPoint[];
 }
 
+// ----------------------------------------------------------------------------- booking plan
+
+/** How Google's "Continue" opens the airline's site: its flight list with route, date and
+ * passengers filled in, its home page (details typed in by hand), or not checked yet. */
+export type BookingHandoff = "prefilled" | "homepage" | "unknown";
+/** Where "Book" goes: Google's "Booking options", a Google Flights search, another site, none. */
+export type BookingPage = "google_booking" | "google_search" | "other" | "none";
+export type BookingLeg = "outbound" | "inbound";
+
+/** One ticket the traveller buys: one leg, or both legs on one booking. */
+export interface BookingTicketOut {
+  /** ["outbound", "inbound"] = one ticket for the whole trip. */
+  legs: BookingLeg[];
+  carrier_code: string | null;
+  airline: string | null;
+  flight_numbers: string[];
+  /** Airports of this ticket's first leg. */
+  origin: string;
+  destination: string;
+  depart_date: ISODate;
+  /** Return date when this ticket covers both legs. */
+  return_date: ISODate | null;
+  departure_time: LocalDateTime;
+  arrival_time: LocalDateTime;
+  handoff: BookingHandoff;
+  airline_url: string | null;
+}
+
+/** GET /api/offers/{id}/booking-plan (BookingPlanOut). */
+export interface BookingPlanOut {
+  /** Refreshed offer; `inbound` is filled when the return flight was found. */
+  offer: FlightOfferOut;
+  /** Where to book: normally Google's "Booking options" page with both flights. */
+  booking_url: string | null;
+  booking_page: BookingPage;
+  adults: number;
+  round_trip: boolean;
+  return_known: boolean;
+  /** true = different airlines each way (normally two bookings); null while unknown. */
+  separate_tickets: boolean | null;
+  tickets: BookingTicketOut[];
+  /** Google's round-trip total when the return flight was looked up, if it moved. */
+  resolved_total: number | null;
+}
+
 // ----------------------------------------------------------------------------- alerts & notifications
 
 export interface AlertRuleCreate {

@@ -1,14 +1,20 @@
-/** Trip form "/trips/new" and "/trips/:id/edit" (spec §3.1 + flexible options + schedule). */
+/**
+ * Trip form "/trips/new" and "/trips/:id/edit" (spec §3.1 + flexible options + schedule).
+ *
+ * A new trip can be prefilled from the URL (`/trips/new?origin=ICN&destination=NRT&depart=…&
+ * return=…&adults=2&trip_type=round_trip`, see `parseTripPrefill`); editing ignores the query.
+ */
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 import type { FormEvent, ReactNode } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ArrowLeft, CalendarRange, Clock, NotebookPen, Plane, Plus, Save, Server, Users, Wallet } from "lucide-react";
 import { api } from "../api/endpoints";
 import { ApiError } from "../api/client";
 import type { Cabin, FlexDays, PriceBasis, ProviderInfo, TripOut } from "../api/types";
 import { CABINS, FLEX_DAYS, MAX_SCHEDULE_TIMES } from "../api/types";
 import { AirportInput } from "../components/AirportInput";
+import { AssistantNote } from "../components/BrandMark";
 import {
   Badge,
   Banner,
@@ -24,14 +30,17 @@ import { useAirport } from "../lib/airports";
 import { useApp } from "../lib/appContext";
 import { CABIN_LABEL, todaySeoul } from "../lib/format";
 import { useTitle } from "../lib/hooks";
-import { tr } from "../lib/i18n";
+import { josa, tr } from "../lib/i18n";
 import { providerDescription, providerMessage, providerName } from "../lib/providerText";
 import { naverTosWarning } from "../lib/trip";
-import type { TimeWindowField, TripFormState } from "../lib/tripForm";
+import type { PrefillParam, TimeWindowField, TripFormState, TripPrefill } from "../lib/tripForm";
 import {
+  applyTripPrefill,
   diffPayload,
   emptyTripForm,
   formToPayload,
+  hasPrefill,
+  parseTripPrefill,
   tripFormWarnings,
   tripToForm,
   validateTripForm,
@@ -48,21 +57,99 @@ const TIME_ROWS: { label: readonly [en: string, ko: string]; from: TimeWindowFie
   { label: ["Return arrives", "오는 편 도착"], from: "return_arrive_from", to: "return_arrive_to", leg: "ret" },
 ];
 
-function FormSection({ icon, title, desc, children }: { icon: ReactNode; title: string; desc?: string; children: ReactNode }) {
+/** Field name of a prefill query parameter, for the note above the form. */
+function prefillParamLabel(param: PrefillParam): string {
+  switch (param) {
+    case "origin":
+      return tr("From", "출발지");
+    case "destination":
+      return tr("To", "도착지");
+    case "depart":
+      return tr("Departure date", "가는 날");
+    case "return":
+      return tr("Return date", "오는 날");
+    case "adults":
+      return tr("Adults", "인원");
+    case "trip_type":
+      return tr("Trip type", "여정 유형");
+  }
+}
+
+/** Parameters whose values were filled in (trip type is implied by the dates, so not listed). */
+function filledParams(prefill: TripPrefill): PrefillParam[] {
+  const filled: PrefillParam[] = [];
+  if (prefill.origin) filled.push("origin");
+  if (prefill.destination) filled.push("destination");
+  if (prefill.depart_date) filled.push("depart");
+  if (prefill.return_date) filled.push("return");
+  if (prefill.adults) filled.push("adults");
+  return filled;
+}
+
+/** The app's note above the form: what to fill in, or what the link already filled in. */
+function FormNote({ editing, prefill }: { editing: boolean; prefill: TripPrefill }) {
+  if (editing) {
+    return <AssistantNote>{tr("Changes apply from the next price check.", "바꾼 조건은 다음 가격 확인부터 적용돼요.")}</AssistantNote>;
+  }
+  const filled = filledParams(prefill).map(prefillParamLabel).join(", ");
+  const ignored = prefill.ignored.map(prefillParamLabel).join(", ");
+  const ignoredText = ignored
+    ? tr(` Left out because the link's value was not valid: ${ignored}.`, ` 링크의 ${ignored} 값은 올바르지 않아 비워 두었어요.`)
+    : "";
+  if (hasPrefill(prefill)) {
+    return (
+      <AssistantNote title={tr("Filled in from your request", "요청하신 조건으로 채워 두었어요")} tone={ignored ? "warn" : "neutral"}>
+        {filled
+          ? tr(
+              `Filled in: ${filled}. Check them; everything else can stay on the defaults.`,
+              `${josa(filled, "을/를")} 채웠어요. 확인만 하시면 나머지는 기본값으로 지켜볼게요.`,
+            )
+          : tr("Check the details; everything else can stay on the defaults.", "확인만 하시면 나머지는 기본값으로 지켜볼게요.")}
+        {ignoredText}
+      </AssistantNote>
+    );
+  }
   return (
-    <section className="card form-card">
-      <div className="card__body section">
-        <div className="form-card__head">
-          <span className="form-card__icon" aria-hidden>
-            {icon}
-          </span>
-          <div className="stack-xs">
-            <h2 className="form-card__title">{title}</h2>
-            {desc && <p className="form-card__desc">{desc}</p>}
-          </div>
+    <AssistantNote tone={ignored ? "warn" : "neutral"}>
+      {tr(
+        "Choose where you fly from and when; I'll watch the rest with the defaults.",
+        "출발지와 날짜만 정하면 나머지는 기본값으로 지켜볼게요.",
+      )}
+      {ignoredText}
+    </AssistantNote>
+  );
+}
+
+/** One calm card of the form: muted icon, section heading, helper text, then the fields. */
+function FormSection({
+  icon,
+  title,
+  desc,
+  optional = false,
+  children,
+}: {
+  icon: ReactNode;
+  title: string;
+  desc?: string;
+  optional?: boolean;
+  children: ReactNode;
+}) {
+  const id = useId();
+  return (
+    <section className="card form-card" aria-labelledby={`${id}-title`}>
+      <header className="form-card__head">
+        <span className="form-card__icon" aria-hidden>
+          {icon}
+        </span>
+        <div className="form-card__heading">
+          <h2 id={`${id}-title`} className="form-card__title">
+            {title}
+            {optional && <span className="form-card__optional">{tr("Optional", "선택 사항")}</span>}
+          </h2>
+          {desc && <p className="form-card__desc">{desc}</p>}
         </div>
-        {children}
-      </div>
+      </header>
+      <div className="form-card__body">{children}</div>
     </section>
   );
 }
@@ -110,8 +197,7 @@ function ScheduleTimes({
             <input
               id={id}
               type="time"
-              className="input"
-              style={{ width: 140 }}
+              className="input time-input"
               value={draft}
               aria-describedby={describedBy}
               aria-invalid={invalid || undefined}
@@ -154,7 +240,7 @@ function ProviderPicker({
     onChange(on ? [...selected, key] : selected.filter((k) => k !== key));
   return (
     <fieldset className="group" aria-describedby="providers-hint">
-      <legend>{tr("Flight sources", "항공권 검색 소스")}</legend>
+      <legend className="sr-only">{tr("Flight sources", "항공권 검색 소스")}</legend>
       <div className="provider-picks">
         {providers.map((p) => (
           <label key={p.key} className={`provider-pick${selected.includes(p.key) ? " is-on" : ""}`}>
@@ -164,7 +250,7 @@ function ProviderPicker({
               onChange={(e) => toggle(p.key, e.target.checked)}
             />
             <span className="provider-pick__body">
-              <span className="row" style={{ gap: 6 }}>
+              <span className="provider-pick__name">
                 <span className="strong">{providerName(p)}</span>
                 {p.configured ? (
                   <Badge tone="good">{tr("Ready", "사용 가능")}</Badge>
@@ -173,14 +259,14 @@ function ProviderPicker({
                     {tr("Not configured", "설정 필요")}
                   </Badge>
                 )}
-                {p.enabled && <Badge tone="info">{tr("Default", "기본")}</Badge>}
+                {p.enabled && <Badge tone="outline">{tr("Default", "기본")}</Badge>}
               </span>
               {p.description && <span className="xsmall subtle">{providerDescription(p)}</span>}
             </span>
           </label>
         ))}
       </div>
-      <p id="providers-hint" className="field__hint" style={{ marginTop: 6 }}>
+      <p id="providers-hint" className="field__hint provider-picks__hint">
         {selected.length === 0
           ? tr(
               `None selected: the default sources are used (${defaults.join(", ") || "none configured"}).`,
@@ -192,7 +278,7 @@ function ProviderPicker({
             )}
       </p>
       {selected.includes("naver") && (
-        <div className="stack-sm" style={{ marginTop: 10 }}>
+        <div className="stack-sm provider-picks__naver">
           <Banner tone="warn" title={tr("Naver Flights terms of service", "Naver 항공권 이용약관")}>
             {naverTosWarning()}
           </Banner>
@@ -211,16 +297,26 @@ function ProviderPicker({
   );
 }
 
-/** Create/edit trip page. */
+/**
+ * Create/edit trip page. Keyed by the trip id, and for a new trip by its query string, so a
+ * fresh link (another composer request, or "New trip" from an edit page) starts a fresh form.
+ */
 export function TripForm() {
   const params = useParams();
+  const [searchParams] = useSearchParams();
   const editId = params.id ? Number(params.id) : null;
+  const search = editId ? "" : searchParams.toString();
+  return <TripFormPage key={editId ? `edit:${params.id}` : `new?${search}`} editId={editId} search={search} />;
+}
+
+function TripFormPage({ editId, search }: { editId: number | null; search: string }) {
   const navigate = useNavigate();
   const { defaults } = useApp();
   useTitle(editId ? tr("Edit trip", "여행 수정") : tr("New trip", "새 여행"));
 
+  const prefill = useMemo(() => parseTripPrefill(search), [search]);
   const [original, setOriginal] = useState<TripOut | null>(null);
-  const [form, setForm] = useState<TripFormState>(() => emptyTripForm(defaults));
+  const [form, setForm] = useState<TripFormState>(() => applyTripPrefill(emptyTripForm(defaults), prefill));
   const [loadError, setLoadError] = useState<unknown>(null);
   const [loading, setLoading] = useState(Boolean(editId));
   const [providers, setProviders] = useState<ProviderInfo[] | undefined>(undefined);
@@ -232,13 +328,14 @@ export function TripForm() {
   const [saveError, setSaveError] = useState<unknown>(null);
   const [touchedDefaults, setTouchedDefaults] = useState(false);
 
+  const timesHintId = useId();
   const originAirport = useAirport(isIataCode(form.origin) ? form.origin : null);
   const destAirport = useAirport(isIataCode(form.destination) ? form.destination : null);
 
-  // meta defaults may arrive after first render (new trip only)
+  // meta defaults may arrive after first render (new trip only); the URL prefill stays on top
   useEffect(() => {
-    if (!editId && !touchedDefaults) setForm(emptyTripForm(defaults));
-  }, [defaults, editId, touchedDefaults]);
+    if (!editId && !touchedDefaults) setForm(applyTripPrefill(emptyTripForm(defaults), prefill));
+  }, [defaults, editId, touchedDefaults, prefill]);
 
   useEffect(() => {
     api
@@ -319,21 +416,19 @@ export function TripForm() {
 
   const roundTrip = form.trip_type === "round_trip";
   const errorCount = Object.keys(shownErrors).length;
+  const backTo = original ? `/trips/${original.id}` : "/";
 
   return (
     <form className="trip-form" onSubmit={submit} noValidate>
       <div className="page-head form-head">
         <div className="page-head__title">
-          <Link className="breadcrumb" to={original ? `/trips/${original.id}` : "/"}>
+          <Link className="breadcrumb" to={backTo}>
             <ArrowLeft size={14} aria-hidden /> {original ? original.name : tr("Trips", "내 여행")}
           </Link>
-          <span className="form-head__eyebrow">
-            {original ? tr("Fine-tune your trip", "여행 조건 다듬기") : tr("Plan a new trip", "새 여행 준비")}
-          </span>
-          <h1>{original ? tr("Edit trip", "여행 수정") : tr("New monitored trip", "새 가격 추적 여행")}</h1>
-          <p className="form-head__lede">
+          <h1>{original ? tr("Edit trip", "여행 수정") : tr("New trip", "새 여행")}</h1>
+          <p className="page-lede">
             {tr(
-              "Set the route, dates and target price — fares are checked on your schedule.",
+              "Set the route, dates and target price; fares are checked on your schedule.",
               "노선과 날짜, 목표 가격을 정하면 정해진 주기마다 항공권 가격을 확인해요.",
             )}
           </p>
@@ -341,7 +436,13 @@ export function TripForm() {
       </div>
 
       <div className="stack">
-        <FormSection icon={<Plane size={18} aria-hidden />} title={tr("Route & dates", "노선 및 날짜")}>
+        <FormNote editing={Boolean(original)} prefill={original ? { ignored: [] } : prefill} />
+
+        <FormSection
+          icon={<Plane size={18} aria-hidden />}
+          title={tr("Route & dates", "노선과 날짜")}
+          desc={tr("Where you fly from and to, and when.", "어디에서 어디로, 언제 떠나는지 정해요.")}
+        >
           <div className="form-grid">
             <Field
               label={tr("From", "출발지")}
@@ -390,36 +491,34 @@ export function TripForm() {
               />
             </div>
 
-            <Field label={tr("Departure date", "가는 날")} required error={err("depart_date")} className="span-3">
-              {({ id, describedBy, invalid }) => (
-                <input
-                  id={id}
-                  type="date"
-                  className="input"
-                  value={form.depart_date}
-                  aria-describedby={describedBy}
-                  aria-invalid={invalid || undefined}
-                  onChange={(e) => update("depart_date", e.target.value)}
-                />
-              )}
-            </Field>
-            <Field
-              label={tr("Flexible departure", "가는 날 유연성")}
-              className="span-3"
-              hint={tr("Search nearby dates too", "앞뒤 날짜도 함께 검색해요")}
-            >
-              {() => (
-                <Segmented
-                  label={tr("Flexible departure (days)", "가는 날 유연성 (일)")}
-                  value={form.flex_depart_days}
-                  options={flexOptions()}
-                  onChange={(v) => update("flex_depart_days", v)}
-                />
-              )}
-            </Field>
+            <div className="span-6 date-col">
+              <Field label={tr("Departure date", "가는 날")} required error={err("depart_date")}>
+                {({ id, describedBy, invalid }) => (
+                  <input
+                    id={id}
+                    type="date"
+                    className="input"
+                    value={form.depart_date}
+                    aria-describedby={describedBy}
+                    aria-invalid={invalid || undefined}
+                    onChange={(e) => update("depart_date", e.target.value)}
+                  />
+                )}
+              </Field>
+              <Field label={tr("Flexible departure", "가는 날 유연성")} hint={tr("Search nearby dates too", "앞뒤 날짜도 함께 검색해요")}>
+                {() => (
+                  <Segmented
+                    label={tr("Flexible departure (days)", "가는 날 유연성 (일)")}
+                    value={form.flex_depart_days}
+                    options={flexOptions()}
+                    onChange={(v) => update("flex_depart_days", v)}
+                  />
+                )}
+              </Field>
+            </div>
             {roundTrip && (
-              <>
-                <Field label={tr("Return date", "오는 날")} required error={err("return_date")} className="span-3">
+              <div className="span-6 date-col">
+                <Field label={tr("Return date", "오는 날")} required error={err("return_date")}>
                   {({ id, describedBy, invalid }) => (
                     <input
                       id={id}
@@ -433,7 +532,7 @@ export function TripForm() {
                     />
                   )}
                 </Field>
-                <Field label={tr("Flexible return", "오는 날 유연성")} className="span-3">
+                <Field label={tr("Flexible return", "오는 날 유연성")}>
                   {() => (
                     <Segmented
                       label={tr("Flexible return (days)", "오는 날 유연성 (일)")}
@@ -443,10 +542,16 @@ export function TripForm() {
                     />
                   )}
                 </Field>
-              </>
+              </div>
             )}
 
-            <div className="span-12">
+            <div className="span-12 form-sub">
+              <div className="form-sub__head">
+                <h3 className="form-sub__title">{tr("Search wider", "더 넓게 찾기")}</h3>
+                <p className="form-sub__desc">
+                  {tr("Optional: other airports that would also work for you.", "선택 사항이에요. 함께 살펴봐도 좋은 공항을 더해요.")}
+                </p>
+              </div>
               <Checkbox
                 checked={form.include_nearby_airports}
                 onChange={(v) => update("include_nearby_airports", v)}
@@ -456,72 +561,57 @@ export function TripForm() {
                   "출발지와 도착지에서 약 100km 이내의 공항도 함께 검색해요.",
                 )}
               />
+              <Field
+                label={tr("Alternative destination airports", "대체 도착 공항")}
+                error={err("alt_destinations")}
+                hint={tr(
+                  "Searched in addition to the main destination (max 10).",
+                  "기본 도착지와 함께 검색해요 (최대 10개).",
+                )}
+              >
+                {({ id, describedBy }) => (
+                  <div className="stack-sm">
+                    {form.alt_destinations.length > 0 && (
+                      <div className="row">
+                        {form.alt_destinations.map((code) => (
+                          <span className="chip" key={code}>
+                            <span className="chip__text mono">{code}</span>
+                            <button
+                              type="button"
+                              aria-label={tr(`Remove ${code}`, `${code} 삭제`)}
+                              onClick={() => update("alt_destinations", form.alt_destinations.filter((c) => c !== code))}
+                            >
+                              ×
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <AirportInput
+                      id={id}
+                      value=""
+                      clearOnSelect
+                      describedBy={describedBy}
+                      placeholder={tr("Add an airport (e.g. KIX, FUK)", "공항 추가 (예: KIX, FUK)")}
+                      onChange={(code) => {
+                        if (code && !form.alt_destinations.includes(code) && form.alt_destinations.length < 10) {
+                          update("alt_destinations", [...form.alt_destinations, code]);
+                        }
+                      }}
+                    />
+                  </div>
+                )}
+              </Field>
             </div>
-            <Field
-              label={tr("Alternative destination airports", "대체 도착 공항")}
-              className="span-12"
-              error={err("alt_destinations")}
-              hint={tr(
-                "Optional. Searched in addition to the main destination (max 10).",
-                "선택 사항이에요. 기본 도착지와 함께 검색해요 (최대 10개).",
-              )}
-            >
-              {({ id, describedBy }) => (
-                <div className="stack-sm">
-                  {form.alt_destinations.length > 0 && (
-                    <div className="row">
-                      {form.alt_destinations.map((code) => (
-                        <span className="chip" key={code}>
-                          <span className="chip__text mono">{code}</span>
-                          <button
-                            type="button"
-                            aria-label={tr(`Remove ${code}`, `${code} 삭제`)}
-                            onClick={() => update("alt_destinations", form.alt_destinations.filter((c) => c !== code))}
-                          >
-                            ×
-                          </button>
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                  <AirportInput
-                    id={id}
-                    value=""
-                    clearOnSelect
-                    describedBy={describedBy}
-                    placeholder={tr("Add an airport (e.g. KIX, FUK)", "공항 추가 (예: KIX, FUK)")}
-                    onChange={(code) => {
-                      if (code && !form.alt_destinations.includes(code) && form.alt_destinations.length < 10) {
-                        update("alt_destinations", [...form.alt_destinations, code]);
-                      }
-                    }}
-                  />
-                </div>
-              )}
-            </Field>
-            <Field
-              label={tr("Trip name", "여행 이름")}
-              className="span-12"
-              error={err("name")}
-              hint={tr("Optional. Leave blank for “ORIGIN → DESTINATION”.", "선택 사항이에요. 비워 두면 “출발지 → 도착지”로 표시돼요.")}
-            >
-              {({ id, describedBy, invalid }) => (
-                <input
-                  id={id}
-                  className="input"
-                  value={form.name}
-                  maxLength={200}
-                  placeholder={form.origin && form.destination ? `${form.origin} → ${form.destination}` : tr("e.g. Tokyo food trip", "예: 도쿄 맛집 여행")}
-                  aria-describedby={describedBy}
-                  aria-invalid={invalid || undefined}
-                  onChange={(e) => update("name", e.target.value)}
-                />
-              )}
-            </Field>
           </div>
         </FormSection>
 
-        <FormSection icon={<Users size={18} aria-hidden />} title={tr("Passengers & flights", "인원 및 항공편")}>
+        <FormSection
+          icon={<Users size={18} aria-hidden />}
+          title={tr("Passengers & flights", "인원과 항공편")}
+          desc={tr("Who is flying and which flights to look for.", "몇 명이 타는지, 어떤 항공편을 찾을지 정해요.")}
+          optional
+        >
           <div className="form-grid">
             <Field label={tr("Adults", "인원")} className="span-3" error={err("adults")}>
               {() => (
@@ -569,7 +659,7 @@ export function TripForm() {
                 </select>
               )}
             </Field>
-            <div className="span-3 field" style={{ justifyContent: "flex-end", paddingBottom: 8 }}>
+            <div className="span-3 field field--check">
               <Checkbox
                 checked={form.direct_only}
                 onChange={(v) => update("direct_only", v)}
@@ -577,46 +667,51 @@ export function TripForm() {
               />
             </div>
 
-            <fieldset className="group span-12">
-              <legend>
-                <Clock size={14} aria-hidden style={{ verticalAlign: -2 }} />{" "}
-                {tr("Preferred times (airport-local, optional)", "희망 시간대 (공항 현지 시각, 선택 사항)")}
-              </legend>
-              <div className="time-windows">
-                {TIME_ROWS.filter((r) => roundTrip || r.leg === "out").map((row) => {
-                  const label = tr(...row.label);
-                  return (
-                  <div className="time-window" key={row.from}>
-                    <span className="time-window__label">{label}</span>
-                    <div className="time-window__inputs">
-                      <input
-                        type="time"
-                        className="input"
-                        aria-label={tr(`${label} from`, `${label} 시작 시각`)}
-                        value={form.times[row.from]}
-                        aria-invalid={Boolean(err(`times.${row.from}`)) || undefined}
-                        onChange={(e) => setTime(row.from, e.target.value)}
-                      />
-                      <span className="subtle" aria-hidden>
-                        –
-                      </span>
-                      <input
-                        type="time"
-                        className="input"
-                        aria-label={tr(`${label} until`, `${label} 종료 시각`)}
-                        value={form.times[row.to]}
-                        aria-invalid={Boolean(err(`times.${row.to}`)) || undefined}
-                        onChange={(e) => setTime(row.to, e.target.value)}
-                      />
-                    </div>
-                    {(err(`times.${row.from}`) || err(`times.${row.to}`)) && (
-                      <span className="field__error">{err(`times.${row.from}`) ?? err(`times.${row.to}`)}</span>
-                    )}
-                  </div>
-                  );
-                })}
-              </div>
-            </fieldset>
+            <div className="span-12 form-sub">
+              <fieldset className="group" aria-describedby={timesHintId}>
+                <legend className="form-sub__title">
+                  <Clock size={15} aria-hidden />
+                  {tr("Preferred times", "희망 시간대")}
+                </legend>
+                <p className="form-sub__desc" id={timesHintId}>
+                  {tr("Optional, in airport-local time. Leave blank for any time.", "선택 사항이에요. 공항 현지 시각 기준이고, 비워 두면 시간대를 가리지 않아요.")}
+                </p>
+                <div className="time-windows">
+                  {TIME_ROWS.filter((r) => roundTrip || r.leg === "out").map((row) => {
+                    const label = tr(...row.label);
+                    return (
+                      <div className="time-window" key={row.from}>
+                        <span className="time-window__label">{label}</span>
+                        <div className="time-window__inputs">
+                          <input
+                            type="time"
+                            className="input"
+                            aria-label={tr(`${label} from`, `${label} 시작 시각`)}
+                            value={form.times[row.from]}
+                            aria-invalid={Boolean(err(`times.${row.from}`)) || undefined}
+                            onChange={(e) => setTime(row.from, e.target.value)}
+                          />
+                          <span className="subtle" aria-hidden>
+                            –
+                          </span>
+                          <input
+                            type="time"
+                            className="input"
+                            aria-label={tr(`${label} until`, `${label} 종료 시각`)}
+                            value={form.times[row.to]}
+                            aria-invalid={Boolean(err(`times.${row.to}`)) || undefined}
+                            onChange={(e) => setTime(row.to, e.target.value)}
+                          />
+                        </div>
+                        {(err(`times.${row.from}`) || err(`times.${row.to}`)) && (
+                          <span className="field__error">{err(`times.${row.from}`) ?? err(`times.${row.to}`)}</span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </fieldset>
+            </div>
           </div>
         </FormSection>
 
@@ -627,6 +722,7 @@ export function TripForm() {
             "Offers above the maximum are ignored. You are notified when the price falls to the target.",
             "최대 가격보다 비싼 항공권은 제외돼요. 가격이 목표 가격까지 내려가면 알려 드려요.",
           )}
+          optional
         >
           <div className="form-grid">
             <Field label={tr("Currency", "통화")} className="span-3" error={err("currency")}>
@@ -710,7 +806,12 @@ export function TripForm() {
           </div>
         </FormSection>
 
-        <FormSection icon={<Server size={18} aria-hidden />} title={tr("Sources", "검색 소스")}>
+        <FormSection
+          icon={<Server size={18} aria-hidden />}
+          title={tr("Flight sources", "항공권 검색 소스")}
+          desc={tr("Where fares are searched for this trip.", "이 여행의 항공권을 어디에서 찾을지 골라요.")}
+          optional
+        >
           {providersError ? <ErrorBanner error={providersError} title={tr("Could not load providers", "검색 소스를 불러오지 못했어요")} /> : null}
           <ProviderPicker
             providers={providers}
@@ -722,7 +823,12 @@ export function TripForm() {
           />
         </FormSection>
 
-        <FormSection icon={<CalendarRange size={18} aria-hidden />} title={tr("Schedule", "확인 주기")}>
+        <FormSection
+          icon={<CalendarRange size={18} aria-hidden />}
+          title={tr("Schedule", "확인 주기")}
+          desc={tr("How often prices are checked, in Korea time.", "가격을 얼마나 자주 확인할지 정해요 (한국 시간).")}
+          optional
+        >
           <div className="form-grid">
             <div className="span-12 row-between">
               <Segmented
@@ -790,24 +896,49 @@ export function TripForm() {
           </div>
         </FormSection>
 
-        <FormSection icon={<NotebookPen size={18} aria-hidden />} title={tr("Notes", "메모")}>
-          <Field
-            label={tr("Notes", "메모")}
-            error={err("notes")}
-            hint={tr("Private notes (max 4000 characters).", "나만 보는 메모예요 (최대 4000자).")}
-          >
-            {({ id, describedBy, invalid }) => (
-              <textarea
-                id={id}
-                className="textarea"
-                value={form.notes}
-                maxLength={4000}
-                aria-describedby={describedBy}
-                aria-invalid={invalid || undefined}
-                onChange={(e) => update("notes", e.target.value)}
-              />
-            )}
-          </Field>
+        <FormSection
+          icon={<NotebookPen size={18} aria-hidden />}
+          title={tr("Name & notes", "이름과 메모")}
+          desc={tr("How the trip is listed, and notes only you see.", "목록에 보일 이름과 나만 보는 메모예요.")}
+          optional
+        >
+          <div className="stack">
+            <Field
+              label={tr("Trip name", "여행 이름")}
+              error={err("name")}
+              hint={tr("Leave blank for “ORIGIN → DESTINATION”.", "비워 두면 “출발지 → 도착지”로 표시돼요.")}
+            >
+              {({ id, describedBy, invalid }) => (
+                <input
+                  id={id}
+                  className="input"
+                  value={form.name}
+                  maxLength={200}
+                  placeholder={form.origin && form.destination ? `${form.origin} → ${form.destination}` : tr("e.g. Tokyo food trip", "예: 도쿄 맛집 여행")}
+                  aria-describedby={describedBy}
+                  aria-invalid={invalid || undefined}
+                  onChange={(e) => update("name", e.target.value)}
+                />
+              )}
+            </Field>
+            <Field
+              label={tr("Notes", "메모")}
+              error={err("notes")}
+              hint={tr("Private notes (max 4000 characters).", "나만 보는 메모예요 (최대 4000자).")}
+            >
+              {({ id, describedBy, invalid }) => (
+                <textarea
+                  id={id}
+                  className="textarea"
+                  value={form.notes}
+                  maxLength={4000}
+                  aria-describedby={describedBy}
+                  aria-invalid={invalid || undefined}
+                  onChange={(e) => update("notes", e.target.value)}
+                />
+              )}
+            </Field>
+          </div>
         </FormSection>
 
         {warnings.map((w) => (
@@ -827,7 +958,7 @@ export function TripForm() {
       </div>
 
       <div className="form-actions">
-        <Link className="btn btn--ghost" to={original ? `/trips/${original.id}` : "/"}>
+        <Link className="btn btn--ghost" to={backTo}>
           {tr("Cancel", "취소")}
         </Link>
         <Button type="submit" variant="primary" busy={saving} icon={<Save size={16} aria-hidden />}>

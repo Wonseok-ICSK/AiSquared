@@ -9,7 +9,7 @@ import type { NotificationSettingsIn, RuntimeSettingsOut } from "../../api/types
 import { TagInput } from "../../components/TagInput";
 import { Badge, Banner, Button, Checkbox, Field, Switch } from "../../components/ui";
 import { formatUtc } from "../../lib/format";
-import { tr } from "../../lib/i18n";
+import { josa, tr } from "../../lib/i18n";
 import { SaveStatus, SecretInput, SettingsCard, TestSendButton, useSettingsSaver } from "./shared";
 
 type OnSettings = (s: RuntimeSettingsOut) => void;
@@ -58,7 +58,7 @@ function useChannelSave(onSettings: OnSettings) {
 
 function SaveButton({ busy, onClick, disabled }: { busy: boolean; onClick: () => void; disabled?: boolean }) {
   return (
-    <Button size="sm" variant="primary" icon={<Save size={14} aria-hidden />} busy={busy} disabled={disabled} onClick={onClick}>
+    <Button size="sm" className="btn--soft" icon={<Save size={14} aria-hidden />} busy={busy} disabled={disabled} onClick={onClick}>
       {tr("Save", "저장")}
     </Button>
   );
@@ -115,7 +115,7 @@ function TelegramChannel({ settings, onSettings }: { settings: RuntimeSettingsOu
         const who = `${r.chat_id}${r.username ? ` (@${r.username})` : ""}`;
         setDetectMsg({
           tone: "good",
-          text: tr(`Found chat ${who}. Saved.`, `채팅 ${who}을(를) 찾아서 저장했어요.`),
+          text: tr(`Found chat ${who}. Saved.`, `채팅 ${josa(who, "을/를")} 찾아서 저장했어요.`),
         });
       }
     } catch (err) {

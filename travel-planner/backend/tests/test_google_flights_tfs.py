@@ -1,5 +1,5 @@
 """Google Flights ``tfs`` encoder. Expected values are tfs strings echoed by real Google Flights
-pages saved by the researcher on 2026-10-06 (docs/research/google-flights-browser.md); the
+pages saved by the researcher on 2026-10-06 (unpublished research notes); the
 nonstop and both-legs-selected ones were also produced by Google's own UI byte for byte."""
 
 from __future__ import annotations

@@ -1,5 +1,6 @@
 /* ---------------------------------------------------------------- itinerary view */
 
+/* itinerary rows on the trip page (ItinerariesTab) */
 .itin-row .card__body {
   align-items: flex-start;
 }
@@ -10,90 +11,67 @@
 }
 .itin-head .page-head__title {
   gap: 8px;
+  max-width: 100%;
 }
-.itin-head__eyebrow {
-  margin-top: var(--sp-3);
-  font-size: 11px;
-  font-weight: 650;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--olive);
+.itin-head .breadcrumb {
+  margin-bottom: var(--sp-1);
 }
 .itin-head h1 {
-  font-size: clamp(24px, 3.2vw, 30px);
-  line-height: 1.3;
+  max-width: 28ch;
   overflow-wrap: anywhere;
 }
 .itin-head__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
   font-size: var(--fs-sm);
   color: var(--text-muted);
 }
-
-/* progress while generating */
-.itin-progress-card {
-  margin-top: var(--sp-3);
-  background: var(--olive-soft);
-  border-color: transparent;
-}
-.itin-progress {
+.itin-head__versions {
   display: flex;
-  align-items: center;
-  gap: var(--sp-3);
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
-/* layout */
+/* feedback, progress and errors above the plan */
+.itin-notices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
+}
+.itin-notices:empty {
+  display: none;
+}
+
+/* layout: the plan reads like a document; details sit beside it */
 .itin-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
-  gap: var(--sp-5);
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: var(--sp-6);
   align-items: start;
-  margin-top: var(--sp-4);
+}
+.itin-main {
+  gap: var(--sp-5);
+}
+.itin-side {
+  position: sticky;
+  top: 24px;
 }
 @media (max-width: 1080px) {
   .itin-layout {
     grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-5);
   }
-}
-.itin-side {
-  position: sticky;
-  top: calc(var(--header-h) + 16px);
-}
-@media (max-width: 1080px) {
   .itin-side {
     position: static;
   }
 }
-
-/* summary */
-.itin-summary {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  gap: var(--sp-3);
-  align-items: flex-start;
-  padding: 20px 22px;
-  border-radius: var(--r-lg);
-  background: var(--olive-soft);
-}
-.itin-summary::after {
-  content: "";
-  position: absolute;
-  top: -70px;
-  right: -60px;
-  width: 160px;
-  height: 160px;
-  border: 1px solid color-mix(in srgb, var(--olive) 30%, transparent);
-  border-radius: 50%;
-  pointer-events: none;
-}
-.itin-summary__icon {
-  flex: none;
-  margin-top: 2px;
-  color: var(--olive);
-}
-.itin-summary p {
+.itin-summary .assistant-note__text {
+  max-width: 70ch;
   font-size: var(--fs-lg);
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--text);
 }
 
@@ -101,16 +79,16 @@
 .itin-card .card__head {
   align-items: center;
 }
-.itin-card__title {
+.itin-card .card__head .itin-card__title {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-display);
-  font-size: var(--fs-lg);
-  font-weight: 700;
+  font-family: var(--font);
+  font-size: var(--fs-md);
+  font-weight: 650;
 }
 .itin-card__title svg {
-  color: var(--olive);
+  color: var(--text-muted);
 }
 .budget-table th,
 .budget-table td {
@@ -120,33 +98,35 @@
 .route-metrics {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--sp-2);
+  gap: var(--sp-4) var(--sp-3);
 }
 .route-metric {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 12px;
-  border-radius: var(--r-md);
-  background: var(--surface-2);
-  border: 1px solid var(--border);
+  gap: 2px;
+  min-width: 0;
 }
 .route-metric__label {
   font-size: var(--fs-xs);
   color: var(--text-muted);
 }
 .route-metric__value {
-  font-family: var(--font-display);
-  font-size: var(--fs-lg);
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
+  font-family: var(--font-serif);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums lining-nums;
   color: var(--text);
 }
 .itin-refine .textarea {
   min-height: 96px;
 }
+.itin-refine__actions {
+  display: flex;
+  justify-content: flex-end;
+}
 .itin-credits {
-  font-size: 11px;
+  font-size: var(--fs-xs);
   line-height: 1.7;
   color: var(--text-muted);
   padding: 0 4px;
@@ -161,45 +141,45 @@
   overflow-wrap: anywhere;
 }
 
-/* day cards */
-.day {
-  overflow: hidden;
-}
+/* day sections */
 .day__head {
   display: flex;
-  align-items: center;
-  gap: var(--sp-4);
-  padding: 18px 20px;
-  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
   flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-5);
+  padding: 24px 28px 18px;
+  border-bottom: 1px solid var(--border);
 }
-.day__head h3 {
-  font-size: var(--fs-lg);
-}
-.day__num {
-  flex: none;
+.day__heading {
+  flex: 1 1 280px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: var(--r-md);
-  background: var(--olive-soft);
-  color: var(--accent);
-  line-height: 1.05;
+  gap: 4px;
+  min-width: 0;
 }
-.day__num-value {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 800;
+.day__eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
 }
-.day__num-label {
-  font-size: 10px;
-  font-weight: 650;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--olive);
+.day__title {
+  font-size: var(--fs-xl);
+  line-height: 1.3;
+}
+.day__theme {
+  max-width: 70ch;
+  margin-top: 2px;
+  font-family: var(--font-serif);
+  font-size: var(--fs-lg);
+  line-height: 1.55;
+  color: var(--text-2);
+}
+.day__areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
 }
 .day__side {
   display: flex;
@@ -207,16 +187,8 @@
   align-items: flex-end;
   gap: 4px;
   margin-left: auto;
-}
-@media (max-width: 560px) {
-  .day__head {
-    padding: 14px 16px;
-  }
-  .day__side {
-    align-items: flex-start;
-    margin-left: 0;
-    flex-basis: 100%;
-  }
+  padding-top: 2px;
+  text-align: right;
 }
 .day__weather {
   display: inline-flex;
@@ -225,31 +197,50 @@
   font-size: var(--fs-sm);
   color: var(--text-2);
 }
+.day__weather svg {
+  color: var(--text-muted);
+}
+.day__cost {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 560px) {
+  .day__head {
+    padding: 18px 16px 14px;
+  }
+  .day__side {
+    align-items: flex-start;
+    margin-left: 0;
+    flex-basis: 100%;
+    text-align: left;
+  }
+}
 
 /* timeline */
 .timeline {
   list-style: none;
   margin: 0;
-  padding: var(--sp-4) 20px var(--sp-4);
+  padding: 20px 28px 24px;
 }
 .tl-item + .tl-item {
-  margin-top: var(--sp-2);
+  margin-top: var(--sp-3);
 }
 .tl-hop {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: var(--sp-3);
-  margin: 0 0 var(--sp-2) 84px;
-  padding: 3px 0 3px 16px;
-  border-left: 2px dotted color-mix(in srgb, var(--olive) 55%, transparent);
+  margin: 0 0 var(--sp-3) 78px;
+  padding: 2px 0 2px 16px;
+  border-left: 2px dotted var(--border-strong);
   font-size: var(--fs-xs);
-  color: var(--text-2);
+  color: var(--text-muted);
   font-variant-numeric: tabular-nums;
 }
 .tl-row {
   display: grid;
-  grid-template-columns: 56px 32px minmax(0, 1fr);
+  grid-template-columns: 52px 30px minmax(0, 1fr);
   gap: var(--sp-3);
   align-items: start;
 }
@@ -258,75 +249,75 @@
   flex-direction: column;
   align-items: flex-end;
   font-size: var(--fs-sm);
-  line-height: 1.3;
-  padding-top: 5px;
+  line-height: 1.35;
+  padding-top: 4px;
+  font-variant-numeric: tabular-nums;
 }
 .tl-dot {
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background: var(--olive-soft);
-  color: var(--olive);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--olive) 28%, transparent);
-}
-.tl-item--meal .tl-dot {
-  background: var(--warn-soft);
-  color: var(--warn);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--warn-mark) 30%, transparent);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
 }
 .tl-item--arrival .tl-dot,
-.tl-item--departure .tl-dot,
-.tl-item--transit .tl-dot {
+.tl-item--departure .tl-dot {
   background: var(--accent-soft);
-  color: var(--accent);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
-}
-.tl-item--hotel .tl-dot,
-.tl-item--free .tl-dot {
-  background: var(--surface-3);
-  color: var(--text-2);
-  box-shadow: 0 0 0 1px var(--border-strong);
+  border-color: var(--accent-line);
+  color: var(--accent-ink);
 }
 .tl-body {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  padding: 4px 0 var(--sp-2);
+  gap: 6px;
+  padding: 3px 0 var(--sp-2);
   min-width: 0;
+}
+.tl-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 .tl-title {
   font-weight: 650;
-  font-size: var(--fs-md);
+  font-size: var(--fs-lg);
+  line-height: 1.4;
 }
 .tl-desc {
-  font-size: var(--fs-sm);
+  max-width: 70ch;
+  font-size: var(--fs-md);
   color: var(--text-2);
-  line-height: 1.6;
+  line-height: 1.75;
 }
 .tl-tip {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   align-items: flex-start;
+  max-width: 70ch;
   font-size: var(--fs-sm);
+  line-height: 1.6;
   color: var(--text-2);
-  background: var(--cream);
+  background: var(--surface-2);
   border-radius: var(--r-sm);
-  padding: 7px 10px;
+  padding: 8px 12px;
 }
 .tl-tip svg {
   flex: none;
-  margin-top: 2px;
+  margin-top: 3px;
   color: var(--warn-mark);
 }
 .tl-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 12px;
+  gap: 4px 14px;
   font-size: var(--fs-xs);
   color: var(--text-muted);
   align-items: center;
+  font-variant-numeric: tabular-nums;
 }
 .tl-link {
   display: inline-flex;
@@ -338,18 +329,25 @@
 }
 @media (max-width: 560px) {
   .tl-row {
-    grid-template-columns: 44px 28px minmax(0, 1fr);
+    grid-template-columns: 42px 26px minmax(0, 1fr);
     gap: var(--sp-2);
   }
   .tl-dot {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
+  }
+  .tl-dot svg {
+    width: 14px;
+    height: 14px;
   }
   .tl-hop {
-    margin-left: 66px;
+    margin-left: 62px;
   }
   .timeline {
-    padding: var(--sp-3);
+    padding: var(--sp-4);
+  }
+  .tl-title {
+    font-size: var(--fs-md);
   }
 }
 
@@ -369,4 +367,12 @@
 .table__total td,
 .table__total th {
   border-top: 2px solid var(--border-strong);
+}
+
+/* Korean: break lines between words, not inside them */
+.itin-head,
+.itin-notices,
+.itin-layout {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }

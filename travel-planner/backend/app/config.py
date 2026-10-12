@@ -49,7 +49,7 @@ class Settings(BaseSettings):
 
     anthropic_api_key: SecretStr | None = None
     llm_model: str = "claude-opus-5-5"
-    llm_effort: str = "high"
+    llm_effort: str = "xhigh"
 
     serpapi_api_key: SecretStr | None = None
     google_maps_api_key: SecretStr | None = None

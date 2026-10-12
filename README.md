@@ -1,8 +1,16 @@
-# AiSquared — Personal Project
+# AiSquared 2.0 — Personal Projects
 
 **This is a personal side project by Wonseok Choi, shared for learning, experimentation, and code review.**
 
 AiSquared contains two local travel-planning applications: a Node.js-based flight-monitoring app called **Wayfinder**, and a separate Python/FastAPI-based **Travel Planner**. Both applications retain their original source layout. Much of the interface and the original documentation is in Korean.
+
+## Learning use and responsibility
+
+This repository is provided for personal learning and experimentation. Users are responsible for complying with each website's terms of service and any applicable access restrictions. Naver data collection is disabled by default and requires explicit opt-in. No permission to collect or reuse third-party data is granted by this repository.
+
+## Version 2.0
+
+This release imports the latest local source updates for both projects, including Wayfinder language-switching UI changes and Travel Planner interface, chart, and booking-preparation updates. `v2.0.0` identifies this repository release; the independent applications retain their own package versions. See [release notes](RELEASE_NOTES.md). Research working notes under `docs/research/` are excluded.
 
 ## Two independent personal projects
 
@@ -16,7 +24,7 @@ This repository groups two separate personal projects by **Wonseok Choi**. They 
 
 Wayfinder is a Korean-language flight-monitoring and trip-planning application built with **React, Vite, Express, and Node.js SQLite**. It organizes monitored trips, fare history, target-price alerts, flight offers, and itineraries in one interface. Its API and frontend use the root Node.js dependency manifests. See [Run Wayfinder](#run-wayfinder) for setup.
 
-The screenshot below comes from an existing browser-test capture with seeded demonstration trips and fares. It illustrates the interface, not current flight prices.
+The screenshot below is a historical interface preview from before version 2.0 and comes from an existing browser-test capture with seeded demonstration trips and fares. It illustrates the interface, not current flight prices.
 
 ![Wayfinder dashboard with demonstration trips and fare history](docs/images/wayfinder-dashboard.png)
 
@@ -28,7 +36,7 @@ The screenshot below comes from an existing browser-test capture with seeded dem
 
 Travel Planner is a separate application built with **React, TypeScript, FastAPI, SQLAlchemy, and APScheduler**. It includes travel planning, scheduled flight checks, and optional AI and notification integrations. It has its own Python backend, frontend dependencies, configuration, and database. See [Run Travel Planner](#run-travel-planner) for setup.
 
-The screenshot below comes from the existing frontend development mock. It shows sample trips and demonstration fares; it is not evidence of live provider results or of the backend running.
+The screenshot below is a historical mock preview from before version 2.0, taken from the frontend development mock. It shows sample trips and demonstration fares; it is not evidence of live provider results or of the backend running.
 
 ![Travel Planner development mock dashboard with demonstration trips](docs/images/travel-planner-dashboard.png)
 
@@ -94,9 +102,9 @@ cd ..
 .\scripts\run.ps1 -NoBrowser
 ```
 
-Open `http://127.0.0.1:8765`. Review `travel-planner/.env.example` for provider, scheduling, and notification settings. Optional integrations require their own credentials and setup. See the [specification](travel-planner/docs/SPEC.md), [design notes](travel-planner/DESIGN.md), and [research notes](travel-planner/docs/research/) for details.
+Open `http://127.0.0.1:8765`. Review `travel-planner/.env.example` for provider, scheduling, and notification settings. Optional integrations require their own credentials and setup. See the [specification](travel-planner/docs/SPEC.md), [design notes](travel-planner/DESIGN.md) for details.
 
-Dependency manifests and lockfiles are preserved as supplied; their installation and compatibility have not been revalidated as part of this upload.
+Dependency manifests and lockfiles are preserved as supplied. Both frontends built successfully using the existing local dependencies; clean dependency installation was not repeated.
 
 ## Tests and review
 
@@ -109,7 +117,7 @@ Existing test suites are included for reviewers:
 | Travel Planner backend | `..\.venv\Scripts\python.exe -m pytest` from `travel-planner/backend` |
 | Travel Planner frontend | `npm test` from `travel-planner/frontend` |
 
-Some browser or live-provider tests need additional setup or credentials. Consult the test configuration before enabling live tests. During import, Python syntax and JSON parsing were checked; the applications and full test suites were not run.
+Some browser or live-provider tests need additional setup or credentials. Consult the test configuration before enabling live tests. For version 2.0, both frontend builds passed, along with 45 Wayfinder tests, 81 Travel Planner frontend tests, and 89 focused backend tests. Live provider calls and full end-to-end workflows were not run.
 
 ## Snapshot contents
 

@@ -8,7 +8,6 @@ import {
   BedDouble,
   CloudSun,
   Coffee,
-  Compass,
   ExternalLink,
   GitBranch,
   Landmark,
@@ -26,6 +25,7 @@ import {
 } from "lucide-react";
 import { api } from "../api/endpoints";
 import { ApiError } from "../api/client";
+import { AssistantNote } from "../components/BrandMark";
 import type { BudgetSummary, ItineraryOut, PlanDay, PlanItem, PlanItemKind, TravelHop } from "../api/types";
 import {
   Badge,
@@ -183,7 +183,7 @@ function TimelineItem({
           {KIND_ICON[item.kind]}
         </div>
         <div className="tl-body">
-          <div className="row" style={{ gap: 6 }}>
+          <div className="tl-head">
             <span className="tl-title">{item.title}</span>
             <span className="sr-only">({KIND_LABEL[item.kind]})</span>
             {item.area && <Badge tone="outline">{item.area}</Badge>}
@@ -244,27 +244,17 @@ function DayCard({
   return (
     <section className="card day" aria-labelledby={`day-${index}`}>
       <header className="day__head">
-        <span className="day__num" aria-hidden>
-          {getLang() === "ko" ? (
-            <>
-              <span className="day__num-value">{index + 1}</span>
-              <span className="day__num-label">일차</span>
-            </>
-          ) : (
-            <>
-              <span className="day__num-label">Day</span>
-              <span className="day__num-value">{index + 1}</span>
-            </>
-          )}
-        </span>
-        <div className="stack-xs grow">
-          <h3 id={`day-${index}`}>
+        <div className="day__heading">
+          <span className="day__eyebrow" aria-hidden>
+            {tr(`Day ${index + 1}`, `${index + 1}일차`)}
+          </span>
+          <h2 id={`day-${index}`} className="day__title">
             <span className="sr-only">{tr(`Day ${index + 1} · `, `${index + 1}일차 · `)}</span>
             {formatDate(day.date)}
-          </h3>
-          {day.theme && <span className="small muted">{day.theme}</span>}
+          </h2>
+          {day.theme && <p className="day__theme">{day.theme}</p>}
           {day.areas.length > 0 && (
-            <span className="row" style={{ gap: 4 }}>
+            <span className="day__areas">
               {day.areas.map((a) => (
                 <Badge key={a}>{a}</Badge>
               ))}
@@ -274,7 +264,7 @@ function DayCard({
         <div className="day__side">
           <Weather weather={day.weather} />
           {day.est_day_cost !== null && day.est_day_cost !== undefined && (
-            <span className="small subtle">
+            <span className="day__cost">
               {tr(
                 `Est. ${formatMoney(day.est_day_cost, currency)}${costBasis ? ` ${costBasis}` : ""}`,
                 `예상 ${formatMoney(day.est_day_cost, currency)}${costBasis ? ` (${costBasis})` : ""}`,
@@ -501,18 +491,19 @@ export function ItineraryView() {
           <Link className="breadcrumb" to={`/trips/${it.trip_id}?tab=itineraries`}>
             <ArrowLeft size={14} aria-hidden /> {trip.data?.name ?? tr("Trip", "여행")} · {tr("Itineraries", "여행 일정")}
           </Link>
-          <span className="itin-head__eyebrow">{tr("Your day-by-day plan", "날짜별로 정리한 여행 계획")}</span>
-          <div className="row" style={{ gap: 10 }}>
-            <h1>{plan?.title ?? tr(`Itinerary #${it.id}`, `여행 일정 #${it.id}`)}</h1>
+          <h1>{plan?.title ?? tr(`Itinerary #${it.id}`, `여행 일정 #${it.id}`)}</h1>
+          <div className="itin-head__meta">
             <StatusChip status={it.status} label={ITINERARY_STATUS_LABEL[it.status]} />
+            {(plan?.destination || it.arrival_at || it.departure_at) && (
+              <span>
+                {plan?.destination ? `${plan.destination} · ` : ""}
+                {it.arrival_at ? `${formatLocalDateTime(it.arrival_at)}${it.arrival_airport ? ` (${it.arrival_airport})` : ""}` : ""}
+                {it.departure_at ? ` → ${formatLocalDateTime(it.departure_at)}${it.departure_airport ? ` (${it.departure_airport})` : ""}` : ""}
+              </span>
+            )}
           </div>
-          <span className="itin-head__meta">
-            {plan?.destination ? `${plan.destination} · ` : ""}
-            {it.arrival_at ? `${formatLocalDateTime(it.arrival_at)}${it.arrival_airport ? ` (${it.arrival_airport})` : ""}` : ""}
-            {it.departure_at ? ` → ${formatLocalDateTime(it.departure_at)}${it.departure_airport ? ` (${it.departure_airport})` : ""}` : ""}
-          </span>
           {(it.parent_id !== null || children.length > 0) && (
-            <span className="row" style={{ gap: 6 }}>
+            <span className="itin-head__versions">
               {it.parent_id !== null && (
                 <Link className="badge badge--outline" to={`/itineraries/${it.parent_id}`}>
                   <GitBranch size={11} aria-hidden /> {tr(`Previous version #${it.parent_id}`, `이전 버전 #${it.parent_id}`)}
@@ -528,49 +519,39 @@ export function ItineraryView() {
         </div>
       </div>
 
-      {it.feedback && (
-        <Banner tone="info" title={tr("Refined with your feedback", "내 의견을 반영해 다듬은 일정")}>
-          “{it.feedback}”
-        </Banner>
-      )}
+      <div className="itin-notices">
+        {it.feedback && (
+          <Banner tone="info" title={tr("Refined with your feedback", "내 의견을 반영해 다듬은 일정")}>
+            “{it.feedback}”
+          </Banner>
+        )}
 
-      {busy && (
-        <div className="card itin-progress-card" aria-live="polite">
-          <div className="card__body itin-progress">
-            <Spinner size={22} label={tr("Generating itinerary", "여행 일정 만드는 중")} />
-            <div className="stack-xs">
-              <span className="strong">
-                {it.status === "pending" ? tr("Queued…", "대기 중…") : tr("Building your itinerary…", "여행 일정을 만드는 중…")}
-              </span>
-              <span className="small subtle">
-                {it.progress ??
-                  tr(
-                    "Researching places, routes and weather. This can take a few minutes.",
-                    "장소, 이동 경로, 날씨를 조사하고 있어요. 몇 분 정도 걸릴 수 있어요.",
-                  )}
-              </span>
-            </div>
+        {busy && (
+          <div aria-live="polite">
+            <AssistantNote
+              title={it.status === "pending" ? tr("Queued…", "차례를 기다리는 중이에요") : tr("Building your itinerary…", "여행 일정을 만드는 중이에요")}
+              action={<Spinner size={20} label={tr("Generating itinerary", "여행 일정 만드는 중")} />}
+            >
+              {it.progress ??
+                tr(
+                  "Researching places, routes and weather. This can take a few minutes.",
+                  "장소, 이동 경로, 날씨를 조사하고 있어요. 몇 분 정도 걸릴 수 있어요.",
+                )}
+            </AssistantNote>
           </div>
-        </div>
-      )}
+        )}
 
-      {it.status === "error" && (
-        <div style={{ marginTop: 12 }}>
+        {it.status === "error" && (
           <Banner tone="error" title={tr("Itinerary generation failed", "여행 일정을 만들지 못했어요")}>
             {it.error ?? tr("Unknown error", "알 수 없는 오류")}
           </Banner>
-        </div>
-      )}
+        )}
+      </div>
 
       {plan && (
         <div className="itin-layout">
           <div className="stack itin-main">
-            {plan.summary && (
-              <div className="itin-summary">
-                <Compass size={20} className="itin-summary__icon" aria-hidden />
-                <p>{plan.summary}</p>
-              </div>
-            )}
+            {plan.summary && <AssistantNote className="itin-summary">{plan.summary}</AssistantNote>}
             {plan.warnings.length > 0 && (
               <Banner tone="warn" title={tr("Things to check", "확인할 점")}>
                 <ul className="plain-list">

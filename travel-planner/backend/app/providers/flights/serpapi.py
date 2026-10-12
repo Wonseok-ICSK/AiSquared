@@ -1,4 +1,4 @@
-"""SerpApi Google Flights provider (DESIGN §13.1, docs/research/flight-apis.md).
+"""SerpApi Google Flights provider (DESIGN §13.1, unpublished research notes).
 
 One ``GET https://serpapi.com/search.json?engine=google_flights`` call per :class:`FlightQuery`
 (one SerpApi credit; cached and errored searches are free). Metro codes are expanded to

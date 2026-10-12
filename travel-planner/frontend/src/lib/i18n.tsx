@@ -62,6 +62,19 @@ export function tr(en: string, ko: string): string {
   return current === "ko" ? ko : en;
 }
 
+/**
+ * `word` followed by the right Korean particle: `josa("인원", "을/를")` → "인원을",
+ * `josa("날짜", "을/를")` → "날짜를". Words that don't end in Hangul (codes, numbers, Latin)
+ * keep both forms: "ICN을(를)".
+ */
+export function josa(word: string, pair: "을/를" | "이/가" | "은/는" | "과/와"): string {
+  const [withFinal, withoutFinal] = pair.split("/");
+  const last = word.trim().slice(-1);
+  const code = last.charCodeAt(0);
+  if (Number.isNaN(code) || code < 0xac00 || code > 0xd7a3) return `${word}${withFinal}(${withoutFinal})`;
+  return `${word}${(code - 0xac00) % 28 === 0 ? withoutFinal : withFinal}`;
+}
+
 /** Pick any value (not only strings) by the current language. */
 export function pick<T>(en: T, ko: T): T {
   return current === "ko" ? ko : en;

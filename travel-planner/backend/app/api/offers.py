@@ -14,6 +14,9 @@
   is stored on the offer (``raw["booking_resolved"]``; the previous link is kept in
   ``raw["search_link"]``), so later clicks redirect at once. Any failure falls back to the
   stored link. A lookup that outlives the timeout still stores its result when it finishes.
+* ``GET /offers/{offer_id}/booking-plan`` — the same resolution, answered as JSON for the UI's
+  booking step: both flights, the tickets to buy and how each airline's site opens
+  (``app.services.booking``).
 """
 
 from __future__ import annotations
@@ -38,12 +41,14 @@ from app.models import SearchRun
 from app.providers.flights import get_provider_class
 from app.providers.flights.base import FlightOffer, FlightProvider
 from app.schemas import (
+    BookingPlanOut,
     FlightOfferOut,
     OfferHistoryOut,
     OfferHistoryPoint,
     PriceHistoryOut,
     PricePoint,
 )
+from app.services import booking as booking_service
 from app.services import search as search_service
 from app.services.alerts import FINISHED_RUN_STATUSES
 from app.services.monitoring import trim_raw
@@ -199,28 +204,52 @@ def offer_history(trip_id: int, offer_id: int, db: Session = Depends(get_db)) ->
 )
 def book_offer(offer_id: int, db: Session = Depends(get_db)) -> RedirectResponse:
     """302 to the offer's booking page, resolving an unknown return flight first (see module)."""
+    url = resolve_booking_url(db, get_or_404(db, OfferRow, offer_id, "Offer"))
+    if url is None:
+        raise HTTPException(status.HTTP_409_CONFLICT, detail="This offer has no booking link")
+    return _redirect(url)
+
+
+@router.get(
+    "/offers/{offer_id}/booking-plan",
+    response_model=BookingPlanOut,
+    responses={404: {"description": "Unknown offer"}},
+)
+def offer_booking_plan(offer_id: int, db: Session = Depends(get_db)) -> BookingPlanOut:
+    """What booking the offer involves: both flights (the return flight is looked up first,
+    exactly like ``/book``), the tickets to buy and what each airline's site opens with."""
+    url = resolve_booking_url(db, get_or_404(db, OfferRow, offer_id, "Offer"))
+    db.expire_all()  # the resolution is stored by another session
     row = get_or_404(db, OfferRow, offer_id, "Offer")
+    return booking_service.build_plan(row, url, offer_adults(row))
+
+
+def resolve_booking_url(db: Session, row: OfferRow) -> str | None:
+    """The most specific booking page of ``row`` (see module), ``None`` without any link.
+
+    May end the session's read transaction and wait for the provider."""
+    offer_id = row.id
     stored = row.booking_url or row.source_url
     if not stored:
-        raise HTTPException(status.HTTP_409_CONFLICT, detail="This offer has no booking link")
+        return None
     one_way = row.return_date is None
     if one_way or row.raw.get(RESOLVED_FLAG) or is_google_booking_page(row.booking_url):
-        return _redirect(stored)
+        return stored
 
     offer = offer_from_row(row)
     if row.inbound is not None:
         # Return flight already known (e.g. filled in when an alert fired): no request needed.
         link = google_booking_link(offer) if row.provider in GOOGLE_LINK_PROVIDERS else None
         if link is None:
-            return _redirect(stored)
+            return stored
         db.rollback()
-        return _redirect(_store_resolution(offer_id, offer, link) or stored)
+        return _store_resolution(offer_id, offer, link) or stored
 
     provider = _details_provider(db, row)
     db.rollback()  # end the read transaction before the (slow) provider request
     if provider is None:
-        return _redirect(stored)
-    return _redirect(_await_resolution(offer_id, offer, provider) or stored)
+        return stored
+    return _await_resolution(offer_id, offer, provider) or stored
 
 
 def _redirect(url: str) -> RedirectResponse:

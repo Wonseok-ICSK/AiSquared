@@ -331,6 +331,7 @@ flex ∈ {0,1,3,7}; origin/destination must not share an airport via metro codes
 | GET `/trips/{id}/price-history` | lowest price per run (+ per provider) |
 | GET `/trips/{id}/offers/{offer_id}/history` | history for that offer_key |
 | GET `/offers/{offer_id}/book` | "Book" button: resolves the exact booking-options page (both flights, dates, passengers; one extra provider lookup for round trips with unknown return leg, cached on the row) and 302-redirects; falls back to the stored link |
+| GET `/offers/{offer_id}/booking-plan` | The UI's booking step (`/trips/:tripId/book/:offerId`): the same resolution as `/book`, answered as `BookingPlanOut` — refreshed offer, booking link + kind, whether the two directions are separate tickets (different airlines), one `BookingTicketOut` per ticket with how Google's "Continue" opens that airline's site (`prefilled` / `homepage` / `unknown`, table in `app/services/booking.py`, checked in a real browser 2026-10-12) |
 | GET/POST `/trips/{id}/alerts`; PUT/DELETE `/alerts/{id}` | alert rules |
 | GET `/notifications?unread_only=&limit=`; GET `/notifications/unread-count`; POST `/notifications/{id}/read`; POST `/notifications/read-all` | in-app inbox |
 | GET/PUT `/trips/{id}/preferences` | travel style + budget |
@@ -353,7 +354,7 @@ discovered and mounted automatically (`_`-prefixed modules and modules without `
   `DATA_DIR`, `DATABASE_URL`, `TIMEZONE=Asia/Seoul`, `DEFAULT_CURRENCY=KRW` (default currency of new
   trips and budgets in `TripCreate`/`PreferencesIn`),
   `BROWSER_CHANNEL=msedge`, `BROWSER_HEADLESS=true`, `SCHEDULER_ENABLED=true`,
-  `ANTHROPIC_API_KEY`, `LLM_MODEL=claude-opus-5-5`, `LLM_EFFORT=high`, `SERPAPI_API_KEY`,
+  `ANTHROPIC_API_KEY`, `LLM_MODEL=claude-opus-5-5`, `LLM_EFFORT=xhigh`, `SERPAPI_API_KEY`,
   `GOOGLE_MAPS_API_KEY`, `SMTP_*`, `KAKAO_*`, `TELEGRAM_*`, `MAX_SEARCH_COMBINATIONS=12`.
 * `settings_store.RuntimeSettings` (UI-editable, persisted in `AppSetting["runtime"]`) overrides env.
   `default_providers: list[str]` — provider keys used for trips with an empty `providers` list;
@@ -459,14 +460,14 @@ enabled+configured channel; one failure never blocks others; results stored in `
 
 ## 13. Provider/integration decisions (from verified research, 2026-10-06)
 
-Full research notes (verified by an independent fact-check pass) live in `docs/research/*.md`.
+Research working notes are excluded from this repository.
 Read the relevant file before implementing a provider/integration.
 
 ### 13.1 Flight sources
 
 | key | Status | Notes |
 |---|---|---|
-| `google_flights` | **default**, no key | Google Flights page `https://www.google.com/travel/flights?tfs=<b64 protobuf>&tfu=EgQIABABIgA&hl=en&gl=KR&curr=KRW` (base path is not robots-disallowed; `/travel/flights/search` and `/booking` are — those are only for user-facing links). Own **tfs encoder** (hand-rolled protobuf varint writer, no protobuf dep) + own **ds:1 JSON parser** (index map in `docs/research/google-flights-browser.md`; reference implementation of fast-flights master in scratch `fcgf/ffm/`), aria-label DOM fallback. Price = "round trip total for **all** passengers" in KRW. Skip unpriced rows (`k[1][0] == []`). Two fetch modes: `browser` (default; real Edge via BrowserManager, headless, read `page.content()`) and `http` (optional setting; httpx GET). Detect blocks (HTTP 429, `/sorry/`, `consent.google.com`, missing `script.ds:1`) → `ProviderBlocked`; never solve captchas or rotate IPs. ≥5 s jittered spacing between queries. User-facing link: `/travel/flights/search?tfs=...&hl=ko&gl=KR&curr=KRW`. |
+| `google_flights` | **default**, no key | Google Flights page `https://www.google.com/travel/flights?tfs=<b64 protobuf>&tfu=EgQIABABIgA&hl=en&gl=KR&curr=KRW` (base path is not robots-disallowed; `/travel/flights/search` and `/booking` are — those are only for user-facing links). Own **tfs encoder** (hand-rolled protobuf varint writer, no protobuf dep) + own **ds:1 JSON parser** (index map in `unpublished research notes`; reference implementation of fast-flights master in scratch `fcgf/ffm/`), aria-label DOM fallback. Price = "round trip total for **all** passengers" in KRW. Skip unpriced rows (`k[1][0] == []`). Two fetch modes: `browser` (default; real Edge via BrowserManager, headless, read `page.content()`) and `http` (optional setting; httpx GET). Detect blocks (HTTP 429, `/sorry/`, `consent.google.com`, missing `script.ds:1`) → `ProviderBlocked`; never solve captchas or rotate IPs. ≥5 s jittered spacing between queries. User-facing link: `/travel/flights/search?tfs=...&hl=ko&gl=KR&curr=KRW`. |
 | `naver` | **opt-in** (off by default; UI must show ToS warning: Naver terms forbid automated collection; personal low-volume use only) | Real Edge, **headed** window placed off-screen (`--window-position=-32000,-32000`) because `flight-api.naver.com` rejects HeadlessChrome UA. Navigate to `https://flight.naver.com/flights/international/{O}-{D}-{YYYYMMDD}/{D}-{O}-{YYYYMMDD}?adult=N&isDirect=true|false&fareType=Y|P|C|F`; capture the `searchFlights` SSE stream **in-page** (init script wrapping `window.fetch`, forward only the final event `status.isCompleted == true` via `expose_binding`). Price: `fareType == "A01"` fares only (no card/payment condition); `adult.totalFare` is **per adult** incl. tax+fuel → total = × adults. Take flight details from the mapping holding the min A01 fare. On 503/429/non-SSE response close the browser immediately (the page retries every 1 s forever). Max 4 queries/run, 15–30 s apart. Never send Naver data to Claude (robots.txt bans AI/RAG). Link: the Naver search URL. |
 | `serpapi` | optional, key `serpapi` | `GET https://serpapi.com/search.json?engine=google_flights&departure_id&arrival_id&outbound_date&return_date&type=1|2&travel_class=1..4&adults&stops=0|1|2|3&currency=KRW&hl=en&gl=kr`. One call per query (outbound list priced at round-trip total); keep `price_insights` in `raw`. Free plan 250/month → `max_queries_per_run = 1` (exact dates only). Fallback candidate when google_flights is blocked. |
 | `mock` | dev/tests only, never in defaults | deterministic fake offers |

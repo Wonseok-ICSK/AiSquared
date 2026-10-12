@@ -22,8 +22,9 @@ import {
 } from "../../components/ui";
 import { ITINERARY_STATUS_LABEL, formatDate, formatLocalDateTime, formatMoney, formatUtc } from "../../lib/format";
 import { useAsync, usePoll } from "../../lib/hooks";
-import { tr } from "../../lib/i18n";
+import { josa, tr } from "../../lib/i18n";
 import { checkLength } from "../../lib/validation";
+import { offerAirline } from "./tripText";
 
 const POLL_MS = 3000;
 
@@ -36,7 +37,7 @@ function OfferChoice({ offer, checked, onSelect }: { offer: FlightOfferOut; chec
     <label className={`offer-choice${checked ? " is-on" : ""}`}>
       <input type="radio" name="offer" checked={checked} onChange={onSelect} />
       <span className="offer-choice__body">
-        <span className="strong">{offer.airline ?? offer.outbound.airlines.join(", ")}</span>
+        <span className="strong">{offerAirline(offer)}</span>
         <span className="small">
           {tr("Arrive", "도착")} {formatLocalDateTime(offer.outbound.arrival_time)} ({offer.outbound.arrival_airport})
         </span>
@@ -48,13 +49,13 @@ function OfferChoice({ offer, checked, onSelect }: { offer: FlightOfferOut; chec
               )
             : offer.return_date
               ? tr(
-                  `Return ${formatDate(offer.return_date)} (time chosen at booking)`,
-                  `오는 날 ${formatDate(offer.return_date)} (시간은 예약할 때 선택)`,
+                  `Return ${formatDate(offer.return_date)} (flight confirmed on the booking step)`,
+                  `오는 날 ${formatDate(offer.return_date)} (오는 편은 예약 준비에서 확인해요)`,
                 )
               : tr("One way", "편도")}
         </span>
       </span>
-      <span className="offer-choice__price num">
+      <span className="offer-choice__price tnum">
         {formatMoney(offer.price_per_person, offer.currency)}
         <span className="xsmall subtle">{tr("per person", "1인")}</span>
       </span>
@@ -204,7 +205,7 @@ function ItineraryRow({ it, onDelete }: { it: ItineraryOut; onDelete: (id: numbe
   const [error, setError] = useState<string | null>(null);
   const title = it.plan?.title ?? tr(`Itinerary #${it.id}`, `여행 일정 #${it.id}`);
   const remove = async () => {
-    if (!window.confirm(tr(`Delete “${title}”?`, `“${title}”을(를) 삭제할까요?`))) return;
+    if (!window.confirm(tr(`Delete “${title}”?`, `“${title}”${josa(title, "을/를").slice(title.length)} 삭제할까요?`))) return;
     setBusy(true);
     try {
       await api.deleteItinerary(it.id);
@@ -215,45 +216,53 @@ function ItineraryRow({ it, onDelete }: { it: ItineraryOut; onDelete: (id: numbe
     }
   };
   return (
-    <li className="card itin-row">
-      <div className="card__body row-between">
-        <span className="itin-row__icon" aria-hidden>
-          <MapPinned size={18} />
-        </span>
-        <div className="stack-xs grow">
-          <span className="row" style={{ gap: 8 }}>
-            <Link className="strong" to={`/itineraries/${it.id}`}>
-              {title}
-            </Link>
-            <StatusChip status={it.status} label={ITINERARY_STATUS_LABEL[it.status]} />
-            {it.parent_id !== null && (
-              <Badge tone="outline" icon={<GitBranch size={11} aria-hidden />}>
-                {tr(`Refined from #${it.parent_id}`, `#${it.parent_id}에서 수정`)}
-              </Badge>
-            )}
-          </span>
-          <span className="small subtle">
-            {it.arrival_at && it.departure_at
-              ? `${formatLocalDateTime(it.arrival_at)} → ${formatLocalDateTime(it.departure_at)} · `
-              : ""}
-            {it.generator === "claude" ? `Claude${it.model ? ` (${it.model})` : ""}` : tr("Rule-based", "규칙 기반")} ·{" "}
-            {tr(`created ${formatUtc(it.created_at)}`, `생성 ${formatUtc(it.created_at)}`)}
-          </span>
-          {isBusy(it) && (
-            <span className="live-status" aria-live="polite">
-              <Spinner size={14} label={tr("Generating", "생성 중")} />
-              {it.progress ?? tr("Waiting to start…", "시작 대기 중…")}
-            </span>
-          )}
-          {it.status === "error" && <span className="field__error">{it.error ?? tr("Generation failed", "일정 생성 실패")}</span>}
-          {error && <span className="field__error">{error}</span>}
-        </div>
-        <div className="row" style={{ gap: 6 }}>
-          <Link className="btn btn--sm" to={`/itineraries/${it.id}`}>
-            {tr("Open", "열기")} <ChevronRight size={14} aria-hidden />
+    <li className="itin-row">
+      <span className="itin-row__icon" aria-hidden>
+        <MapPinned size={18} />
+      </span>
+      <div className="stack-xs grow">
+        <span className="row" style={{ gap: 8 }}>
+          <Link className="itin-row__title" to={`/itineraries/${it.id}`}>
+            {title}
           </Link>
-          <Button size="sm" variant="danger" iconOnly aria-label={tr("Delete itinerary", "일정 삭제")} icon={<Trash2 size={14} aria-hidden />} busy={busy} onClick={() => void remove()} />
-        </div>
+          <StatusChip status={it.status} label={ITINERARY_STATUS_LABEL[it.status]} />
+          {it.parent_id !== null && (
+            <Badge tone="outline" icon={<GitBranch size={11} aria-hidden />}>
+              {tr(`Refined from #${it.parent_id}`, `#${it.parent_id}에서 수정`)}
+            </Badge>
+          )}
+        </span>
+        <span className="small subtle">
+          {it.arrival_at && it.departure_at
+            ? `${formatLocalDateTime(it.arrival_at)} → ${formatLocalDateTime(it.departure_at)} · `
+            : ""}
+          {it.generator === "claude" ? `Claude${it.model ? ` (${it.model})` : ""}` : tr("Rule-based", "규칙 기반")} ·{" "}
+          {tr(`created ${formatUtc(it.created_at)}`, `생성 ${formatUtc(it.created_at)}`)}
+        </span>
+        {isBusy(it) && (
+          <span className="live-status" aria-live="polite">
+            <Spinner size={14} label={tr("Generating", "생성 중")} />
+            {it.progress ?? tr("Waiting to start…", "시작 대기 중…")}
+          </span>
+        )}
+        {it.status === "error" && <span className="field__error">{it.error ?? tr("Generation failed", "일정 생성 실패")}</span>}
+        {error && <span className="field__error">{error}</span>}
+      </div>
+      <div className="itin-row__actions">
+        <Link className="btn btn--sm" to={`/itineraries/${it.id}`}>
+          {tr("Open", "열기")} <ChevronRight size={14} aria-hidden />
+        </Link>
+        <Button
+          size="sm"
+          variant="ghost"
+          className="detail-head__delete"
+          iconOnly
+          aria-label={tr("Delete itinerary", "일정 삭제")}
+          title={tr("Delete itinerary", "일정 삭제")}
+          icon={<Trash2 size={14} aria-hidden />}
+          busy={busy}
+          onClick={() => void remove()}
+        />
       </div>
     </li>
   );
@@ -297,10 +306,19 @@ export function ItinerariesTab({ trip, refreshKey }: { trip: TripOut; refreshKey
         </div>
       </section>
 
-      <section className="section">
-        <h2 className="section__title">{tr("Itineraries", "여행 일정")}</h2>
+      <section className="tab-section" aria-labelledby="itineraries-title">
+        <div className="tab-section__head">
+          <h2 id="itineraries-title">{tr("Itineraries", "여행 일정")}</h2>
+          {items.length > 0 && (
+            <span className="tab-section__note">{tr(`${items.length} made for this trip`, `이 여행의 일정 ${items.length}개`)}</span>
+          )}
+        </div>
         <ErrorBanner error={list.error} title={tr("Could not load itineraries", "여행 일정을 불러오지 못했어요")} onRetry={() => void list.reload()} />
-        {list.loading && !list.data && <SkeletonBlock lines={3} label={tr("Loading itineraries", "여행 일정 불러오는 중")} />}
+        {list.loading && !list.data && (
+          <div className="card card__body">
+            <SkeletonBlock lines={3} label={tr("Loading itineraries", "여행 일정 불러오는 중")} />
+          </div>
+        )}
         {list.data && items.length === 0 && (
           <div className="card">
             <EmptyState compact icon={<MapPinned size={24} />} title={tr("No itineraries yet", "아직 여행 일정이 없어요")}>
@@ -312,11 +330,13 @@ export function ItinerariesTab({ trip, refreshKey }: { trip: TripOut; refreshKey
           </div>
         )}
         {items.length > 0 && (
-          <ul className="itin-list">
-            {items.map((it) => (
-              <ItineraryRow key={it.id} it={it} onDelete={(id) => list.setData((prev) => (prev ?? []).filter((x) => x.id !== id))} />
-            ))}
-          </ul>
+          <div className="card">
+            <ul className="itin-list">
+              {items.map((it) => (
+                <ItineraryRow key={it.id} it={it} onDelete={(id) => list.setData((prev) => (prev ?? []).filter((x) => x.id !== id))} />
+              ))}
+            </ul>
+          </div>
         )}
       </section>
     </div>

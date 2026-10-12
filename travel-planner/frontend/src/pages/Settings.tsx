@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import { Bell, Bot, CalendarClock, Globe, KeyRound, Plane, RefreshCw } from "lucide-react";
 import type { ReactNode } from "react";
 import { api } from "../api/endpoints";
-import type { RuntimeSettingsOut } from "../api/types";
+import type { ProviderInfo, RuntimeSettingsOut } from "../api/types";
+import { AssistantNote } from "../components/BrandMark";
 import { Button, EmptyState, ErrorBanner, SkeletonBlock } from "../components/ui";
 import { formatRelative, formatUtc } from "../lib/format";
 import { useAsync, useNow, useTitle } from "../lib/hooks";
 import { getLang, tr } from "../lib/i18n";
+import { providerName } from "../lib/providerText";
 import { AiSection, ApiKeysSection, BrowserSection } from "./settings/GeneralSections";
 import { NotificationsSection } from "./settings/NotificationsSection";
 import { ProvidersSection } from "./settings/ProvidersSection";
@@ -75,6 +77,59 @@ function useActiveSection(ids: string[], ready: boolean): string {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key, ready]);
   return active;
+}
+
+/** List words the way a sentence would: "A, B and C" / "A·B·C". */
+function joinNames(names: string[]): string {
+  if (getLang() === "ko") return names.join("·");
+  return names.length <= 1 ? (names[0] ?? "") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+}
+
+/** What is configured, in the app's voice: flight sources, alert channels and the itinerary planner. */
+function SettingsSummary({ settings, providers }: { settings: RuntimeSettingsOut; providers: ProviderInfo[] | undefined }) {
+  const n = settings.notifications;
+  const channels = [
+    tr("the app", "앱 알림"),
+    ...(n.desktop.enabled ? [tr("Windows", "Windows 알림")] : []),
+    ...(n.telegram.enabled ? ["Telegram"] : []),
+    ...(n.email.enabled ? [tr("email", "이메일")] : []),
+    ...(n.ntfy.enabled ? ["ntfy"] : []),
+    ...(n.kakao.enabled ? [tr("KakaoTalk", "카카오톡")] : []),
+  ];
+  const defaults = (providers ?? []).filter((p) => p.enabled);
+  const ready = defaults.filter((p) => p.configured).map(providerName);
+  const unready = defaults.filter((p) => !p.configured).map(providerName);
+  const noSource = providers !== undefined && ready.length === 0;
+
+  const sentences: string[] = [];
+  if (noSource) {
+    sentences.push(
+      tr(
+        "No default flight source is ready yet, so prices can't be checked. Set one up below.",
+        "아직 준비된 기본 검색 소스가 없어서 가격을 확인할 수 없어요. 아래에서 하나를 설정해 주세요.",
+      ),
+    );
+  } else if (providers) {
+    sentences.push(tr(`Fares are searched on ${joinNames(ready)}.`, `항공권은 ${joinNames(ready)}에서 찾아요.`));
+    if (unready.length > 0) {
+      sentences.push(tr(`${joinNames(unready)} still needs setup.`, `${joinNames(unready)}은(는) 아직 설정이 필요해요.`));
+    }
+  }
+  sentences.push(tr(`Price alerts go to ${joinNames(channels)}.`, `가격 알림은 ${joinNames(channels)} 채널로 보내요.`));
+  const claude = settings.llm_model ? `Claude (${settings.llm_model})` : "Claude";
+  sentences.push(
+    settings.api_keys.anthropic.is_set
+      ? tr(`${claude} writes the itineraries.`, `여행 일정은 ${claude.replace(" (", "(")}가 만들어요.`)
+      : tr(
+          "Without an Anthropic key, itineraries come from the rule-based planner.",
+          "Anthropic 키가 없어서 여행 일정은 규칙 기반 플래너가 만들어요.",
+        ),
+  );
+  return (
+    <AssistantNote className="settings-summary" tone={noSource ? "warn" : "neutral"}>
+      {sentences.join(" ")}
+    </AssistantNote>
+  );
 }
 
 function SchedulerSection() {
@@ -177,16 +232,16 @@ export function SettingsPage() {
     <>
       <div className="page-head settings-head">
         <div className="page-head__title">
-          <span className="settings-head__eyebrow">{tr("Your workspace, your way", "나에게 꼭 맞는 여행 공간")}</span>
           <h1>{tr("Settings", "설정")}</h1>
-          <span className="settings-head__sub">
+          <p className="page-lede">
             {tr(
               "Stored on this PC. Secrets are encrypted and never shown again.",
               "이 PC에 저장돼요. 비밀 값은 암호화되며 다시 표시되지 않아요.",
             )}
-          </span>
+          </p>
         </div>
       </div>
+      {settings.data && <SettingsSummary settings={settings.data} providers={providers.data} />}
       <div className="settings-layout">
         <nav className="settings-nav" aria-label={tr("Settings sections", "설정 섹션")}>
           {list.map((s) => (

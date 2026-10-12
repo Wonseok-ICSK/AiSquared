@@ -309,7 +309,7 @@ def test_generate_with_claude(db: Session, network: respx.MockRouter, steps: lis
     assert len(stored) == 18 and all(c.coord_source == "llm" for c in stored)
     assert network.routes["overpass"].call_count == 0
     research_call, compose_call = fake.calls
-    assert research_call["model"] == "claude-opus-5-5" and research_call["output_config"] == {"effort": "high"}
+    assert research_call["model"] == "claude-opus-5-5" and research_call["output_config"] == {"effort": "xhigh"}
     for call in fake.calls:  # the flight price never reaches Claude
         assert "812345" not in json.dumps(call, ensure_ascii=False)
     assert "draft_itinerary" in compose_call["messages"][0]["content"][0]["text"]

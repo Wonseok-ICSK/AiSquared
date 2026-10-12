@@ -28,7 +28,7 @@ def stored(db: Session) -> dict:
 def test_defaults_from_env(db: Session) -> None:
     rs = load_runtime_settings(db)
     assert rs.browser_channel == "msedge" and rs.browser_headless is True
-    assert rs.llm_model == "claude-opus-5-5" and rs.llm_effort == "high"
+    assert rs.llm_model == "claude-opus-5-5" and rs.llm_effort == "xhigh"
     assert rs.max_search_combinations == 12 and rs.default_providers == []
     assert rs.notifications.desktop.enabled is True
     assert rs.notifications.email.enabled is False
@@ -104,7 +104,7 @@ def test_env_fallback(db: Session, monkeypatch: pytest.MonkeyPatch) -> None:
 def test_invalid_env_effort_falls_back(db: Session, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("LLM_EFFORT", "turbo")
     get_settings.cache_clear()
-    assert load_runtime_settings(db).llm_effort == "high"
+    assert load_runtime_settings(db).llm_effort == "xhigh"
 
 
 def test_non_secret_override_and_reset(db: Session) -> None:

@@ -10,7 +10,7 @@ Pure Python and deterministic (seeded); no network.
   between 10 and 30 km (≈ 40 km/h effective) and +1.0 min/km beyond 30 km (≈ 60 km/h), so
   airport transfers stay realistic. Examples: Shinjuku → Asakusa (≈ 9 km) ≈ 42 min,
   Haneda → Shinjuku (≈ 17 km) ≈ 56 min, Narita → Shinjuku (≈ 63 km) ≈ 108 min. Calibrated
-  against the Tokyo rail spot checks in ``docs/research/places-routing.md`` (which suggests
+  against the Tokyo rail spot checks in ``unpublished research notes`` (which suggests
   ``12 + 2.5·d``; the contract's 8 min + 1.35 detour at 22 km/h gives similar urban times).
 
 **Clustering** (:func:`balanced_clusters`): points are projected to local kilometres, centres

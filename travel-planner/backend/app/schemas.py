@@ -507,6 +507,50 @@ class FlightOfferOut(OutModel):
     matches_filters: bool
 
 
+BookingHandoff = Literal["prefilled", "homepage", "unknown"]
+"""How Google's "Continue" opens the airline's site: its flight list or fare page with the
+route, date and passengers filled in, its home page (details entered by hand), or not
+checked yet."""
+BookingPage = Literal["google_booking", "google_search", "other", "none"]
+
+
+class BookingTicketOut(OutModel):
+    """One ticket the traveller buys: one leg, or both legs on one booking."""
+
+    legs: list[Literal["outbound", "inbound"]]
+    carrier_code: str | None
+    airline: str | None
+    flight_numbers: list[str]
+    origin: str
+    destination: str
+    depart_date: date
+    return_date: date | None
+    """Return date when this ticket covers both legs."""
+    departure_time: str
+    arrival_time: str
+    handoff: BookingHandoff
+    airline_url: str | None
+
+
+class BookingPlanOut(OutModel):
+    """``GET /offers/{id}/booking-plan``: what booking an offer involves."""
+
+    offer: FlightOfferOut
+    booking_url: str | None
+    """Where "Book" goes: normally Google's "Booking options" page with both flights."""
+    booking_page: BookingPage
+    adults: int
+    round_trip: bool
+    return_known: bool
+    separate_tickets: bool | None
+    """Outbound and return flown by different airlines, so normally two separate bookings
+    (Google's page confirms); ``None`` while the return flight is unknown."""
+    tickets: list[BookingTicketOut]
+    resolved_total: float | None
+    """Round-trip total Google showed when the return flight was looked up, when it differs
+    from the offer's price (fares moved since the search)."""
+
+
 class PricePoint(OutModel):
     """Lowest matching prices of one finished run."""
 

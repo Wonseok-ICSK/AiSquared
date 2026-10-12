@@ -363,6 +363,34 @@ export const STYLE_LABEL = labels<StyleKey>({
 });
 
 /** "성인 2명" / "2 adults", "성인 1명" / "1 adult". */
+/** Korean names of carriers seen on Korea routes (by IATA code); others keep their name. */
+const AIRLINE_KO: Readonly<Record<string, string>> = {
+  KE: "대한항공",
+  OZ: "아시아나항공",
+  "7C": "제주항공",
+  LJ: "진에어",
+  BX: "에어부산",
+  RS: "에어서울",
+  TW: "트리니티항공",
+  YP: "에어프레미아",
+  RF: "에어로케이",
+  ZE: "이스타항공",
+  MM: "피치항공",
+  ZG: "집에어",
+  JL: "일본항공",
+  NH: "전일본공수",
+  GK: "젯스타 재팬",
+  BC: "스카이마크",
+};
+
+/** Airline name in the UI language: Korean for known carriers in the Korean UI, else the
+ * backend's name, else the code. */
+export function airlineName(code: string | null | undefined, name: string | null | undefined): string {
+  const key = code?.toUpperCase() ?? "";
+  if (getLang() === "ko" && AIRLINE_KO[key]) return AIRLINE_KO[key];
+  return name || key || tr("Airline", "항공사");
+}
+
 export function formatAdults(n: number): string {
   return tr(n === 1 ? "1 adult" : `${n} adults`, `성인 ${n}명`);
 }

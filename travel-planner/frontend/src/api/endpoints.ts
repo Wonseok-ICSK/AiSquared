@@ -7,6 +7,7 @@ import type {
   AlertRuleCreate,
   AlertRuleOut,
   AlertRuleUpdate,
+  BookingPlanOut,
   FlightOfferOut,
   HealthOut,
   ItineraryCreate,
@@ -82,6 +83,13 @@ export const api = {
     http
       .get<OfferHistoryOut>(`/trips/${tripId}/offers/${offerId}/history`)
       .then((h) => ({ ...h, points: byKeyAsc(h.points, (p) => p.searched_at) })),
+  /**
+   * The booking step of an offer. The first call can take ~45 s (the backend looks up the
+   * return flight Google pairs with the fare); later calls are instant. The client applies
+   * no timeout of its own, so pass a `signal` to cancel (the page aborts after 90 s).
+   */
+  bookingPlan: (offerId: number, signal?: AbortSignal) =>
+    http.get<BookingPlanOut>(`/offers/${offerId}/booking-plan`, undefined, signal),
 
   // alerts
   listAlerts: (tripId: number) => http.get<AlertRuleOut[]>(`/trips/${tripId}/alerts`),

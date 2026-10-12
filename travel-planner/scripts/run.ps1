@@ -34,6 +34,15 @@ if (Test-Path $EnvFile) {
     $line = Select-String -Path $EnvFile -Pattern '^\s*BACKEND_PORT\s*=\s*(\d+)\s*$' | Select-Object -First 1
     if ($line) { $Port = [int]$line.Matches[0].Groups[1].Value }
 }
+$Url = "http://127.0.0.1:$Port"
+
+# Already running (e.g. started by the logon task): just open the UI instead of failing on the port.
+try {
+    Invoke-WebRequest -UseBasicParsing "$Url/api/health" -TimeoutSec 2 | Out-Null
+    Write-Host "AiSquared Travel Planner is already running at $Url" -ForegroundColor Green
+    if (-not $NoBrowser) { Start-Process "microsoft-edge:$Url" }
+    return
+} catch { }
 
 if ($Build -or -not (Test-Path (Join-Path $Frontend "dist\index.html"))) {
     Write-Host "Building frontend..." -ForegroundColor Cyan
@@ -46,7 +55,6 @@ if ($Build -or -not (Test-Path (Join-Path $Frontend "dist\index.html"))) {
 }
 
 $env:PYTHONUTF8 = "1"
-$Url = "http://127.0.0.1:$Port"
 Write-Host "Starting AiSquared Travel Planner at $Url" -ForegroundColor Green
 
 if (-not $NoBrowser) {

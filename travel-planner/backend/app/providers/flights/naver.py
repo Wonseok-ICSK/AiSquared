@@ -1,4 +1,4 @@
-"""Naver Flights provider — **opt-in** (DESIGN §13.1, docs/research/naver-flights.md).
+"""Naver Flights provider — **opt-in** (DESIGN §13.1, unpublished research notes).
 
 Naver's terms of service forbid automated collection (macros, bots, scrapers) without prior
 permission, so this provider is off by default (``enabled_by_default = False``), describes the

@@ -3,7 +3,7 @@
 Two data sources live in the server-rendered HTML (plain HTTP and ``page.content()`` alike):
 
 1. ``<script class="ds:1">AF_initDataCallback({key: 'ds:1', hash: '5', data:[...], ...})`` — the
-   JSON payload (index map in docs/research/google-flights-browser.md, verified 2026-10-06):
+   JSON payload (index map in unpublished research notes, verified 2026-10-06):
    ``payload[2][0]`` = "Top departing flights", ``payload[3][0]`` = "Other departing flights";
    each row ``k``: ``k[0]`` itinerary, ``k[1] = [[None, PRICE], booking_token]`` (``k[1][0] == []``
    when Google shows "Total price is unavailable"); ``payload[5]`` = price insights;

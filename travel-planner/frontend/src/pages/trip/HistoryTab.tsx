@@ -1,37 +1,24 @@
-/** Price history tab: line chart of run minima (+ per provider, target line), an insight panel
- * comparing the latest price with the target, and the runs table. */
+/** Price history tab: a one-line summary (latest price vs target), the price line on a fixed
+ * relative time window (24 hours / 7 days / 30 days) and the runs table (the chart's table view). */
 
-import { useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
-import {
-  ArrowDownRight,
-  ArrowRight,
-  ArrowUpRight,
-  CheckCircle2,
-  LineChart,
-  Minus,
-  MinusCircle,
-  ShieldCheck,
-  TrendingDown,
-  XCircle,
-} from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowDownRight, ArrowUpRight, CheckCircle2, LineChart, Minus, MinusCircle, XCircle } from "lucide-react";
 import { api } from "../../api/endpoints";
 import type { ProviderRunStat, SearchRunOut, TripOut } from "../../api/types";
+import { BrandMark } from "../../components/BrandMark";
 import { PriceChart } from "../../components/charts/PriceChart";
-import type { ChartSeries } from "../../components/charts/PriceChart";
-import { EmptyState, ErrorBanner, SkeletonBlock, Spinner, StatusChip } from "../../components/ui";
-import {
-  BASIS_LABEL,
-  elapsedSeconds,
-  formatMoney,
-  formatSeconds,
-  formatUtc,
-  inBasis,
-} from "../../lib/format";
-import { useAsync } from "../../lib/hooks";
+import type { ChartPoint } from "../../components/charts/PriceChart";
+import { windowLabel, windowPhrase } from "../../components/charts/chartText";
+import { inWindow, longerWindow, TIME_WINDOWS, WINDOW_MS } from "../../components/charts/scale";
+import type { TimeWindow } from "../../components/charts/scale";
+import { Button, EmptyState, ErrorBanner, Segmented, SkeletonBlock, Spinner, StatusChip } from "../../components/ui";
+import { BASIS_LABEL, elapsedSeconds, formatMoney, formatSeconds, formatUtc, parseUtc } from "../../lib/format";
+import { useAsync, useNow } from "../../lib/hooks";
 import { tr } from "../../lib/i18n";
-import { providerColor, useProviderNames, useProviderOrder } from "../../lib/providers";
+import { useProviderNames } from "../../lib/providers";
 import { historyValues } from "../../lib/history";
+import { historySummary } from "./tripText";
+import type { HistorySummary } from "./tripText";
 
 function ProviderStat({ name, stat }: { name: string; stat: ProviderRunStat }) {
   const Icon = stat.status === "ok" ? CheckCircle2 : stat.status === "error" ? XCircle : MinusCircle;
@@ -90,7 +77,7 @@ function RunRow({ run, trip, names }: { run: SearchRunOut; trip: TripOut; names:
           {stats.map(([key, stat]) => (
             <ProviderStat key={key} name={names(key)} stat={stat} />
           ))}
-          {run.error && <span className="xsmall" style={{ color: "var(--bad)" }}>{run.error}</span>}
+          {run.error && <span className="xsmall run-error">{run.error}</span>}
           {run.log.length > 0 && (
             <details className="disclosure">
               <summary>{tr(`Log (${run.log.length})`, `로그 (${run.log.length})`)}</summary>
@@ -103,76 +90,21 @@ function RunRow({ run, trip, names }: { run: SearchRunOut; trip: TripOut; names:
   );
 }
 
-interface ChartData {
-  times: string[];
-  series: ChartSeries[];
-  currency: string;
-  basis: TripOut["price_basis"];
-  first: number | null;
-  latest: number | null;
-  low: number | null;
-  high: number | null;
-  checks: number;
-}
-
-/** Right-hand panel: how the latest lowest price compares with the target and the first check. */
-function PriceInsight({ trip, chart }: { trip: TripOut; chart: ChartData }) {
-  const { latest, first, currency } = chart;
-  const target = trip.target_price;
-  const reached = latest !== null && target !== null && latest <= target;
-  const gap = latest !== null && target !== null ? formatMoney(Math.abs(target - latest), currency) : null;
-
-  let title: string;
-  let body: string;
-  if (target === null) {
-    title = tr("Set a target price to get alerts.", "목표 가격을 정하면 알려드려요.");
-    body = tr(
-      "Add a target in the trip settings or an alert rule, and we'll tell you when fares reach it.",
-      "여행 수정이나 알림 규칙에서 목표 가격을 정해 보세요. 그 가격에 닿으면 알려드릴게요.",
-    );
-  } else if (reached) {
-    title = tr("Found the price you were waiting for.", "기다리던 가격을 찾았어요.");
-    body = tr(
-      `${gap} cheaper than your target. That leaves more room in your trip budget.`,
-      `목표가보다 ${gap} 저렴한 항공권을 찾았어요. 여행 예산에 여유가 생겼네요.`,
-    );
-  } else {
-    title = tr("Still watching for your price.", "계속 확인할게요.");
-    body = tr(
-      `${gap} above your target of ${formatMoney(target, currency)}. We'll let you know when it drops.`,
-      `목표가 ${formatMoney(target, currency)}까지 ${gap} 남았어요. 가격이 내려가면 알려드릴게요.`,
-    );
-  }
-
-  let change: { dir: "down" | "up" | "flat"; text: string } | null = null;
-  if (chart.checks >= 2 && first !== null && latest !== null && first !== 0) {
-    const pct = ((latest - first) / first) * 100;
-    const abs = Math.abs(pct).toFixed(1);
-    if (Math.abs(pct) < 0.05) change = { dir: "flat", text: tr("Same as the first check", "첫 확인과 같아요") };
-    else if (pct < 0) change = { dir: "down", text: tr(`${abs}% lower than the first check`, `첫 확인 대비 ${abs}% 하락`) };
-    else change = { dir: "up", text: tr(`${abs}% higher than the first check`, `첫 확인 대비 ${abs}% 상승`) };
-  }
+/** The app's one line above the chart: latest price vs target, and the move since the first check. */
+function PriceSummaryLine({ summary }: { summary: HistorySummary }) {
+  const { change } = summary;
   const ChangeIcon = change?.dir === "down" ? ArrowDownRight : change?.dir === "up" ? ArrowUpRight : Minus;
-
   return (
-    <aside className={`price-insight${reached ? " is-reached" : ""}`} aria-label={tr("Price insight", "가격 요약")}>
-      <TrendingDown size={20} className="price-insight__icon" aria-hidden />
-      <span className="price-insight__eyebrow">{tr("My price alert", "나의 가격 알림")}</span>
-      <h3>{title}</h3>
-      <p>{body}</p>
-      <div className="price-insight__price">
-        <span>{tr("Lowest right now", "현재 최저 요금")}</span>
-        <b className="tnum">{formatMoney(latest, currency)}</b>
-      </div>
+    <p className={`price-summary${summary.tone === "good" ? " is-good" : ""}`}>
+      <BrandMark size={18} className="price-summary__mark" />
+      <span className="price-summary__text">{summary.text}</span>
       {change && (
-        <div className={`price-insight__change is-${change.dir}`}>
-          <ChangeIcon size={13} aria-hidden /> {change.text}
-        </div>
+        <span className={`price-summary__change is-${change.dir}`}>
+          <ChangeIcon size={13} aria-hidden />
+          {change.text}
+        </span>
       )}
-      <Link className="btn btn--primary price-insight__cta" to={`/trips/${trip.id}`}>
-        {tr("See flights", "항공편 살펴보기")} <ArrowRight size={15} aria-hidden />
-      </Link>
-    </aside>
+    </p>
   );
 }
 
@@ -193,47 +125,43 @@ export function HistoryTab({
   const history = useAsync(() => api.priceHistory(trip.id), [trip.id, refreshKey]);
   const runs = useAsync(() => api.listRuns(trip.id, 50), [trip.id, refreshKey]);
   const names = useProviderNames();
-  const order = useProviderOrder();
+  const now = useNow(60_000);
+  const [range, setRange] = useState<TimeWindow>("7d");
 
-  const chart = useMemo((): ChartData | null => {
+  const chart = useMemo(() => {
     const h = history.data;
     if (!h || h.points.length === 0) return null;
-    const basis = h.price_basis;
-    const times = h.points.map((p) => p.checked_at);
-    const providerKeys = [...new Set(h.points.flatMap((p) => Object.keys(p.by_provider)))].sort(
-      (a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99),
-    );
-    const series: ChartSeries[] = [
-      {
-        key: "__lowest",
-        label: tr("Lowest overall", "전체 최저가"),
-        color: "var(--series-1)",
-        values: historyValues(h, basis),
-        emphasis: true,
-      },
-      ...providerKeys.map((key) => ({
-        key,
-        label: names(key),
-        color: providerColor(key, order),
-        values: h.points.map((p) => {
-          const v = p.by_provider[key];
-          return v === undefined ? null : inBasis(v, trip.adults, basis);
-        }),
-      })),
-    ];
-    const present = series[0].values.filter((v): v is number => v !== null);
-    return {
-      times,
-      series,
-      currency: h.currency,
-      basis,
-      first: present.length ? present[0] : null,
-      latest: present.length ? present[present.length - 1] : null,
-      low: present.length ? Math.min(...present) : null,
-      high: present.length ? Math.max(...present) : null,
-      checks: h.points.length,
-    };
-  }, [history.data, names, order, trip.adults]);
+    const values = historyValues(h, h.price_basis);
+    const points: ChartPoint[] = h.points.map((p, i) => ({ at: p.checked_at, value: values[i] }));
+    return { points, values, currency: h.currency, basis: h.price_basis };
+  }, [history.data]);
+
+  const summary = chart ? historySummary(trip, chart.values, chart.basis, chart.currency) : null;
+  const windowMs = WINDOW_MS[range];
+  const rangeValues = (chart?.points ?? [])
+    .filter((p) => p.value !== null && inWindow(parseUtc(p.at).getTime(), now, windowMs))
+    .map((p) => p.value as number);
+  const longer = longerWindow(range);
+  const lastPriced = chart ? ([...chart.points].reverse().find((p) => p.value !== null) ?? null) : null;
+  const span = windowPhrase(range);
+  const chartSummary =
+    chart && rangeValues.length > 0
+      ? tr(
+          `Lowest ${BASIS_LABEL[chart.basis]} price per check over ${span} (${rangeValues.length} check${
+            rangeValues.length === 1 ? "" : "s"
+          }): latest ${formatMoney(rangeValues[rangeValues.length - 1], chart.currency)}, lowest ${formatMoney(
+            Math.min(...rangeValues),
+            chart.currency,
+          )}, highest ${formatMoney(Math.max(...rangeValues), chart.currency)}.`,
+          `${span} 동안 확인 ${rangeValues.length}회의 최저가(${BASIS_LABEL[chart.basis]}): 최근 ${formatMoney(
+            rangeValues[rangeValues.length - 1],
+            chart.currency,
+          )}, 최저 ${formatMoney(Math.min(...rangeValues), chart.currency)}, 최고 ${formatMoney(
+            Math.max(...rangeValues),
+            chart.currency,
+          )}.`,
+        )
+      : tr(`No prices checked in ${span}.`, `${span} 동안 확인한 가격이 없어요.`);
 
   // Merge the live run (polled by the parent) into the list so its spinner/progress is current.
   const runList = (runs.data ?? []).map((r) => (activeRun && r.id === activeRun.id ? activeRun : r));
@@ -256,84 +184,69 @@ export function HistoryTab({
         title={tr("Could not load price history", "가격 추이를 불러오지 못했어요")}
         onRetry={() => void history.reload()}
       />
-      <section className={`card price-overview${chart ? "" : " is-empty"}`}>
-        <div className="price-overview__chart">
-          <div className="chart-head">
-            <div>
-              <h2>{tr("Watch the price while you wait", "기다리는 동안 가격을 살펴보세요")}</h2>
-              <p className="small subtle">
-                {tr(
-                  `Lowest matching price per check · ${trip.currency} · ${basisText}`,
-                  `확인할 때마다 조건에 맞는 최저 요금 · ${trip.currency} · ${basisText} 기준`,
-                )}
-              </p>
-            </div>
+      <section className="card price-overview">
+        <div className="chart-head">
+          <div className="chart-head__text">
+            <h2>{tr("Watch the price while you wait", "기다리는 동안 가격을 살펴보세요")}</h2>
+            <p className="small subtle">
+              {tr(
+                `Lowest matching price per check · ${trip.currency} · ${basisText}`,
+                `확인할 때마다 조건에 맞는 최저 요금 · ${trip.currency} · ${basisText} 기준`,
+              )}
+            </p>
           </div>
-          {history.loading && !history.data && <SkeletonBlock lines={5} label={tr("Loading chart", "차트 불러오는 중")} />}
-          {history.data && !chart && (
-            <EmptyState compact icon={<LineChart size={24} />} title={tr("No price history yet", "아직 가격 기록이 없어요")}>
-              {tr("Each finished check adds a point here.", "확인이 끝날 때마다 여기에 가격이 하나씩 쌓여요.")}
-            </EmptyState>
-          )}
           {chart && (
-            <>
-              <dl className="mini-stats">
-                <div>
-                  <dt>{tr("Latest", "최근")}</dt>
-                  <dd>{formatMoney(chart.latest, chart.currency)}</dd>
-                </div>
-                <div>
-                  <dt>{tr("Lowest", "최저")}</dt>
-                  <dd>{formatMoney(chart.low, chart.currency)}</dd>
-                </div>
-                <div>
-                  <dt>{tr("Highest", "최고")}</dt>
-                  <dd>{formatMoney(chart.high, chart.currency)}</dd>
-                </div>
-                <div>
-                  <dt>{tr("Checks", "확인 횟수")}</dt>
-                  <dd>{chart.checks}</dd>
-                </div>
-              </dl>
-              <div className={history.loading ? "is-refreshing" : undefined}>
-                <PriceChart
-                  times={chart.times}
-                  series={chart.series}
-                  currency={chart.currency}
-                  target={trip.target_price}
-                  summary={tr(
-                    `Lowest ${BASIS_LABEL[chart.basis]} price over ${chart.checks} checks: latest ${formatMoney(
-                      chart.latest,
-                      chart.currency,
-                    )}, lowest ${formatMoney(chart.low, chart.currency)}, highest ${formatMoney(chart.high, chart.currency)}.`,
-                    `확인 ${chart.checks}회의 최저가(${BASIS_LABEL[chart.basis]}): 최근 ${formatMoney(
-                      chart.latest,
-                      chart.currency,
-                    )}, 최저 ${formatMoney(chart.low, chart.currency)}, 최고 ${formatMoney(chart.high, chart.currency)}.`,
-                  )}
-                />
-              </div>
-              <div className="chart-foot">
-                <ShieldCheck size={14} aria-hidden />
-                <span>
-                  {tr(
-                    "Per-source lines show each source's cheapest matching offer. Hover or use the arrow keys on the chart for values; every run is also listed below.",
-                    "검색 소스별 선은 소스마다 조건에 맞는 가장 저렴한 항공권을 보여줘요. 차트에 마우스를 올리거나 방향키를 누르면 값을 볼 수 있고, 모든 검색은 아래 목록에도 있어요.",
-                  )}
-                </span>
-                {trip.active && trip.next_run_at && (
-                  <span className="chart-foot__next">
-                    {tr(`Next check: ${formatUtc(trip.next_run_at)}`, `다음 확인: ${formatUtc(trip.next_run_at)}`)}
-                  </span>
-                )}
-              </div>
-            </>
+            <div className="chart-head__range">
+              <Segmented
+                label={tr("Time window", "기간")}
+                value={range}
+                options={TIME_WINDOWS.map((w) => ({ value: w, label: windowLabel(w) }))}
+                onChange={setRange}
+              />
+            </div>
           )}
         </div>
-        {chart && <PriceInsight trip={trip} chart={chart} />}
+        {history.loading && !history.data && <SkeletonBlock lines={5} label={tr("Loading chart", "차트 불러오는 중")} />}
+        {history.data && !chart && (
+          <EmptyState compact icon={<LineChart size={24} />} title={tr("No price history yet", "아직 가격 기록이 없어요")}>
+            {tr("Each finished check adds a point here.", "확인이 끝날 때마다 여기에 가격이 하나씩 쌓여요.")}
+          </EmptyState>
+        )}
+        {chart && (
+          <>
+            {summary && <PriceSummaryLine summary={summary} />}
+            <div className={history.loading ? "is-refreshing" : undefined}>
+              <PriceChart
+                points={chart.points}
+                range={range}
+                now={now}
+                currency={chart.currency}
+                target={trip.target_price}
+                summary={chartSummary}
+                empty={
+                  <div className="chart-empty">
+                    <p className="chart-empty__title">
+                      {tr(`No prices checked in ${span}.`, `${span} 동안 확인한 가격이 없어요.`)}
+                    </p>
+                    {lastPriced && (
+                      <p className="chart-empty__note">
+                        {tr(`The latest one is from ${formatUtc(lastPriced.at)}.`, `가장 최근 기록은 ${formatUtc(lastPriced.at)}이에요.`)}
+                      </p>
+                    )}
+                    {longer && (
+                      <Button size="sm" onClick={() => setRange(longer)}>
+                        {tr(`Show ${windowLabel(longer)}`, `${windowLabel(longer)} 보기`)}
+                      </Button>
+                    )}
+                  </div>
+                }
+              />
+            </div>
+          </>
+        )}
       </section>
 
-      <section className="card">
+      <section className="card runs-card">
         <div className="card__head">
           <h2>{tr("Runs", "검색 기록")}</h2>
           <span className="small subtle">{tr(`${runList.length} most recent`, `최근 ${runList.length}건`)}</span>
