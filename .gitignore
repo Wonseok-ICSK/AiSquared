@@ -8,3 +8,17 @@ artifacts/
 *.log
 .sessions/
 .secrets/
+
+# Local credentials and runtime state (both applications).
+.env.*
+!.env.example
+/data/
+secrets/
+credentials/
+secretbox.key
+secretbox.key.dpapi
+storage-state*.json
+storage_state*.json
+*.key
+*.p12
+*.pfx

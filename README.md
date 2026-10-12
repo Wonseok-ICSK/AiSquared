@@ -120,3 +120,9 @@ This initial upload preserves the selected original files byte for byte. The ori
 Source code, dependency manifests, tests, fixtures, design documents, static images, and the backend airport reference catalog are included. Installed packages, virtual environments, build output, runtime databases and logs, caches, bulk generated screenshots, local environment files, and browser/session or credential storage are excluded. Runtime state is created locally when the applications run.
 
 Keep personal configuration and credentials outside version control. This repository is intended for review and personal experimentation; the source documentation describes its local operating assumptions and limitations.
+
+## API credentials
+
+Claude integration in Travel Planner and OpenAI integration in Wayfinder are retained. Each user must provide their own credentials locally. The `.env.example` files are templates, not working credentials. Never paste real keys into source files, screenshots, issues, or commits.
+
+Local `.env` overrides, runtime data, credential directories, browser storage-state files, and private key files are excluded by Git ignore rules. These rules do not remove files that are already tracked and do not replace a review before pushing. Tests contain deliberately invalid credentials for mocked or opt-in negative authentication checks.
