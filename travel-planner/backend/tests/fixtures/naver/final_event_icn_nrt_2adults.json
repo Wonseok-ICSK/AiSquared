@@ -1,0 +1,6774 @@
+{
+ "uniqueId": "614ee578-e493-40a7-8393-c3f7aeb06fbc",
+ "status": {
+  "searchKey": "RTY200PN20261203ICNANRTA20261207NRTAICNA",
+  "__v": 0,
+  "requestedPartnerCount": 20,
+  "completedPartnerCount": 20,
+  "isCompleted": true,
+  "airlinesCodeMap": {
+   "TW": "트리니티항공",
+   "LJ": "진에어",
+   "KE": "대한항공",
+   "ZE": "이스타항공",
+   "WE": "파라타항공",
+   "OZ": "아시아나항공",
+   "YP": "에어프레미아",
+   "JL": "일본항공",
+   "MU": "중국동방항공",
+   "NX": "에어 마카오",
+   "5J": "세부 퍼시픽 에어",
+   "VJ": "비엣젯항공",
+   "OD": "바틱에어말레이시아",
+   "RS": "에어서울",
+   "BX": "에어부산",
+   "7C": "제주항공",
+   "HX": "홍콩 항공",
+   "ZG": "집에어",
+   "MM": "피치항공",
+   "GK": "젯스타 재팬",
+   "CA": "중국국제항공",
+   "PR": "필리핀 항공",
+   "MF": "샤먼항공",
+   "CX": "캐세이퍼시픽항공"
+  },
+  "itineraryAirports": [
+   {
+    "sequence": 1,
+    "departure": [
+     "ICN"
+    ],
+    "arrival": [
+     "NRT"
+    ]
+   },
+   {
+    "sequence": 2,
+    "departure": [
+     "NRT"
+    ],
+    "arrival": [
+     "ICN"
+    ]
+   }
+  ],
+  "airportsCodeMap": {
+   "SGN": {
+    "airportName": "탄손누트국제공항",
+    "cityName": "호치민시"
+   },
+   "MNL": {
+    "airportName": "니노이아키노국제공항",
+    "cityName": "마닐라"
+   },
+   "NRT": {
+    "airportName": "나리타국제공항",
+    "cityName": "도쿄"
+   },
+   "KUL": {
+    "airportName": "쿠알라룸푸르국제공항",
+    "cityName": "쿠알라룸푸르"
+   },
+   "PVG": {
+    "airportName": "푸동국제공항",
+    "cityName": "상하이"
+   },
+   "ICN": {
+    "airportName": "인천국제공항",
+    "cityName": "인천"
+   },
+   "MFM": {
+    "airportName": "마카오국제공항",
+    "cityName": "마카오"
+   },
+   "NGO": {
+    "airportName": "주부국제공항",
+    "cityName": "나고야"
+   },
+   "HAN": {
+    "airportName": "노이바이국제공항",
+    "cityName": "하노이"
+   },
+   "HKG": {
+    "airportName": "홍콩국제공항",
+    "cityName": "홍콩"
+   },
+   "KOJ": {
+    "airportName": "가고시마공항",
+    "cityName": "가고시마"
+   },
+   "HGH": {
+    "airportName": "항주공항",
+    "cityName": "항주"
+   },
+   "KIX": {
+    "airportName": "간사이국제공항",
+    "cityName": "오사카"
+   },
+   "FOC": {
+    "airportName": "푸저우공항",
+    "cityName": "푸저우"
+   },
+   "FUK": {
+    "airportName": "후쿠오카공항",
+    "cityName": "후쿠오카"
+   },
+   "CKG": {
+    "airportName": "중경공항",
+    "cityName": "충칭"
+   },
+   "TAK": {
+    "airportName": "다카마쓰공항",
+    "cityName": "다카마쓰"
+   },
+   "TPE": {
+    "airportName": "타이완타오위안국제공항",
+    "cityName": "타이베이"
+   }
+  },
+  "fareTypesCodeMap": {
+   "A01": {
+    "name": "성인/모든 결제수단",
+    "category": "",
+    "naverPaySaving": 0
+   },
+   "A01/B31": {
+    "name": "성인/하나카드",
+    "category": "신용카드(즉시할인)",
+    "naverPaySaving": 0
+   },
+   "A01/B74": {
+    "name": "성인/네이버페이",
+    "category": "간편결제",
+    "naverPaySaving": 0
+   },
+   "A01/B96": {
+    "name": "성인/삼성 iD GLOBAL 카드",
+    "category": "신용카드(즉시할인)",
+    "naverPaySaving": 0
+   },
+   "A01/B72": {
+    "name": "성인/NH농협카드",
+    "category": "신용카드(즉시할인)",
+    "naverPaySaving": 0
+   },
+   "A01/B04": {
+    "name": "성인/BC카드",
+    "category": "신용카드(즉시할인)",
+    "naverPaySaving": 0
+   },
+   "A01/B05": {
+    "name": "성인/삼성카드",
+    "category": "신용카드(즉시할인)",
+    "naverPaySaving": 0
+   },
+   "A01/B02": {
+    "name": "성인/롯데카드",
+    "category": "신용카드(즉시할인)",
+    "naverPaySaving": 0
+   },
+   "A01/B25": {
+    "name": "성인/IBK기업은행카드",
+    "category": "신용카드(즉시할인)",
+    "naverPaySaving": 0
+   },
+   "A01/B01": {
+    "name": "성인/KB국민카드",
+    "category": "신용카드(즉시할인)",
+    "naverPaySaving": 0
+   },
+   "A01/B12": {
+    "name": "성인/우리카드",
+    "category": "신용카드(즉시할인)",
+    "naverPaySaving": 0
+   },
+   "A01/B19": {
+    "name": "성인/신한카드",
+    "category": "신용카드(즉시할인)",
+    "naverPaySaving": 0
+   },
+   "A01/B09": {
+    "name": "성인/현대카드",
+    "category": "신용카드(즉시할인)",
+    "naverPaySaving": 0
+   },
+   "A07": {
+    "name": "장애인/모든 결제수단",
+    "category": "",
+    "naverPaySaving": 0
+   },
+   "A01/B13": {
+    "name": "성인/NH채움카드",
+    "category": "신용카드(즉시할인)",
+    "naverPaySaving": 0
+   },
+   "A01/B16": {
+    "name": "성인/하나카드(이용실적 충족시)",
+    "category": "신용카드(실적충족/청구할인)",
+    "naverPaySaving": 0
+   },
+   "A01/B91": {
+    "name": "성인/KB국민카드(이용실적 충족시)",
+    "category": "신용카드(실적충족/청구할인)",
+    "naverPaySaving": 0
+   },
+   "A01/B80": {
+    "name": "성인/현대 M2/M3 Edition2(이용실적 충족시)",
+    "category": "신용카드(실적충족/청구할인)",
+    "naverPaySaving": 0
+   }
+  },
+  "durationSecondsRanges": [
+   {
+    "sequence": 1,
+    "min": 8100,
+    "max": 123600
+   },
+   {
+    "sequence": 2,
+    "min": 9000,
+    "max": 112500
+   }
+  ],
+  "lowestFare": {
+   "direct": 279100,
+   "a01": 284020,
+   "oneStop": 372598
+  },
+  "priceRange": {
+   "min": 279100,
+   "max": 3539800
+  },
+  "expireAt": "2026-10-06T08:02:38.153Z",
+  "hasCarbonEmission": true
+ },
+ "itineraries": [
+  {
+   "itineraryId": "20261203ICNNRTBX0223",
+   "duration": 9600,
+   "sequence": 1,
+   "segments": [
+    {
+     "departure": {
+      "airportCode": "ICN",
+      "dateTime": "202612030735",
+      "date": "20261203",
+      "time": "0735"
+     },
+     "arrival": {
+      "airportCode": "NRT",
+      "dateTime": "202612031015",
+      "date": "20261203",
+      "time": "1015"
+     },
+     "marketingCarrier": {
+      "airlineCode": "BX",
+      "flightNumber": "0223"
+     },
+     "operatingCarrier": {
+      "airlineCode": "BX",
+      "flightNumber": "0223"
+     },
+     "flightDuration": 9600,
+     "groundDuration": 0,
+     "aircraftCode": "321",
+     "hiddenStops": []
+    }
+   ],
+   "carbonEmission": -22
+  },
+  {
+   "itineraryId": "20261207NRTICNTW0242",
+   "duration": 10800,
+   "sequence": 2,
+   "segments": [
+    {
+     "departure": {
+      "airportCode": "NRT",
+      "dateTime": "202612071155",
+      "date": "20261207",
+      "time": "1155"
+     },
+     "arrival": {
+      "airportCode": "ICN",
+      "dateTime": "202612071455",
+      "date": "20261207",
+      "time": "1455"
+     },
+     "marketingCarrier": {
+      "airlineCode": "TW",
+      "flightNumber": "0242"
+     },
+     "operatingCarrier": {
+      "airlineCode": "TW",
+      "flightNumber": "0242"
+     },
+     "flightDuration": 10800,
+     "groundDuration": 0,
+     "aircraftCode": "7M8",
+     "hiddenStops": []
+    }
+   ],
+   "carbonEmission": -55
+  },
+  {
+   "itineraryId": "20261207NRTICNBX0224",
+   "duration": 10200,
+   "sequence": 2,
+   "segments": [
+    {
+     "departure": {
+      "airportCode": "NRT",
+      "dateTime": "202612071110",
+      "date": "20261207",
+      "time": "1110"
+     },
+     "arrival": {
+      "airportCode": "ICN",
+      "dateTime": "202612071400",
+      "date": "20261207",
+      "time": "1400"
+     },
+     "marketingCarrier": {
+      "airlineCode": "BX",
+      "flightNumber": "0224"
+     },
+     "operatingCarrier": {
+      "airlineCode": "BX",
+      "flightNumber": "0224"
+     },
+     "flightDuration": 10200,
+     "groundDuration": 0,
+     "aircraftCode": "321",
+     "hiddenStops": []
+    }
+   ],
+   "carbonEmission": -24
+  },
+  {
+   "itineraryId": "20261203ICNNRT7C1107",
+   "duration": 8700,
+   "sequence": 1,
+   "segments": [
+    {
+     "departure": {
+      "airportCode": "ICN",
+      "dateTime": "202612031450",
+      "date": "20261203",
+      "time": "1450",
+      "cityCode": null,
+      "terminal": null
+     },
+     "arrival": {
+      "airportCode": "NRT",
+      "dateTime": "202612031715",
+      "date": "20261203",
+      "time": "1715",
+      "cityCode": null,
+      "terminal": null
+     },
+     "marketingCarrier": {
+      "airlineCode": "7C",
+      "flightNumber": "1107"
+     },
+     "operatingCarrier": {
+      "airlineCode": "7C",
+      "flightNumber": "1107"
+     },
+     "flightDuration": 8700,
+     "groundDuration": 0,
+     "aircraftCode": "7M8",
+     "hiddenStops": []
+    }
+   ],
+   "carbonEmission": -34
+  },
+  {
+   "itineraryId": "20261207NRTICN7C1184",
+   "duration": 10800,
+   "sequence": 2,
+   "segments": [
+    {
+     "departure": {
+      "airportCode": "NRT",
+      "dateTime": "202612071315",
+      "date": "20261207",
+      "time": "1315",
+      "cityCode": null,
+      "terminal": null
+     },
+     "arrival": {
+      "airportCode": "ICN",
+      "dateTime": "202612071615",
+      "date": "20261207",
+      "time": "1615",
+      "cityCode": null,
+      "terminal": null
+     },
+     "marketingCarrier": {
+      "airlineCode": "7C",
+      "flightNumber": "1184"
+     },
+     "operatingCarrier": {
+      "airlineCode": "7C",
+      "flightNumber": "1184"
+     },
+     "flightDuration": 10800,
+     "groundDuration": 0,
+     "aircraftCode": "Boeing 738",
+     "hiddenStops": []
+    }
+   ]
+  },
+  {
+   "itineraryId": "20261207NRTICN7C1182",
+   "duration": 10200,
+   "sequence": 2,
+   "segments": [
+    {
+     "departure": {
+      "airportCode": "NRT",
+      "dateTime": "202612071040",
+      "date": "20261207",
+      "time": "1040",
+      "cityCode": null,
+      "terminal": null
+     },
+     "arrival": {
+      "airportCode": "ICN",
+      "dateTime": "202612071330",
+      "date": "20261207",
+      "time": "1330",
+      "cityCode": null,
+      "terminal": null
+     },
+     "marketingCarrier": {
+      "airlineCode": "7C",
+      "flightNumber": "1182"
+     },
+     "operatingCarrier": {
+      "airlineCode": "7C",
+      "flightNumber": "1182"
+     },
+     "flightDuration": 10200,
+     "groundDuration": 0,
+     "aircraftCode": "7M8",
+     "hiddenStops": []
+    }
+   ]
+  },
+  {
+   "itineraryId": "20261207NRTICNMM0641",
+   "duration": 12000,
+   "sequence": 2,
+   "segments": [
+    {
+     "departure": {
+      "airportCode": "NRT",
+      "dateTime": "202612070830",
+      "date": "20261207",
+      "time": "0830"
+     },
+     "arrival": {
+      "airportCode": "ICN",
+      "dateTime": "202612071150",
+      "date": "20261207",
+      "time": "1150"
+     },
+     "marketingCarrier": {
+      "airlineCode": "MM",
+      "flightNumber": "0641"
+     },
+     "operatingCarrier": {
+      "airlineCode": "MM",
+      "flightNumber": "0641"
+     },
+     "flightDuration": 12000,
+     "groundDuration": 0,
+     "hiddenStops": []
+    }
+   ],
+   "carbonEmission": -44
+  }
+ ],
+ "fareMappings": [
+  {
+   "itineraryIds": "20261203ICNNRT7C1107-20261207NRTICN7C1182",
+   "fares": [
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B16",
+     "adult": {
+      "totalFare": 279100,
+      "qCharge": 126600,
+      "tax": 67300,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "ONT003",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 288900,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B91",
+     "adult": {
+      "totalFare": 289000,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "ONT003",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 290000,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 291300,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 291700,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 291700,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "ONT003",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 291700,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 291700,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "ONT003",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 291700,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "SKP206",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 293393,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B74",
+     "adult": {
+      "totalFare": 294000,
+      "qCharge": 127800,
+      "tax": 67600,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 294200,
+      "qCharge": 127800,
+      "tax": 67600,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 294500,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 294500,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDP010",
+     "fareType": "A01/B80",
+     "adult": {
+      "totalFare": 294700,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isFreeSameDayRefundable": true
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 295100,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 295200,
+      "tax": 67300,
+      "qCharge": 137500
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "HDP010",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 295300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isFreeSameDayRefundable": true
+    },
+    {
+     "partnerCode": "HDP010",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 295300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isFreeSameDayRefundable": true
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 295800,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 295800,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B04",
+     "adult": {
+      "totalFare": 295800,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 296500,
+      "qCharge": 126600,
+      "tax": 67300,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 296500,
+      "tax": 67300,
+      "qCharge": 137500
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 296500,
+      "tax": 67300,
+      "qCharge": 137500
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "ONT003",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 296700,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HDP010",
+     "fareType": "A01/B74",
+     "adult": {
+      "totalFare": 296800,
+      "tax": 67600,
+      "qCharge": 127800
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isFreeSameDayRefundable": true
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 297800,
+      "tax": 67300,
+      "qCharge": 137500
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 297800,
+      "tax": 67300,
+      "qCharge": 137500
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 297800,
+      "tax": 67300,
+      "qCharge": 137500
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "A7C136",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 298150,
+      "qCharge": 0,
+      "tax": 195400
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 298200,
+      "tax": 67300,
+      "qCharge": 137500
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 298200,
+      "tax": 67300,
+      "qCharge": 137500
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 298600,
+      "tax": 67300,
+      "qCharge": 137500
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 298600,
+      "tax": 67300,
+      "qCharge": 137500
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B04",
+     "adult": {
+      "totalFare": 298600,
+      "tax": 67300,
+      "qCharge": 137500
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 299300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 299400,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 299400,
+      "tax": 67300,
+      "qCharge": 126600,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 299500,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 300200,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 300300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 300400,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 300400,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 300600,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 300600,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 300700,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 300700,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 301100,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 301100,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 301200,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 301600,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 301700,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "BDC219",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 302190,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 302200,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B74",
+     "adult": {
+      "totalFare": 303100,
+      "tax": 67600,
+      "qCharge": 127800
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "ATK201",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 304197,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 304300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 304300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 304300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 304300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 304300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 304300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 304600,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 304600,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 304600,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 304700,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 304700,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 304700,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 304700,
+      "tax": 67300,
+      "qCharge": 126600,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HDP010",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 305200,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isFreeSameDayRefundable": true
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 305300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 305300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B04",
+     "adult": {
+      "totalFare": 305300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 305800,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 306700,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 306700,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 306800,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 306800,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 306800,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 306800,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 306800,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 307900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 307900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 307900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 307900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 307900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 307900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 307900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 307900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 307900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 307900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 307900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 308100,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 308100,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 308800,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 308900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 308900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 308900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 308900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 308900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 308900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 308900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 308900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 308900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "GTG204",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 311812,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "MRT023",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 316700,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "MRT023",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 316700,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "MRT023",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 317300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "MRT023",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 318500,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 322700,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MRT023",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 322900,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 323900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 323900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 323900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 323900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 323900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 323900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 323900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 323900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 323900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 325200,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 327700,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 327700,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 327700,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 327700,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 327700,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 327700,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B13",
+     "adult": {
+      "totalFare": 327700,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 328900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 328900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 328900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 328900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 328900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "JTB016",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 328900,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 328900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MRT023",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 328900,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 328900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 328900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 328900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MRT023",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 328900,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 328900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    }
+   ],
+   "carbonEmission": -69,
+   "curation": [
+    "MIN_PRICE",
+    "NONSTOP_MIN_PRICE"
+   ],
+   "sameFareMappings": []
+  },
+  {
+   "itineraryIds": "20261203ICNNRT7C1107-20261207NRTICNMM0641",
+   "fares": [
+    {
+     "partnerCode": "BDC219",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 284020,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "ATK201",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 288948,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "SKP206",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 290829,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    }
+   ],
+   "carbonEmission": -39,
+   "curation": [],
+   "sameFareMappings": []
+  },
+  {
+   "itineraryIds": "20261203ICNNRTBX0223-20261207NRTICNMM0641",
+   "fares": [
+    {
+     "partnerCode": "BDC219",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 292169,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "ATK201",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 298903,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "SKP206",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 301836,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    }
+   ],
+   "carbonEmission": -34,
+   "curation": [],
+   "sameFareMappings": []
+  },
+  {
+   "itineraryIds": "20261203ICNNRT7C1107-20261207NRTICNBX0224",
+   "fares": [
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B91",
+     "adult": {
+      "totalFare": 297500,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 304100,
+      "qCharge": 133800,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "PARTIAL",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 304100,
+      "qCharge": 133800,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "PARTIAL",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 304100,
+      "qCharge": 133800,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "PARTIAL",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 304100,
+      "qCharge": 133800,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "PARTIAL",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 304100,
+      "qCharge": 133800,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "PARTIAL",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 304200,
+      "qCharge": 133800,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "PARTIAL",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 304200,
+      "qCharge": 133800,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "PARTIAL",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 304400,
+      "qCharge": 133800,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "PARTIAL",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 304600,
+      "qCharge": 133800,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "PARTIAL",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 304600,
+      "qCharge": 133800,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "PARTIAL",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B04",
+     "adult": {
+      "totalFare": 304600,
+      "qCharge": 133800,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "PARTIAL",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 308800,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 309200,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 309200,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 309600,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 309600,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 309600,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 309700,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 309700,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 309800,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B04",
+     "adult": {
+      "totalFare": 309800,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 310100,
+      "qCharge": 133800,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "PARTIAL",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "SKP206",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 311235,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 311300,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 311500,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "BDC219",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 311735,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 314400,
+      "qCharge": 133200,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 315200,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 315300,
+      "tax": 76600,
+      "qCharge": 63300,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 315300,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 315300,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 315400,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 315400,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 315600,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 315600,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 315600,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 315600,
+      "qCharge": 133200,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 315600,
+      "qCharge": 63300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 315700,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 315700,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 315800,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 315900,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 316000,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 316100,
+      "qCharge": 63300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 316400,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 316400,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 316400,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 316400,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 316400,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 316400,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 316600,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B04",
+     "adult": {
+      "totalFare": 316600,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 316600,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 316700,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 316700,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 316800,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 316800,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 316800,
+      "tax": 76600,
+      "qCharge": 63300,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 316800,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "ATK201",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 316939,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 317400,
+      "qCharge": 133200,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 317400,
+      "qCharge": 133200,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 317700,
+      "qCharge": 63300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 317700,
+      "qCharge": 133200,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 317700,
+      "qCharge": 63300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 317700,
+      "qCharge": 133200,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 317700,
+      "qCharge": 63300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 317700,
+      "qCharge": 133200,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 317700,
+      "qCharge": 133200,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 317700,
+      "qCharge": 133200,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 317800,
+      "qCharge": 63300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 317800,
+      "qCharge": 63300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "ONT003",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 318000,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 318000,
+      "tax": 76600,
+      "qCharge": 63300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 318000,
+      "qCharge": 63300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 318000,
+      "qCharge": 133200,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "GTG204",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 321460,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 327400,
+      "qCharge": 63300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 327700,
+      "qCharge": 63300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 328000,
+      "qCharge": 63300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    }
+   ],
+   "carbonEmission": -28,
+   "curation": [],
+   "sameFareMappings": []
+  },
+  {
+   "itineraryIds": "20261203ICNNRT7C1107-20261207NRTICN7C1184",
+   "fares": [
+    {
+     "partnerCode": "SKP206",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 299681,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B16",
+     "adult": {
+      "totalFare": 337600,
+      "qCharge": 126600,
+      "tax": 67300,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B91",
+     "adult": {
+      "totalFare": 348800,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "ONT003",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 351300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "ONT003",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 353100,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 353800,
+      "qCharge": 126600,
+      "tax": 67300,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 356000,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "ONT003",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 356000,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "ONT003",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 356000,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 356600,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 356600,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 356600,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDP010",
+     "fareType": "A01/B80",
+     "adult": {
+      "totalFare": 356900,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isFreeSameDayRefundable": true
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 358400,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 358500,
+      "tax": 67300,
+      "qCharge": 126600,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 358600,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 358700,
+      "tax": 67300,
+      "qCharge": 126600,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 359800,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 360000,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 360100,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 360100,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 360100,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 360200,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 360500,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 360500,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 360600,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 360600,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 360600,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 360600,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 360600,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "ONT003",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 361100,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HDP010",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 361100,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isFreeSameDayRefundable": true
+    },
+    {
+     "partnerCode": "HDP010",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 361100,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isFreeSameDayRefundable": true
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 361100,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "A7C136",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 361200,
+      "qCharge": 0,
+      "tax": 195400
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 361300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 361300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 361400,
+      "tax": 67300,
+      "qCharge": 126600,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 362100,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 362100,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 362100,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B04",
+     "adult": {
+      "totalFare": 362100,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 362200,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 362200,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 362200,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 362200,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 362200,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 362300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "BDC219",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 362510,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 363000,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 363000,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 363100,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B04",
+     "adult": {
+      "totalFare": 363800,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 366500,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 366500,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 366500,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 366500,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 366500,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 366500,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 366900,
+      "tax": 67600,
+      "qCharge": 127800
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B74",
+     "adult": {
+      "totalFare": 366900,
+      "tax": 67600,
+      "qCharge": 127800
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 367000,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 367000,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 367000,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 367100,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 367100,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 367100,
+      "tax": 67300,
+      "qCharge": 126600,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 367100,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 368100,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 368100,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B04",
+     "adult": {
+      "totalFare": 368100,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 368700,
+      "qCharge": 137500,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 368700,
+      "qCharge": 137500,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 368800,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 369000,
+      "qCharge": 137500,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 369000,
+      "qCharge": 137500,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 369000,
+      "qCharge": 137500,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 369000,
+      "qCharge": 137500,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 369000,
+      "qCharge": 137500,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 369300,
+      "qCharge": 137500,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 370500,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 370500,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 370500,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 370500,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 370500,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 372200,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 372200,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 372200,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 372200,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 372200,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 372200,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 372600,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 372600,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TBK033",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 373800,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 373900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 373900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 373900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDP010",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 373900,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isFreeSameDayRefundable": true
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 373900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 373900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 373900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 373900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 373900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "GTG204",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 375116,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "MRT023",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 375300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "MRT023",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 375300,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "ATK201",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 375854,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "MRT023",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 376200,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "MRT023",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 378100,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 384400,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MRT023",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 384800,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 386300,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 386300,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 386300,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 386300,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 386300,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 386300,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 386300,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 386300,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDT028",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 386300,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 388200,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 392000,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 392000,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 392000,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 392000,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 392000,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 392000,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01/B13",
+     "adult": {
+      "totalFare": 392000,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MOT007",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 393900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "JTB016",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 393900,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 393900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MRT023",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 393900,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 393900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 393900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 393900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 393900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 393900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 393900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "MRT023",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 393900,
+      "tax": 67300,
+      "qCharge": 126600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 393900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "VGT027",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 393900,
+      "qCharge": 126600,
+      "tax": 67300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    }
+   ],
+   "carbonEmission": -69,
+   "curation": [],
+   "sameFareMappings": []
+  },
+  {
+   "itineraryIds": "20261203ICNNRT7C1107-20261207NRTICNTW0242",
+   "fares": [
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B91",
+     "adult": {
+      "totalFare": 303420,
+      "tax": 77010,
+      "qCharge": 139010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 303620,
+      "tax": 77010,
+      "qCharge": 139010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 304320,
+      "tax": 77010,
+      "qCharge": 139010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 304320,
+      "tax": 77010,
+      "qCharge": 139010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 304480,
+      "qCharge": 139610,
+      "tax": 77010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 304680,
+      "qCharge": 139610,
+      "tax": 77010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 304680,
+      "qCharge": 139610,
+      "tax": 77010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 304680,
+      "qCharge": 139610,
+      "tax": 77010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 304920,
+      "tax": 77010,
+      "qCharge": 139010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 304920,
+      "tax": 77010,
+      "qCharge": 139010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 304920,
+      "tax": 77010,
+      "qCharge": 139010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 305120,
+      "tax": 77010,
+      "qCharge": 139010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 305320,
+      "tax": 77010,
+      "qCharge": 139010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 305320,
+      "tax": 77010,
+      "qCharge": 139010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 305380,
+      "qCharge": 139610,
+      "tax": 77010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 305720,
+      "tax": 77010,
+      "qCharge": 139010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "WHY002",
+     "fareType": "A01/B04",
+     "adult": {
+      "totalFare": 305720,
+      "tax": 77010,
+      "qCharge": 139010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isHoneymoonBenefit": false
+    },
+    {
+     "partnerCode": "SKP206",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 306057,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 306580,
+      "qCharge": 139610,
+      "tax": 77010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 307380,
+      "qCharge": 139610,
+      "tax": 77010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 307580,
+      "qCharge": 139610,
+      "tax": 77010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 307780,
+      "qCharge": 139610,
+      "tax": 77010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 307780,
+      "qCharge": 139610,
+      "tax": 77010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01/B04",
+     "adult": {
+      "totalFare": 307780,
+      "qCharge": 139610,
+      "tax": 77010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "BDC219",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 308374,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "HDP010",
+     "fareType": "A01/B80",
+     "adult": {
+      "totalFare": 308754,
+      "tax": 77010,
+      "qCharge": 139610
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isFreeSameDayRefundable": true
+    },
+    {
+     "partnerCode": "HDP010",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 309980,
+      "tax": 77010,
+      "qCharge": 139610
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isFreeSameDayRefundable": true
+    },
+    {
+     "partnerCode": "ATK201",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 313667,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "GTG204",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 313667,
+      "qCharge": 0,
+      "tax": 0
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "UNKNOWN"
+    },
+    {
+     "partnerCode": "HDP010",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 315180,
+      "tax": 77010,
+      "qCharge": 139610
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isFreeSameDayRefundable": true
+    },
+    {
+     "partnerCode": "TOV025",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 317880,
+      "qCharge": 139610,
+      "tax": 77010
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HDP010",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 317880,
+      "tax": 77010,
+      "qCharge": 139610
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isFreeSameDayRefundable": true
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 319500,
+      "qCharge": 138300,
+      "tax": 76600,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 320500,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 320700,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 320700,
+      "qCharge": 138300,
+      "tax": 76600,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 321200,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 321500,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 321500,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 321500,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 321500,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 321500,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 321500,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 321700,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 321700,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "LTT017",
+     "fareType": "A01/B04",
+     "adult": {
+      "totalFare": 321700,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 322500,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 322500,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 322800,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 322800,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 322800,
+      "qCharge": 138300,
+      "tax": 76600,
+      "hideMemberFare": true
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 322800,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 322800,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 322800,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 322800,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 322800,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 322900,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 322900,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YEL009",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 323100,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "YNJ035",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 323100,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 328700,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 329900,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 330000,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 330200,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 330300,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 330400,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 330600,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 332500,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B96",
+     "adult": {
+      "totalFare": 332800,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 332800,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "NIT015",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 333100,
+      "qCharge": 138300,
+      "tax": 76600
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE",
+     "isPartnerNdc": false
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B01",
+     "adult": {
+      "totalFare": 334100,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B09",
+     "adult": {
+      "totalFare": 334200,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B05",
+     "adult": {
+      "totalFare": 334400,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B72",
+     "adult": {
+      "totalFare": 334500,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B12",
+     "adult": {
+      "totalFare": 334600,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 334600,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 334600,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "WEB001",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 334600,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B02",
+     "adult": {
+      "totalFare": 334800,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B25",
+     "adult": {
+      "totalFare": 339000,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B31",
+     "adult": {
+      "totalFare": 339000,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01/B19",
+     "adult": {
+      "totalFare": 339000,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "HAT004",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 339000,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    },
+    {
+     "partnerCode": "ONT003",
+     "fareType": "A01",
+     "adult": {
+      "totalFare": 340200,
+      "tax": 76600,
+      "qCharge": 138300
+     },
+     "reservationUrl": "",
+     "priceTransparencyUrl": "",
+     "isConfirmed": true,
+     "baggageFeeType": "FREE"
+    }
+   ],
+   "carbonEmission": -45,
+   "curation": [],
+   "sameFareMappings": []
+  }
+ ],
+ "isExpired": false,
+ "popularFlights": []
+}

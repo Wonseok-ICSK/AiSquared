@@ -1,0 +1,32 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API (test fixture)",
+  "osm3s": {"copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."},
+  "elements": [
+    {"type": "node", "id": 1001, "lat": 35.7147651, "lon": 139.7966553,
+     "tags": {"amenity": "place_of_worship", "religion": "buddhist", "tourism": "attraction", "name": "浅草寺", "name:en": "Senso-ji", "name:ko": "센소지",
+              "wikidata": "Q1061033", "wikipedia": "ja:浅草寺", "opening_hours": "06:00-17:00", "website": "https://www.senso-ji.jp/"}},
+    {"type": "way", "id": 2002, "center": {"lat": 35.7148, "lon": 139.7734},
+     "tags": {"leisure": "park", "name": "上野恩賜公園", "name:en": "Ueno Park", "wikidata": "Q1192496"}},
+    {"type": "node", "id": 1003, "lat": 35.7188, "lon": 139.7765,
+     "tags": {"tourism": "museum", "name": "東京国立博物館", "name:en": "Tokyo National Museum", "wikidata": "Q653433",
+              "opening_hours": "Tu-Su 09:30-17:00; PH 09:30-17:00", "website": "https://www.tnm.jp/", "fee": "yes"}},
+    {"type": "node", "id": 1004, "lat": 35.7110, "lon": 139.7990,
+     "tags": {"tourism": "viewpoint", "name": "隅田川テラス"}},
+    {"type": "node", "id": 1005, "lat": 35.7105, "lon": 139.7960,
+     "tags": {"amenity": "restaurant", "name": "すしざんまい 浅草店", "cuisine": "sushi", "opening_hours": "24/7"}},
+    {"type": "node", "id": 1006, "lat": 35.7120, "lon": 139.7955,
+     "tags": {"amenity": "restaurant", "name": "一蘭 浅草店", "name:en": "Ichiran Asakusa", "cuisine": "ramen",
+              "opening_hours": "Mo-Su 10:00-22:00"}},
+    {"type": "node", "id": 1007, "lat": 35.7130, "lon": 139.7940,
+     "tags": {"amenity": "cafe", "name": "Cafe Asakusa", "cuisine": "coffee_shop", "opening_hours": "Mo-Fr 08:00-18:00; Sa,Su 09:00-19:00"}},
+    {"type": "node", "id": 1008, "lat": 35.7101, "lon": 139.7745,
+     "tags": {"amenity": "marketplace", "name": "アメ横", "name:en": "Ameyoko", "opening_hours": "sunrise-sunset"}},
+    {"type": "node", "id": 1009, "lat": 35.7000, "lon": 139.7900,
+     "tags": {"tourism": "attraction"}},
+    {"type": "node", "id": 1010, "lat": 35.7106, "lon": 139.8108,
+     "tags": {"tourism": "attraction", "name": "東京スカイツリー", "name:en": "Tokyo Skytree", "wikidata": "Q13945", "fee": "yes"}},
+    {"type": "relation", "id": 3011,
+     "tags": {"historic": "castle", "name": "No geometry castle", "wikidata": "Q1"}}
+  ]
+}

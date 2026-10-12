@@ -1,0 +1,160 @@
+/* ---------------------------------------------------------------- notifications */
+
+.inbox-head__eyebrow {
+  display: block;
+  margin-top: var(--sp-2);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--olive);
+}
+.inbox-head__lede {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+.inbox-head h1 {
+  font-size: 30px;
+}
+
+.notif-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.notif {
+  position: relative;
+  display: flex;
+  gap: var(--sp-4);
+  padding: 20px 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.notif.is-unread {
+  background: color-mix(in srgb, var(--accent-soft) 45%, var(--surface));
+  border-color: color-mix(in srgb, var(--accent) 22%, var(--border));
+}
+.notif.is-unread::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent);
+}
+.notif__icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex: none;
+  background: var(--surface-3);
+  color: var(--text-2);
+}
+.notif__icon--price_alert {
+  background: var(--good-soft);
+  color: var(--good);
+}
+.notif__icon--itinerary {
+  background: var(--olive-soft);
+  color: var(--olive);
+}
+.notif__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.notif__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+.notif__kind {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.notif__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.notif__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+.notif.is-unread .notif__title {
+  font-weight: 750;
+}
+.notif__meta {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+.notif__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.notif__text {
+  margin: 0;
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  font-family: var(--font);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--text-2);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.notif__channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+@media (max-width: 600px) {
+  .notif {
+    padding: 16px;
+    gap: var(--sp-3);
+  }
+  .notif__icon {
+    width: 34px;
+    height: 34px;
+  }
+  .notif__actions {
+    width: 100%;
+  }
+}
+
+/* Korean: break lines between words, not inside them */
+.inbox-head,
+.notif-list {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}

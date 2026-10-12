@@ -1,0 +1,198 @@
+{
+  "search_metadata": {
+    "id": "6703a2a4c9d14e2a8b5f3e9c",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/a17c0e5b22d94a31/6703a2a4c9d14e2a8b5f3e9c.json",
+    "created_at": "2026-10-06 03:15:48 UTC",
+    "processed_at": "2026-10-06 03:15:48 UTC",
+    "google_flights_url": "https://www.google.com/travel/flights?hl=en&gl=kr&curr=KRW&tfs=CBwQAhopEgoyMDI2LTExLTIwagwIAhIIL20vMGhzcWZyDQgDEgkvbS8wN2RmaxopEgoyMDI2LTExLTIzag0IAxIJL20vMDdkZmtyDAgCEggvbS8waHNxZkIBAkgBcAGYAQE&tfu=EgIIAQ",
+    "raw_html_file": "https://serpapi.com/searches/a17c0e5b22d94a31/6703a2a4c9d14e2a8b5f3e9c.html",
+    "prettify_html_file": "https://serpapi.com/searches/a17c0e5b22d94a31/6703a2a4c9d14e2a8b5f3e9c.prettify",
+    "total_time_taken": 1.87
+  },
+  "search_parameters": {
+    "engine": "google_flights",
+    "hl": "en",
+    "gl": "kr",
+    "type": "1",
+    "departure_id": "ICN,GMP",
+    "arrival_id": "NRT,HND",
+    "outbound_date": "2026-11-20",
+    "return_date": "2026-11-23",
+    "travel_class": 1,
+    "adults": 2,
+    "stops": "0",
+    "currency": "KRW",
+    "departure_token": "WyJDalJJZEU1c2R6RnBhWGRSYlZGQlFqWlFXbEZDUnkwdExTMHRMUzB0TFhaMFltSjBNakJCUVVGQlFVZGpRMEZDYTBoTmRqQkRRUklGIixbWyJJQ04iLCIyMDI2LTExLTIwIiwiTlJUIixudWxsLCJNTSIsIjcwMiJdXV0="
+  },
+  "best_flights": [
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Narita International Airport",
+            "id": "NRT",
+            "time": "2026-11-23 19:30"
+          },
+          "arrival_airport": {
+            "name": "Incheon International Airport",
+            "id": "ICN",
+            "time": "2026-11-23 22:10"
+          },
+          "duration": 160,
+          "airplane": "Airbus A320",
+          "airline": "Peach",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/MM.png",
+          "travel_class": "Economy",
+          "flight_number": "MM 703",
+          "legroom": "28 in",
+          "extensions": [
+            "Below average legroom (28 in)",
+            "Carbon emissions estimate: 98 kg"
+          ]
+        }
+      ],
+      "total_duration": 160,
+      "carbon_emissions": {
+        "this_flight": 98000,
+        "typical_for_this_route": 112000,
+        "difference_percent": -12
+      },
+      "price": 668872,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/MM.png",
+      "extensions": [
+        "Checked baggage for a fee"
+      ],
+      "booking_token": "WyJDalJJZEU1c2R6RnBhWGRSYlZGQlFqWlFXbEZDUnkwdExTMHRMUzB0TFhaMFltSjBNakJCUVVGQlFVZGpRMEZDYTBoTmRqQkRRUklGIixbWyJOUlQiLCIyMDI2LTExLTIzIiwiSUNOIixudWxsLCJNTSIsIjcwMyJdXV0="
+    },
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Narita International Airport",
+            "id": "NRT",
+            "time": "2026-11-23 14:20"
+          },
+          "arrival_airport": {
+            "name": "Incheon International Airport",
+            "id": "ICN",
+            "time": "2026-11-23 17:05"
+          },
+          "duration": 165,
+          "airplane": "Airbus A320",
+          "airline": "Peach",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/MM.png",
+          "travel_class": "Economy",
+          "flight_number": "MM 701",
+          "legroom": "28 in",
+          "extensions": [
+            "Below average legroom (28 in)",
+            "Carbon emissions estimate: 98 kg"
+          ]
+        }
+      ],
+      "total_duration": 165,
+      "carbon_emissions": {
+        "this_flight": 98000,
+        "typical_for_this_route": 112000,
+        "difference_percent": -12
+      },
+      "price": 652872,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/MM.png",
+      "extensions": [
+        "Checked baggage for a fee"
+      ],
+      "booking_token": "WyJDalJJZEU1c2R6RnBhWGRSYlZGQlFqWlFXbEZDUnkwdExTMHRMUzB0TFhaMFltSjBNakJCUVVGQlFVZGpRMEZDYTBoTmRqQkRRUklGIixbWyJOUlQiLCIyMDI2LTExLTIzIiwiSUNOIixudWxsLCJNTSIsIjcwMSJdXV0="
+    }
+  ],
+  "other_flights": [
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Narita International Airport",
+            "id": "NRT",
+            "time": "2026-11-23 08:15"
+          },
+          "arrival_airport": {
+            "name": "Incheon International Airport",
+            "id": "ICN",
+            "time": "2026-11-23 11:00"
+          },
+          "duration": 165,
+          "airplane": "Airbus A320",
+          "airline": "Peach",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/MM.png",
+          "travel_class": "Economy",
+          "flight_number": "MM 705",
+          "legroom": "28 in",
+          "extensions": [
+            "Below average legroom (28 in)",
+            "Carbon emissions estimate: 98 kg"
+          ]
+        }
+      ],
+      "total_duration": 165,
+      "carbon_emissions": {
+        "this_flight": 98000,
+        "typical_for_this_route": 112000,
+        "difference_percent": -12
+      },
+      "price": 684872,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/MM.png",
+      "extensions": [
+        "Checked baggage for a fee"
+      ],
+      "booking_token": "WyJDalJJZEU1c2R6RnBhWGRSYlZGQlFqWlFXbEZDUnkwdExTMHRMUzB0TFhaMFltSjBNakJCUVVGQlFVZGpRMEZDYTBoTmRqQkRRUklGIixbWyJOUlQiLCIyMDI2LTExLTIzIiwiSUNOIixudWxsLCJNTSIsIjcwNSJdXV0="
+    }
+  ],
+  "price_insights": {
+    "lowest_price": 541200,
+    "price_level": "typical",
+    "typical_price_range": [
+      580000,
+      820000
+    ],
+    "price_history": [
+      [
+        1754409600,
+        701000
+      ],
+      [
+        1755014400,
+        688400
+      ],
+      [
+        1755619200,
+        664872
+      ],
+      [
+        1756224000,
+        690100
+      ],
+      [
+        1756828800,
+        652872
+      ],
+      [
+        1757433600,
+        640000
+      ],
+      [
+        1758038400,
+        662400
+      ],
+      [
+        1758643200,
+        652872
+      ],
+      [
+        1759248000,
+        671200
+      ]
+    ]
+  }
+}

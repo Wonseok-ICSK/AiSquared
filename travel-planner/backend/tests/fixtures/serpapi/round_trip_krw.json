@@ -1,0 +1,486 @@
+{
+  "search_metadata": {
+    "id": "6703a1f0c9d14e2a8b5f3e21",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/3f2a9c1b7d8e4f60/6703a1f0c9d14e2a8b5f3e21.json",
+    "created_at": "2026-10-06 03:12:44 UTC",
+    "processed_at": "2026-10-06 03:12:44 UTC",
+    "google_flights_url": "https://www.google.com/travel/flights?hl=en&gl=kr&curr=KRW&tfs=CBwQAhopEgoyMDI2LTExLTIwagwIAhIIL20vMGhzcWZyDQgDEgkvbS8wN2RmaxopEgoyMDI2LTExLTIzag0IAxIJL20vMDdkZmtyDAgCEggvbS8waHNxZkIBAkgBcAGYAQE&tfu=EgIIAQ",
+    "raw_html_file": "https://serpapi.com/searches/3f2a9c1b7d8e4f60/6703a1f0c9d14e2a8b5f3e21.html",
+    "prettify_html_file": "https://serpapi.com/searches/3f2a9c1b7d8e4f60/6703a1f0c9d14e2a8b5f3e21.prettify",
+    "total_time_taken": 2.41
+  },
+  "search_parameters": {
+    "engine": "google_flights",
+    "hl": "en",
+    "gl": "kr",
+    "type": "1",
+    "departure_id": "ICN,GMP",
+    "arrival_id": "NRT,HND",
+    "outbound_date": "2026-11-20",
+    "return_date": "2026-11-23",
+    "travel_class": 1,
+    "adults": 2,
+    "stops": "0",
+    "currency": "KRW"
+  },
+  "best_flights": [
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Incheon International Airport",
+            "id": "ICN",
+            "time": "2026-11-20 10:55"
+          },
+          "arrival_airport": {
+            "name": "Narita International Airport",
+            "id": "NRT",
+            "time": "2026-11-20 13:20"
+          },
+          "duration": 145,
+          "airplane": "Airbus A320",
+          "airline": "Peach",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/MM.png",
+          "travel_class": "Economy",
+          "flight_number": "MM 702",
+          "legroom": "28 in",
+          "extensions": [
+            "Below average legroom (28 in)",
+            "Carbon emissions estimate: 98 kg"
+          ]
+        }
+      ],
+      "total_duration": 145,
+      "carbon_emissions": {
+        "this_flight": 98000,
+        "typical_for_this_route": 112000,
+        "difference_percent": -12
+      },
+      "price": 652872,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/MM.png",
+      "extensions": [
+        "Checked baggage for a fee",
+        "Bag and fare conditions depend on the return flight"
+      ],
+      "departure_token": "WyJDalJJZEU1c2R6RnBhWGRSYlZGQlFqWlFXbEZDUnkwdExTMHRMUzB0TFhaMFltSjBNakJCUVVGQlFVZGpRMEZDYTBoTmRqQkRRUklGIixbWyJJQ04iLCIyMDI2LTExLTIwIiwiTlJUIixudWxsLCJNTSIsIjcwMiJdXV0="
+    },
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Incheon International Airport",
+            "id": "ICN",
+            "time": "2026-11-20 13:40"
+          },
+          "arrival_airport": {
+            "name": "Narita International Airport",
+            "id": "NRT",
+            "time": "2026-11-20 16:05"
+          },
+          "duration": 145,
+          "airplane": "Boeing 787",
+          "airline": "Air Premia",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/YP.png",
+          "travel_class": "Economy",
+          "flight_number": "YP 731",
+          "legroom": "31 in",
+          "extensions": [
+            "Average legroom (31 in)",
+            "In-seat USB outlet",
+            "Carbon emissions estimate: 104 kg"
+          ]
+        }
+      ],
+      "total_duration": 145,
+      "carbon_emissions": {
+        "this_flight": 104000,
+        "typical_for_this_route": 112000,
+        "difference_percent": -7
+      },
+      "price": 653872,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/YP.png",
+      "extensions": [
+        "Bag and fare conditions depend on the return flight"
+      ],
+      "departure_token": "WyJDalJJZEU1c2R6RnBhWGRSYlZGQlFqWlFXbEZDUnkwdExTMHRMUzB0TFhaMFltSjBNakJCUVVGQlFVZGpRMEZDYTBoTmRqQkRRUklGIixbWyJJQ04iLCIyMDI2LTExLTIwIiwiTlJUIixudWxsLCJZUCIsIjczMSJdXV0="
+    },
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Gimpo International Airport",
+            "id": "GMP",
+            "time": "2026-11-20 08:10"
+          },
+          "arrival_airport": {
+            "name": "Haneda Airport",
+            "id": "HND",
+            "time": "2026-11-20 10:20"
+          },
+          "duration": 130,
+          "airplane": "Airbus A330",
+          "airline": "Korean Air",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
+          "travel_class": "Economy",
+          "flight_number": "KE 2101",
+          "ticket_also_sold_by": [
+            "Delta"
+          ],
+          "legroom": "33 in",
+          "extensions": [
+            "Above average legroom (33 in)",
+            "In-seat power & USB outlets",
+            "On-demand video",
+            "Carbon emissions estimate: 121 kg"
+          ]
+        }
+      ],
+      "total_duration": 130,
+      "carbon_emissions": {
+        "this_flight": 121000,
+        "typical_for_this_route": 112000,
+        "difference_percent": 8
+      },
+      "price": 905200,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
+      "departure_token": "WyJDalJJZEU1c2R6RnBhWGRSYlZGQlFqWlFXbEZDUnkwdExTMHRMUzB0TFhaMFltSjBNakJCUVVGQlFVZGpRMEZDYTBoTmRqQkRRUklGIixbWyJHTVAiLCIyMDI2LTExLTIwIiwiSE5EIixudWxsLCJLRSIsIjIxMDEiXV1d"
+    }
+  ],
+  "other_flights": [
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Incheon International Airport",
+            "id": "ICN",
+            "time": "2026-11-20 09:40"
+          },
+          "arrival_airport": {
+            "name": "Shanghai Pudong International Airport",
+            "id": "PVG",
+            "time": "2026-11-20 10:55"
+          },
+          "duration": 135,
+          "airplane": "Airbus A320neo",
+          "airline": "China Eastern",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/MU.png",
+          "travel_class": "Economy",
+          "flight_number": "MU 5034",
+          "legroom": "30 in",
+          "extensions": [
+            "Average legroom (30 in)",
+            "Carbon emissions estimate: 87 kg"
+          ]
+        },
+        {
+          "departure_airport": {
+            "name": "Shanghai Pudong International Airport",
+            "id": "PVG",
+            "time": "2026-11-20 13:50"
+          },
+          "arrival_airport": {
+            "name": "Narita International Airport",
+            "id": "NRT",
+            "time": "2026-11-20 17:40"
+          },
+          "duration": 170,
+          "airplane": "Boeing 737MAX 8 Passenger",
+          "airline": "China Eastern",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/MU.png",
+          "travel_class": "Economy",
+          "flight_number": "MU 523",
+          "legroom": "30 in",
+          "extensions": [
+            "Average legroom (30 in)",
+            "Carbon emissions estimate: 112 kg"
+          ]
+        }
+      ],
+      "layovers": [
+        {
+          "duration": 175,
+          "name": "Shanghai Pudong International Airport",
+          "id": "PVG"
+        }
+      ],
+      "total_duration": 480,
+      "carbon_emissions": {
+        "this_flight": 199000,
+        "typical_for_this_route": 112000,
+        "difference_percent": 78
+      },
+      "price": 541200,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/MU.png",
+      "departure_token": "WyJDalJJZEU1c2R6RnBhWGRSYlZGQlFqWlFXbEZDUnkwdExTMHRMUzB0TFhaMFltSjBNakJCUVVGQlFVZGpRMEZDYTBoTmRqQkRRUklGIixbWyJJQ04iLCIyMDI2LTExLTIwIiwiUFZHIixudWxsLCJNVSIsIjUwMzQiXSxbIlBWRyIsIjIwMjYtMTEtMjAiLCJOUlQiLG51bGwsIk1VIiwiNTIzIl1dXQ=="
+    },
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Incheon International Airport",
+            "id": "ICN",
+            "time": "2026-11-20 07:25"
+          },
+          "arrival_airport": {
+            "name": "Narita International Airport",
+            "id": "NRT",
+            "time": "2026-11-20 09:50"
+          },
+          "duration": 145,
+          "airplane": "Boeing 737",
+          "airline": "Jeju Air",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/7C.png",
+          "travel_class": "Economy",
+          "flight_number": "7C 1102",
+          "legroom": "29 in",
+          "extensions": [
+            "Below average legroom (29 in)",
+            "Carbon emissions estimate: 101 kg"
+          ],
+          "often_delayed_by_over_30_min": true
+        }
+      ],
+      "total_duration": 145,
+      "carbon_emissions": {
+        "this_flight": 101000,
+        "typical_for_this_route": 112000,
+        "difference_percent": -10
+      },
+      "price": 689272,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/7C.png",
+      "extensions": [
+        "Checked baggage for a fee",
+        "Bag and fare conditions depend on the return flight"
+      ],
+      "departure_token": "WyJDalJJZEU1c2R6RnBhWGRSYlZGQlFqWlFXbEZDUnkwdExTMHRMUzB0TFhaMFltSjBNakJCUVVGQlFVZGpRMEZDYTBoTmRqQkRRUklGIixbWyJJQ04iLCIyMDI2LTExLTIwIiwiTlJUIixudWxsLCI3QyIsIjExMDIiXV1d"
+    },
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Incheon International Airport",
+            "id": "ICN",
+            "time": "2026-11-20 18:05"
+          },
+          "arrival_airport": {
+            "name": "Narita International Airport",
+            "id": "NRT",
+            "time": "2026-11-20 20:30"
+          },
+          "duration": 145,
+          "airplane": "Boeing 737",
+          "airline": "Korean Air",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
+          "travel_class": "Economy",
+          "flight_number": "KE 5705",
+          "legroom": "29 in",
+          "extensions": [
+            "Below average legroom (29 in)",
+            "Carbon emissions estimate: 100 kg"
+          ],
+          "plane_and_crew_by": "Jin Air"
+        }
+      ],
+      "total_duration": 145,
+      "carbon_emissions": {
+        "this_flight": 100000,
+        "typical_for_this_route": 112000,
+        "difference_percent": -11
+      },
+      "price": 702400,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
+      "departure_token": "WyJDalJJZEU1c2R6RnBhWGRSYlZGQlFqWlFXbEZDUnkwdExTMHRMUzB0TFhaMFltSjBNakJCUVVGQlFVZGpRMEZDYTBoTmRqQkRRUklGIixbWyJJQ04iLCIyMDI2LTExLTIwIiwiTlJUIixudWxsLCJLRSIsIjU3MDUiXV1d"
+    },
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Incheon International Airport",
+            "id": "ICN",
+            "time": "2026-11-20 15:20"
+          },
+          "arrival_airport": {
+            "name": "Narita International Airport",
+            "id": "NRT",
+            "time": "2026-11-20 17:45"
+          },
+          "duration": 145,
+          "airplane": "Boeing 787",
+          "airline": "ZIPAIR",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/ZG.png",
+          "travel_class": "Economy",
+          "flight_number": "ZG 42",
+          "legroom": "31 in",
+          "extensions": [
+            "Average legroom (31 in)",
+            "Carbon emissions estimate: 99 kg"
+          ]
+        }
+      ],
+      "total_duration": 145,
+      "carbon_emissions": {
+        "this_flight": 99000,
+        "typical_for_this_route": 112000,
+        "difference_percent": -12
+      },
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/ZG.png",
+      "departure_token": "WyJDalJJZEU1c2R6RnBhWGRSYlZGQlFqWlFXbEZDUnkwdExTMHRMUzB0TFhaMFltSjBNakJCUVVGQlFVZGpRMEZDYTBoTmRqQkRRUklGIixbWyJJQ04iLCIyMDI2LTExLTIwIiwiTlJUIixudWxsLCJaRyIsIjQyIl1dXQ=="
+    }
+  ],
+  "price_insights": {
+    "lowest_price": 541200,
+    "price_level": "typical",
+    "typical_price_range": [
+      580000,
+      820000
+    ],
+    "price_history": [
+      [
+        1754409600,
+        701000
+      ],
+      [
+        1755014400,
+        688400
+      ],
+      [
+        1755619200,
+        664872
+      ],
+      [
+        1756224000,
+        690100
+      ],
+      [
+        1756828800,
+        652872
+      ],
+      [
+        1757433600,
+        640000
+      ],
+      [
+        1758038400,
+        662400
+      ],
+      [
+        1758643200,
+        652872
+      ],
+      [
+        1759248000,
+        671200
+      ]
+    ]
+  },
+  "airports": [
+    {
+      "departure": [
+        {
+          "airport": {
+            "id": "ICN",
+            "name": "Incheon International Airport"
+          },
+          "city": "Seoul",
+          "country": "South Korea",
+          "country_code": "KR",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:seoul",
+          "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:seoul-thumb"
+        },
+        {
+          "airport": {
+            "id": "GMP",
+            "name": "Gimpo International Airport"
+          },
+          "city": "Seoul",
+          "country": "South Korea",
+          "country_code": "KR",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:seoul",
+          "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:seoul-thumb"
+        }
+      ],
+      "arrival": [
+        {
+          "airport": {
+            "id": "NRT",
+            "name": "Narita International Airport"
+          },
+          "city": "Tokyo",
+          "country": "Japan",
+          "country_code": "JP",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:tokyo",
+          "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:tokyo-thumb"
+        },
+        {
+          "airport": {
+            "id": "HND",
+            "name": "Haneda Airport"
+          },
+          "city": "Tokyo",
+          "country": "Japan",
+          "country_code": "JP",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:tokyo",
+          "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:tokyo-thumb"
+        }
+      ]
+    },
+    {
+      "departure": [
+        {
+          "airport": {
+            "id": "NRT",
+            "name": "Narita International Airport"
+          },
+          "city": "Tokyo",
+          "country": "Japan",
+          "country_code": "JP",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:tokyo",
+          "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:tokyo-thumb"
+        },
+        {
+          "airport": {
+            "id": "HND",
+            "name": "Haneda Airport"
+          },
+          "city": "Tokyo",
+          "country": "Japan",
+          "country_code": "JP",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:tokyo",
+          "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:tokyo-thumb"
+        }
+      ],
+      "arrival": [
+        {
+          "airport": {
+            "id": "ICN",
+            "name": "Incheon International Airport"
+          },
+          "city": "Seoul",
+          "country": "South Korea",
+          "country_code": "KR",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:seoul",
+          "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:seoul-thumb"
+        },
+        {
+          "airport": {
+            "id": "GMP",
+            "name": "Gimpo International Airport"
+          },
+          "city": "Seoul",
+          "country": "South Korea",
+          "country_code": "KR",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:seoul",
+          "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:seoul-thumb"
+        }
+      ]
+    }
+  ]
+}
