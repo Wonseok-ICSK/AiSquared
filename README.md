@@ -1,6 +1,6 @@
 # AiSquared — Personal Project
 
-**This is a personal project by Wonseok-ICSK, shared for learning, experimentation, and code review.**
+**This is a personal side project by Wonseok Choi, shared for learning, experimentation, and code review.**
 
 AiSquared contains two local travel-planning applications: a Node.js-based flight-monitoring app called **Wayfinder**, and a separate Python/FastAPI-based **Travel Planner**. Both applications retain their original source layout. Much of the interface and the original documentation is in Korean.
 
