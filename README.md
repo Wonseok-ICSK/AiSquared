@@ -4,14 +4,33 @@
 
 AiSquared contains two local travel-planning applications: a Node.js-based flight-monitoring app called **Wayfinder**, and a separate Python/FastAPI-based **Travel Planner**. Both applications retain their original source layout. Much of the interface and the original documentation is in Korean.
 
-## Applications
+## Two independent personal projects
 
-| Application | Location | Main technologies | Purpose |
-| --- | --- | --- | --- |
-| Wayfinder | Repository root | React, Vite, Express, Node.js SQLite | Flight-price monitoring, trip planning, and travel-service integrations |
-| Travel Planner | `travel-planner/` | FastAPI, SQLAlchemy, APScheduler, React, TypeScript | Travel planning, scheduled flight checks, and optional AI and notification integrations |
+This repository groups two separate personal projects by **Wonseok Choi**. They explore similar travel-planning ideas but have different implementations, interfaces, and development histories. They are not two components of one application.
 
-These are independent applications with separate dependencies, configuration, and local databases.
+### 1. Wayfinder — Developed with Codex
+
+**Development:** A personal project by Wonseok Choi, coded with assistance from OpenAI Codex.
+
+**Location:** repository root (`src/`, `server/`, and `shared/`).
+
+Wayfinder is a Korean-language flight-monitoring and trip-planning application built with **React, Vite, Express, and Node.js SQLite**. It organizes monitored trips, fare history, target-price alerts, flight offers, and itineraries in one interface. Its API and frontend use the root Node.js dependency manifests. See [Run Wayfinder](#run-wayfinder) for setup.
+
+The screenshot below comes from an existing browser-test capture with seeded demonstration trips and fares. It illustrates the interface, not current flight prices.
+
+![Wayfinder dashboard with demonstration trips and fare history](docs/images/wayfinder-dashboard.png)
+
+### 2. Travel Planner — Developed with Claude
+
+**Development:** A personal project by Wonseok Choi, coded with assistance from Anthropic Claude.
+
+**Location:** `travel-planner/`.
+
+Travel Planner is a separate application built with **React, TypeScript, FastAPI, SQLAlchemy, and APScheduler**. It includes travel planning, scheduled flight checks, and optional AI and notification integrations. It has its own Python backend, frontend dependencies, configuration, and database. See [Run Travel Planner](#run-travel-planner) for setup.
+
+The screenshot below comes from the existing frontend development mock. It shows sample trips and demonstration fares; it is not evidence of live provider results or of the backend running.
+
+![Travel Planner development mock dashboard with demonstration trips](docs/images/travel-planner-dashboard.png)
 
 ## Repository guide
 
@@ -22,6 +41,7 @@ shared/                       Shared Wayfinder modules
 scripts/                      Wayfinder development and configuration scripts
 tests/                        Wayfinder tests and fixtures
 public/                       Wayfinder static assets
+docs/images/                  Selected interface screenshots for both projects
 README.original.md            Original Wayfinder documentation, preserved unchanged
 travel-planner/
   backend/app/                FastAPI application and integrations
@@ -93,8 +113,10 @@ Some browser or live-provider tests need additional setup or credentials. Consul
 
 ## Snapshot contents
 
+After the initial import, this README was expanded to describe the two projects separately, and two selected existing screenshots were added under `docs/images/`. The application source remains unchanged.
+
 This initial upload preserves the selected original files byte for byte. The original root README is retained as `README.original.md`; this English overview and a Git attributes file were added for sharing. No application code, existing comments, dependencies, or behavior were changed.
 
-Source code, dependency manifests, tests, fixtures, design documents, static images, and the backend airport reference catalog are included. Installed packages, virtual environments, build output, runtime databases and logs, caches, generated screenshots, local environment files, and browser/session or credential storage are excluded. Runtime state is created locally when the applications run.
+Source code, dependency manifests, tests, fixtures, design documents, static images, and the backend airport reference catalog are included. Installed packages, virtual environments, build output, runtime databases and logs, caches, bulk generated screenshots, local environment files, and browser/session or credential storage are excluded. Runtime state is created locally when the applications run.
 
 Keep personal configuration and credentials outside version control. This repository is intended for review and personal experimentation; the source documentation describes its local operating assumptions and limitations.
